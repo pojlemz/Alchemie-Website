@@ -1,0 +1,1 @@
+module.exports = '$2a$10$AKylNQQ49oam0G73SrvObu';

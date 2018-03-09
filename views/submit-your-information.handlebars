@@ -1,0 +1,62 @@
+<div class="css-left-pane">
+    <a type="button" class="btn btn-default css-left-pane-button" href="/">Addresses</a>
+    <a type="button" class="btn btn-default css-left-pane-button" href="/two-factor-options">Security</a>
+    <a type="button" class="btn btn-default css-left-pane-button" href="/buy-tokens">Buy Tokens</a>
+</div>
+<div class="css-right-pane">
+    <!--<h2 class="page-header">Dashboard</h2>-->
+    <!-- <p>Enter addresses below that you wish to claim under the Alchemy umbrella.</p> -->
+    <form action="/kyc-upload" class="dropzone css-dropzone" id="my-awesome-dropzone" encType="multipart/form-data" method="post">
+        <p class="css-heading-for-id-address">Please Fill In The Form Below</p>
+        <p> Before we can mint gold tokens for you, it is necessary for you to provide us with some information about who you are. Please fill in the form below telling us about yourself so that we can validate your identity. </p>
+        <div class="css-inputs-for-document-upload">
+            <div class="form-group css-form-group-half-screen">
+                <label>First Name</label>
+                <input type="text" class="form-control" placeholder="First Name" name="firstname">
+            </div>
+            <div class="form-group css-form-group-half-screen">
+                <label>Last Name</label>
+                <input type="text" class="form-control" placeholder="Last Name" name="lastname">
+            </div>
+            <div class="form-group css-form-group-full-screen">
+                <label>Street Address</label>
+                <input type="text" class="form-control" placeholder="Street Address" name="streetaddress">
+            </div>
+            <div class="form-group css-form-group-half-screen">
+                <label>City</label>
+                <input type="text" class="form-control" placeholder="City" name="city">
+            </div>
+            <div class="form-group css-form-group-half-screen">
+                <label>State/Province</label>
+                <input type="text" class="form-control" placeholder="State/Provice" name="state">
+            </div>
+            <div class="form-group css-form-group-half-screen">
+                <label>Country</label>
+                <input type="text" class="form-control" placeholder="Country" name="country">
+            </div>
+            <div class="form-group css-form-group-half-screen">
+                <label>Date of Birth</label>
+                <input type="text" class="form-control" placeholder="MM/DD/YYYY" name="dateofbirth" id="dateofbirth">
+            </div>
+        </div>
+        <div class="css-document-upload-section">
+            <p class="css-heading-for-id-address">Please Upload A Document Matching Your Information</p>
+            <p> Before we can mint gold tokens for you, it is necessary for you to provide us with some identification. Please upload a photo of your drivers license or passport providing proof of your address. </p>
+            <div class="css-file-upload-button btn btn-default" clickcontroller="fileRealUploadButton">
+                <!-- Note the trigger on the text element and to look at its hit box when making any changes -->
+                Select File
+            </div>
+            <div class="css-file-real-upload-button">
+                <input type="file" class="fn-file-real-upload-button" name="sampleFile" changecontroller="inputKycFileChange"/>
+            </div>
+            <div class="css-label-row-chosen-file">
+                <div class="css-label-chosen-file"></div>
+                <div class="css-chosen-file-full-text fn-chosen-file-full-text">No File Chosen</div>
+            </div>
+            <div class="css-file-submit-button btn-success btn" id="filename" clickcontroller="fileRealSubmitButton"> Upload File</div>
+            <div class="css-file-real-submit-button">
+                <input type='submit' class='fn-file-real-submit-button' value='Upload!'/>
+            </div>
+        </div>
+    </form>
+</div>

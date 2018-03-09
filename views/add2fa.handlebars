@@ -1,0 +1,24 @@
+<div class="css-left-pane">
+    <a type="button" class="btn btn-default css-left-pane-button" href="/">Addresses</a>
+    <a type="button" class="btn btn-default css-left-pane-button" href="/two-factor-options">Security</a>
+    <a type="button" class="btn btn-default css-left-pane-button" href="/buy-tokens">Buy Tokens</a>
+</div>
+<div class="css-right-pane">
+    <!--<h2 class="page-header">Dashboard</h2>-->
+    <p>This page allows you to setup two factor authentication.</p>
+    <br/>
+    <form method="post" action="/click-add-2fa">
+        <p>Scan this QR Code with Google Authenticator</p>
+        <img src="{{qrImage}}"/>
+        <br/>
+        <p class="css-or-enter">Or enter the following key manually</p>
+        <h3 id="2faSecret" class="2fa-key css-2fa-key">{{key}}</h3>
+        <p>After scanning the code above with Google authenticator, enter the six digit code that authenticator produces into the box below and click 'Enable 2FA'</p>
+        <div class="input-group input-group-sm css-small-screen-width">
+            <input id="2faCode" type="text" class="form-control" placeholder="000000" aria-describedby="sizing-addon1">
+            <span class="input-group-btn">
+                <button class="btn btn-secondary css-add-2fa-button" type="Button" clickcontroller="enable2FA">Enable 2FA</button>
+            </span>
+        </div>
+    </form>
+</div>
