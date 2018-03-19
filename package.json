@@ -12,6 +12,7 @@
     "ascii-hex": "^1.0.1",
     "aws-sdk": "^2.188.0",
     "bcryptjs": "*",
+    "bitgo": "^4.21.0",
     "body-parser": "*",
     "chai": "^4.1.2",
     "client-sessions": "^0.8.0",
