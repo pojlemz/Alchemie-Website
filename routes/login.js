@@ -8,7 +8,7 @@ var passport = require('../server/passport');
 //     //res.redirect('/');
 // });
 router.post('/login',
-    passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login',failureFlash: 'Incorrect Username And Password Combination'}),
+    passport.authenticate('local', {successRedirect:'/',failureRedirect:'/login', failureFlash: 'Incorrect Username And Password Combination'}),
     function(req, res) {
         res.redirect('/');
     }
