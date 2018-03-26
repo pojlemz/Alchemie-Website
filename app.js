@@ -78,16 +78,26 @@ app.use(cookieParser());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Express Session
-app.use(session({
-    /*cookieName: 'session',*/
-    /*duration: 30 * 60 * 1000,*/
-    /*activeDuration: 5 * 60 * 1000,*/
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
-    resave: true,
-    cookie: {  httpOnly: true,  secure: true  }
-}));
+if (process.env.NODE_ENV !== 'production') {
+    // Express Session
+    app.use(session({
+        secret: process.env.SESSION_SECRET,
+        saveUninitialized: true,
+        resave: true,
+        cookie: {httpOnly: true, secure: true}
+    }));
+} else {
+    // Express Session
+    app.use(session({
+        /*cookieName: 'session',*/
+        /*duration: 30 * 60 * 1000,*/
+        /*activeDuration: 5 * 60 * 1000,*/
+        secret: process.env.SESSION_SECRET,
+        saveUninitialized: true,
+        resave: true,
+        cookie: {httpOnly: true, secure: false}
+    }));
+}
 
 // default options
 app.use(fileUpload());
