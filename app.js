@@ -78,7 +78,7 @@ app.use(cookieParser());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
     // Express Session
     app.use(session({
         secret: process.env.SESSION_SECRET,
