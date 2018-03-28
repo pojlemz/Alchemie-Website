@@ -20,7 +20,7 @@ router.get('/two-factor-options', ensureAuthenticated, function(req, res){
             var key = random2faKeyGenerator.randomKey(10);
             var encodedKey = base32.encode(key);
 
-            var otpUrl = 'otpauth://totp/Block Unity (' + req.user.email + ')?secret=' + encodedKey + '&period=30';
+            var otpUrl = 'otpauth://totp/Alchemie:' + req.user.email + '?secret=' + encodedKey + '&period=30';
             var qrImage = 'https://chart.googleapis.com/chart?chs=166x166&chld=L|0&cht=qr&chl=' + encodeURIComponent(otpUrl);
 
             response.render('add2fa', {user: req.user, key: encodedKey, qrImage: qrImage });

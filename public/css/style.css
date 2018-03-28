@@ -398,3 +398,13 @@ footer{
 .css-main-display {
   overflow-y: auto;
 }
+
+#BTCPayQRCode {
+  width: 300px;
+  height: 300px;
+}
+
+#BTCPayQRCode img {
+  width: 300px;
+  height: 300px;
+}

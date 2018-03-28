@@ -35,6 +35,7 @@ router.get('/buy-tokens', ensureAuthenticated, function(req, res){
 
 function preparePageToShowBitGoAddress(req, res) {
     const email = req.user.email;
+    const response = res;
     BitcoinAddress.getBitcoinAddressByEmail(email, function(err, res){
         if (typeof(res) === 'undefined' || res === null){
             // A bitcoin address has not been assigned for this user
@@ -42,9 +43,10 @@ function preparePageToShowBitGoAddress(req, res) {
                 // Create a new bitcoin address.
                 wallet.createAddress({ label: email }).then(function(address) {
                     // Store this bitcoin address
-                    BitcoinAddress.setBitcoinAddress(email, address, function(err, res){
-                        res.render('buy-bitgo-tokens-with-bitcoin', {
-                            'bitGoAddress': address
+                    const btcAddress = address.address;
+                    BitcoinAddress.setBitcoinAddress(email, btcAddress, function(err, res){
+                        response.render('buy-bitgo-tokens-with-bitcoin', {
+                            'bitGoAddress': btcAddress
                         });
                     });
                 });
@@ -52,7 +54,7 @@ function preparePageToShowBitGoAddress(req, res) {
 
         } else {
             const address = res.bitcoinaddress; // Create a bitcoin address
-            res.render('buy-bitgo-tokens-with-bitcoin', {
+            response.render('buy-bitgo-tokens-with-bitcoin', {
                 'bitGoAddress': address
             });
         }
