@@ -36,8 +36,14 @@ ViewUserMessages.prototype.showErrorForIncorrect2FACode = function(){
     $(".fnAlertBox").prepend(htmlMessage);
 }
 
-ViewUserMessages.prototype.showErrorForMismatchingPasswords = function(){
+ViewUserMessages.prototype.showCustomErrorMessage = function(message){
     $(".fnOnlyOneError").remove();
-    htmlMessage = '<div class="alert alert-danger fnOnlyOneError fnShowErrorForPasswordMismatch">The two passwords you typed in do not match. </div>';
+    htmlMessage = '<div class="alert alert-danger fnOnlyOneError fnShowCustomError">' + message + '</div>';
+    $(".fnAlertBox").prepend(htmlMessage);
+}
+
+ViewUserMessages.prototype.showCustomSuccessMessage = function(message){
+    $(".fnOnlyOneError").remove();
+    htmlMessage = '<div class="alert alert-success fnOnlyOneError fnShowCustomSuccess">' + message + '</div>';
     $(".fnAlertBox").prepend(htmlMessage);
 }

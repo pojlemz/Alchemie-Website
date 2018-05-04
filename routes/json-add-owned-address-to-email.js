@@ -8,7 +8,7 @@ var web3 = require('web3');
 // http://localhost:3000/add-owned-address-to-email?address=0x0000000000000000000000000000000000000000000000000
 router.get('/add-owned-address-to-email', ensureAuthenticated, function(req, res){
     // Ensure user is authenticated.
-    if (web3.utils.isAddress(req.query.address)) {
+    // if (web3.utils.isAddress(req.query.address)) {
         var response = res;
         // req.user.email
         // var query = "SELECT * FROM ownedaddress WHERE address=$1"; // business logic change - we are permitting addresses from one account
@@ -46,10 +46,10 @@ router.get('/add-owned-address-to-email', ensureAuthenticated, function(req, res
                 response.send(JSON.stringify({response: "failure", email: null, address: null, error: "You have already added that address."}));
             }
         });
-    } else {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({response: "failure", email: null, address: null}));
-    }
+    // } else {
+    //     res.setHeader('Content-Type', 'application/json');
+    //     res.send(JSON.stringify({response: "failure", email: null, address: null}));
+    // }
 });
 
 function ensureAuthenticated(req, res, next){

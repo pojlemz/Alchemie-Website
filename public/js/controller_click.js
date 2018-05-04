@@ -1,18 +1,26 @@
 function ControllerClick(){
-
+    this._addressToDelete = "";
 };
 
 ControllerClick.prototype.initialize = function(){
+    this.resetClickControllerForSelector('');
+}
+
+ControllerClick.prototype.resetClickControllerForSelector = function(selector){
     var self = this;
-    $('[clickcontroller]').click(function(event){
+    $(selector + ' [clickcontroller]').off('click');
+    $(selector + ' [clickcontroller]').click(function(event){
         // select the chosen element with $(event.target).
         // Try the code shown below:
         // $(event.target).css('background-color', 'black');
         //
         // console.log(event);
         fnName = $(event.target).attr('clickcontroller');
-        self[fnName].apply(self, [event]); // This calls the function specified by controllerclick
-
+        if (typeof(fnName) !== 'undefined') {
+            self[fnName].apply(self, [event]); // This calls the function specified by controllerclick
+        } else {
+            $(event.target).parent().click();
+        }
     });
 }
 
@@ -168,4 +176,74 @@ ControllerClick.prototype.fileRealSubmitButton = function(event){
 
 ControllerClick.prototype.fileRealUploadButton = function(event){
     $('.fn-file-real-upload-button').click();
+}
+
+ControllerClick.prototype.addWithdrawalAddress = function(event){
+    // First we check that the entered password is the same as the confirmed password.
+    var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret";
+    $.ajax(urlHas2FA).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        if (msg) {
+            var url2FAIsAttemptable = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-is-2fa-attemptable";
+            $.ajax(url2FAIsAttemptable).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+                if (msg) {
+                    // 2 factor is enabled and not blocked so prompt the user to enter their code.
+                    g_App.getViewModals().showModal("fn-add-withdrawal-address-2fa-modal");
+                } else {
+                    // This code is run if the user has attempted to put a 2FA code in too many times.
+                    g_App.getViewModals().showModal("fn-2fa-not-attemptable");
+                }
+            });
+        } else {
+            // 2 factor is disabled so submit request to server.
+            var address = $("#withdrawalAddressToAdd").val();
+            var urlWithdrawalAddressAdd = g_App.getAjaxUrlPrefix() + "/withdrawal-address-add?address="+address;
+            $.ajax(urlWithdrawalAddressAdd).done(function(msg) {
+                g_App.getViewWithdrawalAddressAdd().handleAddWithdrawalMessage(msg);
+            });
+        }
+    });
+}
+
+ControllerClick.prototype.twoFactorAddWithdrawalAddress = function(event){
+    var self = this;
+    var code2fa = $("#add-withdrawal-address-2fa-input").val();
+    // 2 factor is disabled so submit request to server.
+    var url2FAIsValidCode = g_App.getAjaxUrlPrefix() + "/verify-one-time-code-and-email?code="+code2fa;
+    $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        if (msg) {
+            // This code executed when the user successfully enters their code.
+            var address = $("#withdrawalAddressToAdd").val();
+            var urlWithdrawalAddressAdd = g_App.getAjaxUrlPrefix() + "/withdrawal-address-add?code="+code2fa+"&address="+address;
+            $.ajax(urlWithdrawalAddressAdd).done(function(msg) {
+                g_App.getViewWithdrawalAddressAdd().handleAddWithdrawalMessage(msg);
+            });
+        } else {
+            // This code is run when the user unsuccessfully enters their code.
+            g_App.getViewUserMessages().showErrorForIncorrect2FACode("fn-2fa-not-attemptable");
+        }
+    });
+}
+
+ControllerClick.prototype.selectWithdrawalAddress = function(event){
+    var selectedAddressElement = $(event.target);
+    $(".fn-withdrawal-address-main-text").removeClass("cssSelected");
+    $(".fn-withdrawal-address-main-text").removeClass("fnSelected");
+    $(selectedAddressElement).addClass("cssSelected");
+    $(selectedAddressElement).addClass("fnSelected");
+}
+
+ControllerClick.prototype.deleteWithdrawalAddress = function(event){
+    this._addressToDelete = $(event.target).attr("value");
+    g_App.getViewModals().showModal("fn-confirm-delete-withdrawal-address-modal");
+}
+
+ControllerClick.prototype.confirmDeleteWithdrawalAddress = function(event){
+    var self = this;
+    var url2FAIsValidCode = g_App.getAjaxUrlPrefix() + "/withdrawal-address-remove?address="+self._addressToDelete;
+    $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        if (msg) {
+            $(".fn-withdrawal-address[value=" + self._addressToDelete+"]").remove();
+            self.closeModals();
+        }
+    });
 }

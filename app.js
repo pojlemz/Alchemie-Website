@@ -47,6 +47,11 @@ var routeKycUpload = require('./routes/kyc-upload');
 var routeInformationIsInReview = require('./routes/information-is-in-review');
 var routeKycApprove = require('./routes/kyc-approve');
 var routeKycDeny = require('./routes/kyc-deny');
+var routeDeposit = require('./routes/deposit');
+var routeWithdraw = require('./routes/withdraw');
+var routeWithdrawalAddressAdd = require('./routes/withdrawal-address-add');
+var routeWithdrawalAddressRemove = require('./routes/withdrawal-address-remove');
+
 var os = require("os");
 var RateLimit = require('express-rate-limit');
 
@@ -175,6 +180,10 @@ app.use('/', routeKycUpload);
 app.use('/', routeInformationIsInReview);
 app.use('/', routeKycApprove);
 app.use('/', routeKycDeny);
+app.use('/', routeDeposit);
+app.use('/', routeWithdraw);
+app.use('/', routeWithdrawalAddressAdd);
+app.use('/', routeWithdrawalAddressRemove);
 
 // Set Port
 if (process.env.NODE_ENV !== 'production') {

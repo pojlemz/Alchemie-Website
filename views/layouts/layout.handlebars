@@ -21,12 +21,30 @@
             <button type="button" class="css-float-left btn btn-default" clickcontroller="twoFactorNewPassword">Verify</button>
         </form>
     </div>
-    <div class="container modal css-2fa-not-attemptable modal fn-2fa-not-attemptable fn-modal">
+    <div class="container modal css-2fa-not-attemptable fn-2fa-not-attemptable fn-modal">
         <form method="post">
             <div class="form-group">
                 <label>You have exceeded the number of 2 factor authentication attempts permitted at this time. Please try again later. </label>
             </div>
             <button type="button" class="css-float-left btn btn-default" clickcontroller="closeModals">Ok</button>
+        </form>
+    </div>
+    <div class="container modal css-add-withdrawal-address-2fa-modal fn-add-withdrawal-address-2fa-modal fn-modal">
+        <form method="post">
+            <div class="form-group">
+                <label>Please verify your account by entering your six digit code from Google Authenticator.</label>
+                <input type="text" id="add-withdrawal-address-2fa-input" class="form-control css-add-withdrawal-address-2fa-input" name="username" placeholder="000000">
+            </div>
+            <button type="button" class="css-float-left btn btn-default" clickcontroller="twoFactorAddWithdrawalAddress">Verify</button>
+        </form>
+    </div>
+    <div class="container modal css-confirm-delete-withdrawal-address-modal fn-confirm-delete-withdrawal-address-modal fn-modal">
+        <form method="post">
+            <div class="form-group">
+                <label>Are you sure you want to remove this withdrawal address from your account?</label>
+            </div>
+            <button type="button" class="css-float-left btn btn-default" clickcontroller="confirmDeleteWithdrawalAddress">Ok</button>
+            <button type="button" class="css-float-right btn btn-default" clickcontroller="closeModals">Cancel</button>
         </form>
     </div>
     <!-- Main content -->
@@ -92,6 +110,7 @@
     <script src="/js/view_address_add.js"></script>
     <script src="/js/view_user_messages.js"></script>
     <script src="/js/view_modals.js"></script>
+    <script src="/js/view_withdrawal_address_add.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/thirdparty.js"></script>
     <script src="/js/initialize.js"></script> <!-- this script must be last -->

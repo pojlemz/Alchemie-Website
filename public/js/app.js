@@ -6,6 +6,7 @@ function App(){
     this._viewAddressAdd = new ViewAddressAdd();
     this._viewUserMessages = new ViewUserMessages();
     this._viewModals = new ViewModals();
+    this._viewWithdrawalAddressAdd = new ViewWithdrawalAddressAdd();
 };
 
 App.prototype.initialize = function(){
@@ -83,4 +84,8 @@ App.prototype.getViewUserMessages = function(){
 
 App.prototype.getViewModals = function(){
     return this._viewModals;
+}
+
+App.prototype.getViewWithdrawalAddressAdd = function(){
+    return this._viewWithdrawalAddressAdd;
 }

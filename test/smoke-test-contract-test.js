@@ -14,6 +14,14 @@ describe('Testing smart contract deployment', function() {
     it('Contract deployment', function(done) {
         const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
         MetaCoin.setProvider(web3.currentProvider);
+        if (typeof MetaCoin.currentProvider.sendAsync !== "function") {
+            MetaCoin.currentProvider.sendAsync = function() {
+                return MetaCoin.currentProvider.send.apply(
+                    MetaCoin.currentProvider, arguments
+                );
+            };
+        }
+        MetaCoin.setProvider(web3.currentProvider);
         web3.eth.getAccounts(function(err, accs) {
             if (err != null) {
                 console.error("There was an error fetching your accounts.");
@@ -33,8 +41,10 @@ describe('Testing smart contract deployment', function() {
             }).then(function(value) {
                 console.log("Printing value: value of....");
                 console.log(value.valueOf());
+                done();
             }).catch(function(e) {
                 console.error(e);
+                done();
             });
         });
     });
