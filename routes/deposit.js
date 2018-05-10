@@ -6,7 +6,7 @@ const DocumentInReview = require('../models/document-in-review');
 const BitgoAddress = require('../models/bitgo-address');
 const BitGoJS = require('bitgo');
 
-const bitgo = new BitGoJS.BitGo({ env: 'test', accessToken: process.env.BITGO_ACCESS_TOKEN});
+const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
 const walletId = process.env.WALLET_ID;
 const coinType = process.env.BITCOIN_NETWORK;
 

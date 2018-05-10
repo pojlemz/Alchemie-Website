@@ -6,7 +6,6 @@ const DocumentInReview = require('../models/document-in-review');
 
 const WithdrawalAddress = require('../models/withdrawal-address');
 
-const BitgoAddress = require('../models/bitgo-address');
 const BitGoJS = require('bitgo');
 
 const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
@@ -14,7 +13,7 @@ const walletId = process.env.WALLET_ID;
 const coinType = process.env.BITCOIN_NETWORK;
 
 // Get Homepage
-router.get('/withdraw', ensureAuthenticated, function(req, res){
+router.get('/confirm-withdraw', ensureAuthenticated, function(req, res){
     const email = req.user.email;
     const response = res;
     WithdrawalAddress.getAddresses(email, 'BTC', function (err, res) {
