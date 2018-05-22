@@ -511,6 +511,9 @@ footer{
 
 .css-withdrawal-address-main-text.cssSelected {
   background-color: #b7e8b0;
+  border-color: green;
+  border-width: 3px;
+  padding: 8px 16px;
 }
 
 /*css-address-left-tab*/

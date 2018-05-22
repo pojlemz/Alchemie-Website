@@ -51,6 +51,7 @@ var routeDeposit = require('./routes/deposit');
 var routeWithdraw = require('./routes/withdraw');
 var routeWithdrawalAddressAdd = require('./routes/withdrawal-address-add');
 var routeWithdrawalAddressRemove = require('./routes/withdrawal-address-remove');
+var routeSubmitWithdrawal = require('./routes/submit-withdrawal');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -184,6 +185,7 @@ app.use('/', routeDeposit);
 app.use('/', routeWithdraw);
 app.use('/', routeWithdrawalAddressAdd);
 app.use('/', routeWithdrawalAddressRemove);
+app.use('/', routeSubmitWithdrawal);
 
 // Set Port
 if (process.env.NODE_ENV !== 'production') {

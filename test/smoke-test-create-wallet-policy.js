@@ -8,7 +8,7 @@
 //
 
 const BitGoJS = require('../../src/index.js');
-const bitgo = new BitGoJS.BitGo({ env: 'test' , accessToken: promise.env.BITGO_FULL_ACCESS_TOKEN});
+const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT , accessToken: promise.env.BITGO_FULL_ACCESS_TOKEN});
 const Promise = require('bluebird');
 
 // TODO: put the new policy on the wallet with this id

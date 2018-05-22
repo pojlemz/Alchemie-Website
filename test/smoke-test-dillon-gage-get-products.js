@@ -1,7 +1,9 @@
+require('dotenv').config({path: '../.env'});
+
 const request = require('request');
 mlog = require('mocha-logger');
-const host = "https://stage-connect.fiztrade.com";
-const publicToken = "1349-00bdbf2b582db69fb28b72a446cb6d18";
+const host = process.env.DILLON_GAGE_API_ENDPOINT;
+const publicToken = process.env.DILLON_GAGE_PUBLIC_TOKEN;
 
 describe('Get Dillon Gage Products', function() {
     it('List the Dillon Gage products that are available on the website', function(done) {

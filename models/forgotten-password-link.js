@@ -1,7 +1,7 @@
 // A model that contains all successful requests a user makes to reset their password.
 // This includes any request that successfully sends an email.
 
-// ownedaddress
+// forgottenpasswordlinks
 // email - text
 // passwordlink - text
 // expirysecondssinceunixepoch - bigint

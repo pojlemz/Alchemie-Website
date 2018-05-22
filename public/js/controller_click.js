@@ -26,9 +26,7 @@ ControllerClick.prototype.resetClickControllerForSelector = function(selector){
 
 ControllerClick.prototype.addAddressToAccount = function(event){
     var addressToAddToAccount = $("#addressToAddToAccount").val();
-    var url = g_App.getAjaxUrlPrefix() + "/add-owned-address-to-email?address="+addressToAddToAccount;
-    //console.log(addressToAddToAccount);
-    $.ajax(url).done(function(msg) { // Make API call to server to see if Address is taken
+    $.post("/add-owned-address-to-email", { address: addressToAddToAccount}, function( msg ) {
         // Try the following line of code in the Javascript console:
         // thirdparty.web3.utils.isAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
         if (thirdparty.web3.utils.isAddress(addressToAddToAccount)) {
@@ -43,7 +41,7 @@ ControllerClick.prototype.addAddressToAccount = function(event){
         } else {
             g_App.getViewAddressAdd().showErrorForInvalidAddress();
         }
-    });
+    }, "json");
 }
 
 ControllerClick.prototype.enable2FA = function(event){
@@ -246,4 +244,22 @@ ControllerClick.prototype.confirmDeleteWithdrawalAddress = function(event){
             self.closeModals();
         }
     });
+}
+
+ControllerClick.prototype.submitWithdrawal = function(event){
+    // var self = this;
+    var address = $(".fnSelected").attr('value');
+    var amount = $("#withdrawalAmount").val();
+
+    // var url = g_App.getAjaxUrlPrefix() + "/submit-withdrawal";
+    // $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    //     if (msg) {
+    //         $(".fn-withdrawal-address[value=" + self._addressToDelete+"]").remove();
+    //         self.closeModals();
+    //     }
+    // });
+    $.post( "/submit-withdrawal", { address: address, amount: amount }, function( data ) {
+        console.log( data.name ); // John
+        console.log( data.time ); // 2pm
+    }, "json");
 }

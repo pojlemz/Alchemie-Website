@@ -2,7 +2,7 @@
 
 var BitGoJS = require('bitgo');
 var BitGoAddress = require('./bitgo-address');
-// const bitgo = new BitGoJS.BitGo({ env: 'test', accessToken: process.env.ACCESS_TOKEN });
+// const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.ACCESS_TOKEN });
 const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
 const walletId = process.env.WALLET_ID;
 const bitcoinNetwork = process.env.BITCOIN_NETWORK;
@@ -31,6 +31,13 @@ module.exports.getUTXOByHash = function(hash, callback){
     var query = "SELECT * FROM bitcoinutxos WHERE hash=$1;";
     var params = [hash];
     pgClient.runQuery(query, params, callback);
+}
+
+module.exports.getUTXOsByAddress = function(address, callback){
+    // null or false indicates that the user has not been kyced
+    var query = "SELECT * FROM bitcoinutxos WHERE address=$1;";
+    var params = [address];
+    pgClient.runQueryMultiSelect(query, params, callback);
 }
 
 module.exports.updateUTXOListWithBitGoByEmail = function(email, callback){

@@ -13,7 +13,7 @@ const walletId = process.env.WALLET_ID;
 const coinType = process.env.BITCOIN_NETWORK;
 
 // Get Homepage
-router.get('/confirm-withdraw', ensureAuthenticated, function(req, res){
+router.get('/confirm-withdrawal', ensureAuthenticated, function(req, res){
     const email = req.user.email;
     const response = res;
     WithdrawalAddress.getAddresses(email, 'BTC', function (err, res) {
