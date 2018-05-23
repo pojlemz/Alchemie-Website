@@ -1,41 +1,44 @@
 const express = require('express');
 const router = express.Router();
-var requestIp = require('request-ip');
-const HasBeenKyced = require("../models/has-been-kyced");
-const DocumentInReview = require('../models/document-in-review');
-const WithdrawalAddress = require('../models/withdrawal-address');
+const host = require('../server/host');
+const PendingWithdrawal = require('../models/pending-withdrawal');
+
+var generateRandomHash = require('../server/generate-random-hash');
+var messageSender = require('../server/emailer/message-sender');
 
 const BitGoJS = require('bitgo');
 
-const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
-const walletId = process.env.WALLET_ID;
-const coinType = process.env.BITCOIN_NETWORK;
-
 // Get Homepage
 router.post('/submit-withdrawal', ensureAuthenticated, function(req, res){
-    // const email = req.user.email; // bob@blockunity.com
-    // const address = req.body.address; // "2MtaWaq1uH4HvukDbXi1irjnDthFcdpvVMG"
-    // const amount = req.body.amount; // 0.01
-    //
-    // const response = res;
-    // WithdrawalAddress.getAddresses(email, 'BTC', function (err, res) {
-    //     // var addresses = [];
-    //     // for (var i = 0; i < res.length; i++) {
-    //     //     addresses.push(res[i].address);
-    //     // }
-    //     response.send(JSON.stringify({"error": "This address has already been added."}));
-    // });
-
-    res.render('withdraw');
+    administerWithdrawLink(req, res);
 });
 
 function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
         return next();
     } else {
         //req.flash('error_msg','You are not logged in');
         res.redirect('/login');
     }
+}
+
+function administerWithdrawLink(req, res){
+    const email = req.user.email; // bob@blockunity.com
+    const address = req.body.address; // "2MtaWaq1uH4HvukDbXi1irjnDthFcdpvVMG"
+    const amountRequested = req.body.amount;
+    const amountSatoshis = parseInt(parseFloat(req.body.amount) * 1000); // 0.01
+    var currentTime = new Date().getTime();
+    var expiryTime = currentTime + 1000 * 60 * 30;
+    var randomHash = generateRandomHash();
+    var newPendingWithdrawalLink = {email: email, cointype: 'BTC', address: address, amount: amountSatoshis, withdrawLink:randomHash, expiryMillisecondsSinceUnixEpoch: expiryTime};
+    var url = host + '/reset-your-password?key=' + randomHash;
+    var messageSubject = 'Confirm your withdrawal with Block Unity';
+    var messageBody = "Greetings from the Block Unity team!\n\n We received a request to withdraw bitcoin from your Alchemie account.\n\n If this was you then please click on the link found at " + url + " within thirty minutes to reset your password. \n\n If you didn't make this request then feel free to ignore this email. \n\n" +"Best Regards,"+"\n\n" +"The Block Unity Team";
+    PendingWithdrawal.createPendingWithdrawalLink(newPendingWithdrawalLink, function(err2, res2) {
+        messageSender(email, messageSubject, messageBody, function (err, content) {
+            res.render('withdraw-check-email');
+        });
+    });
 }
 
 module.exports = router;

@@ -90,6 +90,7 @@ ControllerClick.prototype.remove2FA = function(event){
 }
 
 ControllerClick.prototype.forgotYourPassword = function(event){
+    // We are okay with this simply being a GET request because it just takes us to the forgotten password page.
     g_App.sendPostRequest('/forgotten-password', {}, 'get');
 }
 

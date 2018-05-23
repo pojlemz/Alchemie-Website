@@ -6,7 +6,7 @@ var web3 = require('web3');
 
 // Try the following line in the browser to test retrieval of owned addresses
 // http://localhost:3000/add-owned-address-to-email?address=0x0000000000000000000000000000000000000000000000000
-router.get('/add-owned-address-to-email', ensureAuthenticated, function(req, res){
+router.post('/add-owned-address-to-email', ensureAuthenticated, function(req, res){
     // Ensure user is authenticated.
     // if (web3.utils.isAddress(req.query.address)) {
         var response = res;
