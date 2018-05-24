@@ -187,6 +187,8 @@ app.use('/', routeWithdrawalAddressAdd);
 app.use('/', routeWithdrawalAddressRemove);
 app.use('/', routeSubmitWithdrawal);
 
+require('./server/server_interval');
+
 // Set Port
 if (process.env.NODE_ENV !== 'production') {
     app.set('port', (process.env.PORT || 3000));

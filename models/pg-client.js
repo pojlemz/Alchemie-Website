@@ -7,7 +7,7 @@ client.connect();
 module.exports.runQuery = function(query, params, callback){
     client.query(query, params, function(err, res){
         if (typeof(res) === 'undefined' || res === null || typeof(res.rows) === 'undefined' || res.rows === null || res.rows.length === 0){
-            console.log("Statement returned no results");
+            // console.log("Statement returned no results");
             if (err){
                 console.error(err);
             }

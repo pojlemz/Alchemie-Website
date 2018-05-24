@@ -33,7 +33,7 @@ function administerWithdrawLink(req, res){
     var newPendingWithdrawalLink = {email: email, cointype: 'BTC', address: address, amount: amountSatoshis, withdrawLink:randomHash, expiryMillisecondsSinceUnixEpoch: expiryTime};
     var url = host + '/reset-your-password?key=' + randomHash;
     var messageSubject = 'Confirm your withdrawal with Block Unity';
-    var messageBody = "Greetings from the Block Unity team!\n\n We received a request to withdraw bitcoin from your Alchemie account.\n\n If this was you then please click on the link found at " + url + " within thirty minutes to reset your password. \n\n If you didn't make this request then feel free to ignore this email. \n\n" +"Best Regards,"+"\n\n" +"The Block Unity Team";
+    var messageBody = "Greetings from the Block Unity team!\n\n We received a request to withdraw bitcoin from your Alchemie account.\n\n If this was you then please click on the link found at " + url + " within thirty minutes to complete your withdrawal. \n\n If you didn't make this request then feel free to ignore this email. \n\n" +"Best Regards,"+"\n\n" +"The Block Unity Team";
     PendingWithdrawal.createPendingWithdrawalLink(newPendingWithdrawalLink, function(err2, res2) {
         messageSender(email, messageSubject, messageBody, function (err, content) {
             res.render('withdraw-check-email');

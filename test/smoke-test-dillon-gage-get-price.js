@@ -1,26 +1,59 @@
 require('dotenv').config({path: '../.env'});
 
 const request = require('request');
-mlog = require('mocha-logger');
 const host = process.env.DILLON_GAGE_API_ENDPOINT;
-const publicToken = process.env.DILLON_GAGE_PUBLIC_TOKEN;
+const publicToken = process.env.DILLON_GAGE_PRIVATE_TOKEN;
 
-describe('Get Dillon Gage Products', function() {
-    it('List the Dillon Gage products that are available on the website', function(done) {
-        // var url = host + '/FizServices/GetPrices/'+publicToken+'/1GP';
-        var url = host + '/FizServices/GetPrices/'+publicToken+'/1KILOG';
-        request({
-            uri: url,
-            method: ""
-        }, function(error, response, body) {
-            if (typeof(body) === 'undefined') {
-                console.error("Error when getting body.");
-                console.log(error);
-            } else {
-                var result = JSON.parse(body);
-                console.log(result);
-            }
-            done();
-        });
-    });
+// 100G
+// var url = host + '/FizServices/GetPrices/'+publicToken+'/1GP';
+var url = host + '/FizServices/GetPrices/'+publicToken+'/1KILOG';
+request({
+    uri: url,
+    method: ""
+}, function(error, response, body) {
+    if (typeof(body) === 'undefined') {
+        console.error("Error when getting body.");
+        console.log(error);
+    } else {
+        var result = JSON.parse(body);
+        console.log(result);
+    }
 });
+/*
+{ code: '1KILOG',
+    isActiveBuy: 'Y',
+    isActiveSell: 'Y',
+    availability: '1-5 Days',
+    tiers:
+    { '1':
+        { spread: 200.92,
+            melt: 32.148,
+            bidPercise: 41885.62920000001,
+            askPercise: 42086.554200000006,
+            bid: 41885.63,
+            ask: 42086.55 },
+        '2':
+        { spread: 200.92,
+            melt: 32.148,
+            bidPercise: 41885.62920000001,
+            askPercise: 42086.554200000006,
+            bid: 41885.63,
+            ask: 42086.55 },
+        '3':
+        { spread: 200.92,
+            melt: 32.148,
+            bidPercise: 41885.62920000001,
+            askPercise: 42086.554200000006,
+            bid: 41885.63,
+            ask: 42086.55 },
+        '4':
+        { spread: 200.92,
+            melt: 32.148,
+            bidPercise: 41885.62920000001,
+            askPercise: 42086.554200000006,
+            bid: 41885.63,
+            ask: 42086.55
+        }
+    }
+}
+*/
