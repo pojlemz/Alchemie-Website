@@ -260,7 +260,5 @@ ControllerClick.prototype.submitWithdrawal = function(event){
     //     }
     // });
     $.post( "/submit-withdrawal", { address: address, amount: amount }, function( data ) {
-        console.log( data.name ); // John
-        console.log( data.time ); // 2pm
     }, "json");
 }

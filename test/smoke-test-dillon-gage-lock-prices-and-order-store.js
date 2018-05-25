@@ -13,8 +13,8 @@ request.post(url,
             "includeRetailPrices": "yes",          // optional
             "items":
                 [
-                    {"code":"1KILOG","transactionType":"buy","qty":"10"},
-                    {"code":"1GP","transactionType":"buy","qty":"50"}
+                    {"code":"1KILOG","transactionType":"buy","qty":"1"},
+                    {"code":"100G","transactionType":"buy","qty":"5"}
                 ]
         }
     }
@@ -24,16 +24,17 @@ request.post(url,
             console.log(error);
         } else {
             console.log(body);
-            var url2 = host + '/FizServices/ExecuteTrade/token/' + privateToken;
+            var url2 = host + '/FizServices/ExecuteTrade/' + privateToken;
             // https://stage-connect.fiztrade.com/FizServices/ExecuteTrade/token/1349-00bdbf2b582db69fb28b72a446cb6d18
+            /* "inventoryLocation":"DGI", */
             request.post(url2, {json:
                 {
                     "transactionId":"123456",
-                    "referenceNumber":"123",
-                    "inventoryLocation":"DGI",
-                    "shippingOption":"store",
+                    "referenceNumber":"123456",
+                    "shippingOption":"hold",
+                    "dropShipInfo": {"name": "Retail Customer", "address1": "123 Hickory Lane", "address2": "", "address4":"+1 416 996-1688", "city": "Madison", "state":"CT", "postalCode":"06443", "country": "US"},
                     "lockToken":body.lockToken,
-                    "traderId":"jargonson2828282828@gmail.com"
+                    "traderId":"dan@blockunity.com"
                 }
             }, function(error, response, body) {
                 // body.lockToken

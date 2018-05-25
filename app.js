@@ -52,6 +52,7 @@ var routeWithdraw = require('./routes/withdraw');
 var routeWithdrawalAddressAdd = require('./routes/withdrawal-address-add');
 var routeWithdrawalAddressRemove = require('./routes/withdrawal-address-remove');
 var routeSubmitWithdrawal = require('./routes/submit-withdrawal');
+var routeGetPrices = require('./routes/json-get-prices');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -186,6 +187,7 @@ app.use('/', routeWithdraw);
 app.use('/', routeWithdrawalAddressAdd);
 app.use('/', routeWithdrawalAddressRemove);
 app.use('/', routeSubmitWithdrawal);
+app.use('/', routeGetPrices);
 
 require('./server/server_interval');
 

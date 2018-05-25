@@ -7,6 +7,7 @@ function App(){
     this._viewUserMessages = new ViewUserMessages();
     this._viewModals = new ViewModals();
     this._viewWithdrawalAddressAdd = new ViewWithdrawalAddressAdd();
+    this._viewProductPrices = new ViewProductPrices();
 };
 
 App.prototype.initialize = function(){
@@ -16,6 +17,7 @@ App.prototype.initialize = function(){
     this._viewModals.initialize();
     this._controllerDrop.initialize();
     this._controllerChange.initialize();
+    this._viewProductPrices.initialize();
 
     g_App.getViewAddressAdd().showListOfOwnedAddresses();
     $(document).ready(function() { // This disables default action in the captcha form so that it can be handled in Javascript.
@@ -88,4 +90,8 @@ App.prototype.getViewModals = function(){
 
 App.prototype.getViewWithdrawalAddressAdd = function(){
     return this._viewWithdrawalAddressAdd;
+}
+
+App.prototype.getViewProductPrices = function(){
+    return this._viewProductPrices;
 }

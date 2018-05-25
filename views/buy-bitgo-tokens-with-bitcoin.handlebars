@@ -7,8 +7,49 @@
 </div>
 <div class="css-right-pane">
     <!--<h2 class="page-header">Dashboard</h2>-->
-    <p>Please send Bitcoin to the following address and then we will credit your account with some gold tokens.</p>
-    <div id="BTCPayQRCode"><img src="https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:{{bitGoAddress}}"></img></div>
-    <br/>
-    <script src="/js/thirdparty.js"></script>
+    <!-- <p>Please send Bitcoin to the following address and then we will credit your account with some gold tokens.</p> -->
+    <!-- <div id="BTCPayQRCode"><img src="https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:{{bitGoAddress}}"></img></div> -->
+    <!-- <br/> -->
+    <p>Use the form below to enter quantities for your order.</p>
+    <div class="container-fluid">
+        <div class="row css-heading-dillon-gage-product">
+            <div class="css-dillon-gage-heading-label">
+                <b>Product</b>
+            </div>
+            <div class="css-dillon-gage-heading-amount">
+                <b>Qty</b>
+            </div>
+            <div class="css-dillon-gage-heading-price">
+                <b>Price</b>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row css-row-dillon-gage-product">
+            <img src="/images/gold-bar.png" class="img-thumbnail css-dillon-gage-thumbnail" alt="gold-bar">
+            <div class="css-dillon-gage-product-label">
+                <b>Kilogram Gold Bar</b>
+            </div>
+            <div class="input-group input-group-md css-dillon-gage-amount">
+                <input type="text" class="form-control fnQty" value="1KILOG" placeholder="0">
+            </div>
+            <div class="css-dillon-gage-product-price">
+                <b class="fnPrice" value="1KILOG">$40000.00</b>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row css-footer-dillon-gage-product">
+            <div class="css-dillon-gage-footer-label">
+                <h3>Grand Total:</h3>
+            </div>
+            <div class="css-dillon-gage-footer-total">
+                <h3 class="fn-grand-total">$0.00</h3>
+            </div>
+        </div>
+    </div>
+    <div class="css-purchase-button-panel">
+        <a type="button" class="btn btn-default css-button-complete-withdrawal" clickcontroller="submitWithdrawal"> Begin Order </a>
+    </div>
+    <!--<script src="/js/price_interval.js"></script> -->
 </div>
