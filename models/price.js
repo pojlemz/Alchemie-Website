@@ -6,6 +6,7 @@
 // time_created - TIMESTAMP
 // price - float8
 
+const getUsdToBtc = require('../server/get-usd-to-btc');
 var pgClient = require('./pg-client');
 
 module.exports.addPrice = function(instrument, price, callback){
@@ -27,4 +28,20 @@ module.exports.getLatestPrices = function(callback){
     var query = "SELECT * FROM price p1 INNER JOIN (SELECT instrument, MAX(time_created) AS latest_time FROM price GROUP BY instrument) p2 ON p1.instrument=p2.instrument AND p1.time_created=p2.latest_time;";
     var params = [];
     pgClient.runQueryMultiSelect(query, params, callback);
+}
+
+module.exports.getLatestPricesInBitcoin = function(callback){
+    // null or false indicates that the user has not been kyced
+    var query = "SELECT * FROM price p1 INNER JOIN (SELECT instrument, MAX(time_created) AS latest_time FROM price GROUP BY instrument) p2 ON p1.instrument=p2.instrument AND p1.time_created=p2.latest_time;";
+    var params = [];
+    pgClient.runQueryMultiSelect(query, params, function(err,res){
+        if (err){
+            callback(err, res);
+        } else {
+            for (var i = 0; i < res.length; i++){
+                res[i]['price'] = getUsdToBtc(res[i]['price']); // Converts price from USD to BTC
+            }
+            callback(err, res);
+        }
+    });
 }

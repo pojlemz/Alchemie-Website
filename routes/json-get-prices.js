@@ -9,7 +9,7 @@ var pgClient = require('../models/pg-client');
 router.post('/get-prices', ensureAuthenticated, function(req, res){
     // Ensure user is authenticated.
     var response = res;
-    Price.getLatestPrices(function(err, res){
+    Price.getLatestPricesInBitcoin(function(err, res){
         if (err) {
             response.setHeader('Content-Type', 'application/json');
             response.send(JSON.stringify({ response: 'error', prices: res }));

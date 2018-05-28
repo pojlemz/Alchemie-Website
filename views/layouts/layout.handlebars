@@ -12,40 +12,97 @@
 <body>
     <!-- modals -->
     <div id="fn-modal-overlay" class="css-overlay" clickcontroller="closeModals"></div>
-    <div class="container modal css-password-change-2fa-modal fn-password-change-2fa-modal fn-modal">
-        <form method="post">
-            <div class="form-group">
-                <label>Please verify your account by entering your six digit code from Google Authenticator.</label>
-                <input type="text" id="change-password-2fa-input" class="form-control css-change-password-2fa-input" name="username" placeholder="000000">
+    <!--<div class="container modal css-password-change-2fa-modal fn-password-change-2fa-modal fn-modal" tabindex="-1" role="dialog">-->
+    <div class="modal fn-password-change-2fa-modal fn-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Verify Your Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label>Please verify your account by entering your six digit code from Google Authenticator.</label>
+                            <input type="text" id="change-password-2fa-input" class="form-control css-change-password-2fa-input" name="username" placeholder="000000">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="css-float-left btn btn-danger" clickcontroller="twoFactorNewPassword">Verify</button>
+                </div>
             </div>
-            <button type="button" class="css-float-left btn btn-default" clickcontroller="twoFactorNewPassword">Verify</button>
-        </form>
+        </div>
     </div>
-    <div class="container modal css-2fa-not-attemptable fn-2fa-not-attemptable fn-modal">
-        <form method="post">
-            <div class="form-group">
-                <label>You have exceeded the number of 2 factor authentication attempts permitted at this time. Please try again later. </label>
+    <div class="modal fn-2fa-not-attemptable fn-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Too Many Attempts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label>You have exceeded the number of 2 factor authentication attempts permitted at this time. Please try again later. </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="css-float-left btn btn-danger" clickcontroller="closeModals">Ok</button>
+                </div>
             </div>
-            <button type="button" class="css-float-left btn btn-default" clickcontroller="closeModals">Ok</button>
-        </form>
+        </div>
     </div>
-    <div class="container modal css-add-withdrawal-address-2fa-modal fn-add-withdrawal-address-2fa-modal fn-modal">
-        <form method="post">
-            <div class="form-group">
-                <label>Please verify your account by entering your six digit code from Google Authenticator.</label>
-                <input type="text" id="add-withdrawal-address-2fa-input" class="form-control css-add-withdrawal-address-2fa-input" name="username" placeholder="000000">
+    <div class="modal fn-add-withdrawal-address-2fa-modal fn-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Verify Your Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label>Please verify your account by entering your six digit code from Google Authenticator.</label>
+                            <input type="text" id="add-withdrawal-address-2fa-input" class="form-control css-add-withdrawal-address-2fa-input" name="username" placeholder="000000">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="css-float-left btn btn-danger" clickcontroller="twoFactorAddWithdrawalAddress">Verify</button>
+                </div>
             </div>
-            <button type="button" class="css-float-left btn btn-default" clickcontroller="twoFactorAddWithdrawalAddress">Verify</button>
-        </form>
+        </div>
     </div>
-    <div class="container modal css-confirm-delete-withdrawal-address-modal fn-confirm-delete-withdrawal-address-modal fn-modal">
-        <form method="post">
-            <div class="form-group">
-                <label>Are you sure you want to remove this withdrawal address from your account?</label>
+    <div class="modal fn-confirm-delete-withdrawal-address-modal fn-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Address Removal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label>Are you sure you want to remove this withdrawal address from your account?</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="css-float-left btn btn-success" clickcontroller="confirmDeleteWithdrawalAddress">Ok</button>
+                    <button type="button" class="css-float-right btn btn-danger" clickcontroller="closeModals">Cancel</button>
+                </div>
             </div>
-            <button type="button" class="css-float-left btn btn-default" clickcontroller="confirmDeleteWithdrawalAddress">Ok</button>
-            <button type="button" class="css-float-right btn btn-default" clickcontroller="closeModals">Cancel</button>
-        </form>
+        </div>
     </div>
     <!-- Main content -->
     <div class="css-main-page">

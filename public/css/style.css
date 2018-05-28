@@ -161,10 +161,6 @@ footer{
   float: left;
 }
 
-.modal {
-  background: white;
-}
-
 .css-password-change-2fa-modal {
   max-width: 400px;
   max-height: 200px;
@@ -591,7 +587,7 @@ footer{
 }
 
 .css-dillon-gage-product-price {
-  width: 100px;
+  width: 140px;
   float: right;
   top: 40px;
   position: relative;
@@ -604,7 +600,7 @@ footer{
 }
 
 .css-dillon-gage-heading-price {
-  width: 100px;
+  width: 140px;
   float: right;
   position: relative;
 }
@@ -632,4 +628,14 @@ footer{
 
 .css-purchase-button-panel {
   padding-top: 20px;
+}
+
+.css-max-right-pane-wrapper {
+  min-width: 500px;
+}
+
+.modal-header .close {
+  position: absolute;
+  top: 13px;
+  right: 10px;
 }

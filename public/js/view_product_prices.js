@@ -47,7 +47,7 @@ ViewProductPrices.prototype.updatePrices = function(){
     if (this._isAvailable){
         for (var i = 0; i < jsonPrices.length; i++) {
             var selector = ".fnPrice[value='" + jsonPrices[i].instrument + "']";
-            $(selector).text("$"+jsonPrices[i].price.toFixed(2));
+            $(selector).text(jsonPrices[i].price.toFixed(8));
         }
         this.updateGrandTotal();
     } else {
@@ -67,7 +67,7 @@ ViewProductPrices.prototype.updateGrandTotal = function() {
             }
             grandTotal += qty * prices[i].price;
         }
-        $(".fn-grand-total").text("$" + grandTotal.toFixed(2));
+        $(".fn-grand-total").text(grandTotal.toFixed(8) + " BTC");
     } else {
         $(".fn-grand-total").text(".....");
     }
