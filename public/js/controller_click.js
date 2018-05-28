@@ -262,3 +262,14 @@ ControllerClick.prototype.submitWithdrawal = function(event){
     $.post( "/submit-withdrawal", { address: address, amount: amount }, function( data ) {
     }, "json");
 }
+
+ControllerClick.prototype.beginOrder = function(event){
+    // Creates a lock token on the server
+    // Gets prices and metrics corresponding to the lock token
+    // Show the modal that lets you place an order on the locked prices (you have 20 seconds to place the order)
+    g_App.getViewModals().showModal("fn-confirm-place-order");
+}
+
+ControllerClick.prototype.confirmProductOrder = function(event){
+
+}

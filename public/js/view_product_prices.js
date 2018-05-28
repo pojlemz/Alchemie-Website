@@ -20,6 +20,7 @@ ViewProductPrices.prototype.initialize = function(){
     var requestLoop = setInterval(fetchPricesAndUpdate, 5000);
     $(document).ready(function(){
         fetchPricesAndUpdate();
+        $(".fnQty").val('');
     });
 }
 

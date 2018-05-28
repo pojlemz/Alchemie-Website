@@ -560,15 +560,19 @@ footer{
   padding-top: 20px;
 }
 
-.css-button-complete-withdrawal {
-  background-color: #eee;
-}
-
 .css-row-dillon-gage-product {
   height: 120px;
 }
 
+.css-row-dillon-gage-product-modal {
+  height: 120px;
+}
+
 .css-dillon-gage-thumbnail {
+  float:left;
+}
+
+.css-dillon-gage-thumbnail-modal {
   float:left;
 }
 
@@ -578,7 +582,22 @@ footer{
   top: 35px;
 }
 
+.css-dillon-gage-amount-modal {
+  float: right;
+  width: 50px;
+  top: 40px;
+  position: relative;
+}
+
 .css-dillon-gage-product-label {
+  top: 40px;
+  position: relative;
+  left: 20px;
+  float: left;
+  width: 200px;
+}
+
+.css-dillon-gage-product-label-modal {
   top: 40px;
   position: relative;
   left: 20px;
@@ -593,7 +612,20 @@ footer{
   position: relative;
 }
 
+.css-dillon-gage-product-price-modal {
+  width: 140px;
+  float: right;
+  top: 40px;
+  position: relative;
+}
+
 .css-dillon-gage-heading-label {
+  position: relative;
+  float: left;
+  width: 200px;
+}
+
+.css-dillon-gage-heading-label-modal {
   position: relative;
   float: left;
   width: 200px;
@@ -605,7 +637,19 @@ footer{
   position: relative;
 }
 
+.css-dillon-gage-heading-price-modal {
+  width: 140px;
+  float: right;
+  position: relative;
+}
+
 .css-dillon-gage-heading-amount {
+  float: right;
+  width: 50px;
+  top: 35px;
+}
+
+.css-dillon-gage-heading-amount-modal {
   float: right;
   width: 50px;
   top: 35px;
@@ -616,12 +660,27 @@ footer{
   height: 60px;
 }
 
+.css-heading-dillon-gage-product-modal{
+  padding-top: 20px;
+  height: 60px;
+}
+
 .css-dillon-gage-footer-label {
   color: orangered;
   float: left;
 }
 
+.css-dillon-gage-footer-label-modal {
+  color: orangered;
+  float: left;
+}
+
 .css-dillon-gage-footer-total {
+  color: orangered;
+  float: right;
+}
+
+.css-dillon-gage-footer-total-modal {
   color: orangered;
   float: right;
 }
@@ -638,4 +697,20 @@ footer{
   position: absolute;
   top: 13px;
   right: 10px;
+}
+
+.css-dillon-gage-heading-total-modal {
+  float: right;
+  width: 110px;
+}
+
+.css-dillon-gage-product-total-modal {
+  float: right;
+  width: 110px;
+  position: relative;
+  top: 40px;
+}
+
+.css-modal-order-content {
+  width: 635px;
 }
