@@ -701,16 +701,20 @@ footer{
 
 .css-dillon-gage-heading-total-modal {
   float: right;
-  width: 110px;
+  width: 125px;
 }
 
 .css-dillon-gage-product-total-modal {
   float: right;
-  width: 110px;
+  width: 125px;
   position: relative;
   top: 40px;
 }
 
 .css-modal-order-content {
-  width: 635px;
+  width: 650px;
+}
+
+.css-footer-dillon-gage-product-modal {
+  padding-right: 50px;
 }

@@ -14,7 +14,7 @@ request.post(url,
             "items":
                 [
                     {"code":"1KILOG","transactionType":"buy","qty":"1"},
-                    {"code":"100G","transactionType":"buy","qty":"5"}
+                    {"code":"1GP","transactionType":"buy","qty":"5"}
                 ]
         }
     }
@@ -49,3 +49,10 @@ request.post(url,
         }
     }
 );
+/*
+{ inventoryLocation: 'Vault',
+    referenceNumber: '123456',
+    status: 'filled',
+    transactionId: '123456',
+    confirmationNumber: [ 'FIZ00063269' ] }
+*/

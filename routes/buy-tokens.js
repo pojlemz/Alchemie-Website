@@ -39,7 +39,6 @@ function preparePageToShowBitGoAddress(req, res) {
     const email = req.user.email;
     const response = res;
 
-
     BitgoAddress.getAddressByEmail(email, 'BTC', function (err, res) {
         if (typeof(res) === 'undefined' || res === null) {
             // BitgoWallet.getWalletIdByEmail(req.user.email, function(err, res) {

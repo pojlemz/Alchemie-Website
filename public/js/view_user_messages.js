@@ -47,3 +47,7 @@ ViewUserMessages.prototype.showCustomSuccessMessage = function(message){
     htmlMessage = '<div class="alert alert-success fnOnlyOneError fnShowCustomSuccess">' + message + '</div>';
     $(".fnAlertBox").prepend(htmlMessage);
 }
+
+ViewUserMessages.prototype.removeMessagesFromUserAlertBox = function(message){
+    $(".fnOnlyOneError").remove();
+}

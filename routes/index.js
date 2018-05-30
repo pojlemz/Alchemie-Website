@@ -45,14 +45,20 @@ router.get('/', ensureAuthenticated, function(req, res){
         } else {
             const address = res.address; // Create a bitcoin address
             bitgo.blockchain().getAddress({ address: address}, function(err, res) {
-                if (err) { console.log(err); process.exit(-1); }
-                const btcSpendableBalance = Number(res.spendableBalance / 100000000).toFixed(8) + " BTC";
-                const btcBalance = Number(res.balance / 100000000).toFixed(8) + " BTC";
-                response.render('index', {
-                    'bitGoAddress': address,
-                    'spendableBalance': btcSpendableBalance,
-                    'balance': btcBalance
-                });
+                if (err) {
+                    console.log(err);
+                    console.error('Error connecting to bitGo');
+                    // TODO: Render page and tell the user that the wallet is unavailable
+                    // TODO: Still let the user reach the dashboard but inform them that BitGo is unreachable
+                } else {
+                    const btcSpendableBalance = Number(res.spendableBalance / 100000000).toFixed(8) + " BTC";
+                    const btcBalance = Number(res.balance / 100000000).toFixed(8) + " BTC";
+                    response.render('index', {
+                        'bitGoAddress': address,
+                        'spendableBalance': btcSpendableBalance,
+                        'balance': btcBalance
+                    });
+                }
             });
         }
     })
