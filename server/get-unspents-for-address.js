@@ -12,41 +12,77 @@ module.exports = function getUnspentsForAddress(address, callback) {
             // console.dir(unspents);
             // print the wallets
             wallet.transactions({}, function(err, result) {
-                var utxoList = [];
                 if (!err) {
                     // print unspents
+                    var utxoList = [];
                     var transactions = result['transactions'];
-                    // Initialize the utxo list here
+                    var outputDictionary = {}; // Key maps to true only if they are supposed to be included in tx list
+                    // @NOTE: This block fills the output dictionary with default false values for all our utxos
                     for (var j = 0; j < transactions.length; j++){
-                        var outputIds = [];
+                        var transaction = transactions[j];
+                        var outputs = transaction['outputs'];
+                        var inputs = transaction['inputs'];
+                        for (var i = 0; i < outputs.length; i++){
+                            var output = outputs[i];
+                            outputDictionary[output['id']] = false;
+                        }
+                        for (var i = 0; i < inputs.length; i++){
+                            var input = inputs[i];
+                            outputDictionary[input['id']] = false;
+                        }
+                    }
+                    // @NOTE: This code block sets the initial list of outputs with which the recursive function will be called with.
+                    // @NOTE: Each element in the list is the first to be appended to the owned outputs.
+                    var initialOutputs = [];
+                    for (var j = 0; j < transactions.length; j++){
                         var transaction = transactions[j];
                         var outputs = transaction['outputs'].filter(function(output){
                             return (output['address'] == address);
                         });
-                        for (var i = 0; i < outputs.length; i++){
-                            outputIds.push(outputs[i]['id']);
-                        }
-                        utxoList = utxoList.concat(outputIds);
-                        // console.log(utxoList);
+                        outputs.forEach(function(element) {
+                            initialOutputs.push(element['id']);
+                        });
                     }
-                    // Grow the list here from
-                    // console.dir(result);
-                    // console.dir(transactions.length);
-                    utxoListCount = 0;
-                    while (utxoListCount < utxoList.length){
-                        utxoListCount = utxoList.length;
-                        for (var i = 0; i < utxoList.length; i++){
-                            var utxo = utxoList[i];
-                            for (var j = 0; j < transactions.length; j++){
-                                var transaction = transactions[j];
-                                var inputs = transaction['inputs'].filter(function(input){
-                                    return (input['id'] == utxo);
-                                });
-                                utxoList.concat(inputs);
+                    // @NOTE: This code block recreates the input/output model as a dictionary.
+                    // @NOTE: We assume that inputs are only ever used once (as it should be in the UTXO model)
+                    var inputToOutputDict = {};
+                    for (var j = 0; j < transactions.length; j++){
+                        var transaction = transactions[j];
+                        var inputs = transaction['inputs'];
+                        var outputs = transaction['outputs'];
+                        for (var i = 0; i < inputs.length; i++){
+                            inputToOutputDict[inputs[i]['id']] = [];
+                            for (var k = 0; k < outputs.length; k++) {
+                                inputToOutputDict[inputs[i]['id']].push(outputs[k]['id']);
                             }
                         }
                     }
-                    callback(err, utxoList);
+                    // @NOTE: We use the following recursive function to expand the dictionary of outputs with 'true' value.
+                    var expandOutputDictionary = function selfExpandOutputDictionary(id){
+                        outputDictionary[id] = true;
+                        if (typeof(inputToOutputDict[id]) !== 'undefined') { // This condition is met if the output is not a leaf.
+                            var listOfOutputs = inputToOutputDict[id];
+                            for (var i = 0; i < listOfOutputs.length; i++) {
+                                if (outputDictionary[listOfOutputs[i]] === false) {
+                                    selfExpandOutputDictionary(listOfOutputs[i]);
+                                }
+                            }
+                        }
+                    }
+                    // @NOTE: We call the recursive output function with the initial outputs array.
+                    initialOutputs.forEach(function(element){
+                        expandOutputDictionary(element);
+                    });
+                    // @NOTE: We collect a list of all the dictionary elements that have been assigned to true.
+                    var outputList = [];
+                    var keys = Object.keys(outputDictionary);
+                    keys.forEach(function(element){
+                        if (outputDictionary[element]) {
+                            outputList.push(element)
+                        }
+                    });
+                    // Call the callback with the list that we have built.
+                    callback(err, outputList);
                 }
             });
         });
