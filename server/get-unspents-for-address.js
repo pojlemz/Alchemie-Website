@@ -1,12 +1,19 @@
 var BitGoJS = require('bitgo');
 
-const getOutputsForAddress = require('../server/get-outputs-for-address');
+const getOutputDictForAddress = require('../server/get-output-dict-for-address');
 
 module.exports = function getUnspentsForAddress(address, wallet, callback) {
     // const address = "2N6WNRJzgwokT2qKLSCoYovBJqUmN5Ay8Dr";
-    getOutputsForAddress(address, wallet, function (err, res) {
+    getOutputDictForAddress(address, wallet, function (err, res) {
+        outputDict = res;
         wallet.unspents().then(function (unspents) {
-            callback(err, res)
+            var listOfUnspentsForAddress = [];
+            for (var i = 0; i < unspents.unspents.length; i++){
+                if (outputDict[unspents.unspents[i]['id']]){
+                    listOfUnspentsForAddress.push(unspents.unspents[i]['id']);
+                }
+            }
+            callback(err, listOfUnspentsForAddress)
         });
     });
 }
