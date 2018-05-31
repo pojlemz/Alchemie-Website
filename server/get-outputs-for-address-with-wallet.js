@@ -1,11 +1,11 @@
-const getOutputDictForAddress = require('../server/get-output-dict-for-address');
+const getOutputDictForAddressWithWallet = require('./get-output-dict-for-address-with-wallet');
 
 // const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.ACCESS_TOKEN });
 
-module.exports = function getOutputsForAddress(address, wallet, callback) {
+module.exports = function getOutputsForAddressWithWallet(address, wallet, callback) {
     // console.dir(unspents);
     // print the wallets
-    getOutputDictForAddress(address, wallet, function(err, result){
+    getOutputDictForAddressWithWallet(address, wallet, function(err, result){
         var outputDictionary = result;
         // @NOTE: We collect a list of all the dictionary elements that have been assigned to true.
         var outputList = [];

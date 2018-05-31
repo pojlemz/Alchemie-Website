@@ -1,19 +1,12 @@
-var BitGoJS = require('bitgo');
+const BitGoJS = require('bitgo');
+const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
+const walletId = process.env.WALLET_ID;
+const bitcoinNetwork = process.env.BITCOIN_NETWORK; // ie. tbtc
 
-const getOutputDictForAddress = require('../server/get-output-dict-for-address');
+const getUnspentsForAddressWithWallet = require('../server/get-unspents-for-address-with-wallet');
 
-module.exports = function getUnspentsForAddress(address, wallet, callback) {
-    // const address = "2N6WNRJzgwokT2qKLSCoYovBJqUmN5Ay8Dr";
-    getOutputDictForAddress(address, wallet, function (err, res) {
-        outputDict = res;
-        wallet.unspents().then(function (unspents) {
-            var listOfUnspentsForAddress = [];
-            for (var i = 0; i < unspents.unspents.length; i++){
-                if (outputDict[unspents.unspents[i]['id']]){
-                    listOfUnspentsForAddress.push(unspents.unspents[i]['id']);
-                }
-            }
-            callback(err, listOfUnspentsForAddress)
-        });
+module.exports = function getUnspentsForAddress(address, callback){
+    bitgo.coin(bitcoinNetwork).wallets().get({ id: walletId }).then(function(wallet) {
+        getUnspentsForAddressWithWallet(address, wallet, callback);
     });
 }
