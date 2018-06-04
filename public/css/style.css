@@ -718,3 +718,7 @@ footer{
 .css-footer-dillon-gage-product-modal {
   padding-right: 50px;
 }
+
+.css-dillon-gage-product-list {
+  max-height: 260px;
+}
