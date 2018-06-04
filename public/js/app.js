@@ -8,6 +8,7 @@ function App(){
     this._viewModals = new ViewModals();
     this._viewWithdrawalAddressAdd = new ViewWithdrawalAddressAdd();
     this._viewProductPrices = new ViewProductPrices();
+    this._viewProductAddressAdd = new ViewProductAddressAdd();
 };
 
 App.prototype.initialize = function(){
@@ -18,8 +19,9 @@ App.prototype.initialize = function(){
     this._controllerDrop.initialize();
     this._controllerChange.initialize();
     this._viewProductPrices.initialize();
+    this._viewProductAddressAdd.initialize();
 
-    g_App.getViewAddressAdd().showListOfOwnedAddresses();
+    // g_App.getViewAddressAdd().showListOfOwnedAddresses();
     $(document).ready(function() { // This disables default action in the captcha form so that it can be handled in Javascript.
         $('#password-reset-form').submit(function() {
             $(this).ajaxSubmit({
@@ -94,4 +96,8 @@ App.prototype.getViewWithdrawalAddressAdd = function(){
 
 App.prototype.getViewProductPrices = function(){
     return this._viewProductPrices;
+}
+
+App.prototype.getViewProductAddressAdd = function(){
+    return this._viewProductAddressAdd;
 }

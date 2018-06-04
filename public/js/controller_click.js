@@ -264,6 +264,17 @@ ControllerClick.prototype.submitWithdrawal = function(event){
 }
 
 ControllerClick.prototype.beginOrder = function(event){
+    g_App.getViewProductAddressAdd().hideShowFinalOrderButton();
+    g_App.getViewProductAddressAdd().showListOfProductAddresses(function(msg){
+        g_App.getViewModals().showModal('fn-select-a-gold-address');
+    });
+}
+
+ControllerClick.prototype.confirmProductOrder = function(event){
+
+}
+
+ControllerClick.prototype.showFinalOrder = function(event){
     // Creates a lock token on the server
     // Gets prices and metrics corresponding to the lock token
     // Show the modal that lets you place an order on the locked prices (you have 20 seconds to place the order)
@@ -298,6 +309,36 @@ ControllerClick.prototype.beginOrder = function(event){
     }, "json");
 }
 
-ControllerClick.prototype.confirmProductOrder = function(event){
+ControllerClick.prototype.selectProductAddress = function(event){
+    var selectedAddressElement = $(event.target);
+    $(".fn-withdrawal-address-main-text").removeClass("cssSelected");
+    $(".fn-withdrawal-address-main-text").removeClass("fnSelected");
+    $(selectedAddressElement).addClass("cssSelected");
+    $(selectedAddressElement).addClass("fnSelected");
+    g_App.getViewProductAddressAdd().showShowFinalOrderButton();
+}
 
+ControllerClick.prototype.deleteProductAddress = function(event){
+
+}
+
+ControllerClick.prototype.addProductAddressToAccount = function(event) {
+    var addressToAddToAccount = $("#productAddressToAdd").val();
+    // Try the following line of code in the Javascript console:
+    // thirdparty.web3.utils.isAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
+    if (thirdparty.web3Utils.isAddress(addressToAddToAccount)) {
+        $.post("/add-product-address-to-email", { address: addressToAddToAccount}, function( msg ) {
+            // console.log(JSON.stringify(msg)); // This line of code produces a message like the following:
+            // {"response":"failure","email":null,"address":null}
+            if (msg.response === 'failure') { // If address is then report an error in the view.
+                g_App.getViewAddressAdd().showErrorForTakenAddress();
+            } else {
+                // Add the address to the list in the UI
+                g_App.getViewAddressAdd().addAddressToList(addressToAddToAccount);
+            }
+        }, "json");
+    } else {
+        // TODO: Show the right error message here
+        g_App.getViewAddressAdd().showErrorForInvalidAddress();
+    }
 }

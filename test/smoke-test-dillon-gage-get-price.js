@@ -57,3 +57,37 @@ request({
     }
 }
 */
+/*
+{ code: '1KILOG',
+    isActiveBuy: 'Y',
+    isActiveSell: 'Y',
+    availability: '1-5 Days',
+    tiers:
+    { '1':
+        { spread: 200.93,
+            melt: 32.148,
+            bidPercise: 41560.934400000006,
+            askPercise: 41761.8594,
+            bid: 41560.93,
+            ask: 41761.86 },
+        '2':
+        { spread: 200.93,
+            melt: 32.148,
+            bidPercise: 41560.934400000006,
+            askPercise: 41761.8594,
+            bid: 41560.93,
+            ask: 41761.86 },
+        '3':
+        { spread: 200.93,
+            melt: 32.148,
+            bidPercise: 41560.934400000006,
+            askPercise: 41761.8594,
+            bid: 41560.93,
+            ask: 41761.86 },
+        '4':
+        { spread: 200.93,
+            melt: 32.148,
+            bidPercise: 41560.934400000006,
+            askPercise: 41761.8594,
+            bid: 41560.93,
+            ask: 41761.86 } } } */

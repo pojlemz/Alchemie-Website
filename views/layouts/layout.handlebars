@@ -151,7 +151,7 @@
                     <div class="container-fluid">
                         <div class="row css-footer-dillon-gage-product-modal">
                             <div class="css-dillon-gage-footer-label-modal">
-                                <h3>Final Cost:</h3>
+                                <h3>Total Due:</h3>
                             </div>
                             <div class="css-dillon-gage-footer-total-modal">
                                 <h3 class="fn-final-cost">0.00000008 BTC</h3>
@@ -159,9 +159,37 @@
                         </div>
                     </div>
                     <h6>Note: Orders must be confirmed within 10 seconds due to price fluctuations. </h6>
+                    <h6>Note: Standard bitcoin network transaction fees apply in addition to total due. </h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="css-float-left btn btn-success" clickcontroller="confirmProductOrder">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fn-select-a-gold-address fn-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content css-modal-order-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select An Address To Accept Newly Minted Product Tokens</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Add a new Block Unity Product address using the box below.</p>
+                    <div class="input-group input-group-lg">
+                        <input id="productAddressToAdd" type="text" class="form-control" placeholder="0x0000000000000000000000000000000000000000" aria-describedby="sizing-addon1">
+                        <span class="input-group-addon cssCursorPointer" clickcontroller="addProductAddressToAccount"> Add </span>
+                    </div>
+                    <div class="css-descriptor-withdraw-bitcoin-address">
+                        <p> Select a product address below to send tokens to. </p>
+                    </div>
+                    <div class="css-withdrawal-address-list fn-product-address-list">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="css-float-left btn btn-success fn-show-final-order-button" clickcontroller="showFinalOrder">Proceed</button>
                 </div>
             </div>
         </div>
@@ -231,6 +259,7 @@
     <script src="/js/view_user_messages.js"></script>
     <script src="/js/view_modals.js"></script>
     <script src="/js/view_withdrawal_address_add.js"></script>
+    <script src="/js/view_product_address_add.js"></script>
     <script src="/js/view_product_prices.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/thirdparty.js"></script>
