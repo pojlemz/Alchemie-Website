@@ -264,6 +264,7 @@ ControllerClick.prototype.submitWithdrawal = function(event){
 }
 
 ControllerClick.prototype.beginOrder = function(event){
+    g_App.getViewProductPrices().copyCurrentPricesToLockedPrices();
     g_App.getViewProductAddressAdd().hideShowFinalOrderButton();
     g_App.getViewProductAddressAdd().showListOfProductAddresses(function(msg){
         g_App.getViewModals().showModal('fn-select-a-gold-address');

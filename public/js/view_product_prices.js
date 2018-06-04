@@ -1,6 +1,7 @@
 function ViewProductPrices(){
     this._prices = [];
     this._isAvailable = false;
+    this._lockedPrices = [];
 };
 
 ViewProductPrices.prototype.initialize = function(){
@@ -72,4 +73,12 @@ ViewProductPrices.prototype.updateGrandTotal = function() {
     } else {
         $(".fn-grand-total").text(".....");
     }
+}
+
+ViewProductPrices.prototype.getLockedPrices = function(){
+    return this._lockedPrices;
+}
+
+ViewProductPrices.prototype.copyCurrentPricesToLockedPrices = function(){
+    this._lockedPrices = this._prices;
 }
