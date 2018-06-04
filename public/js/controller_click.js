@@ -311,8 +311,8 @@ ControllerClick.prototype.showFinalOrder = function(event){
 
 ControllerClick.prototype.selectProductAddress = function(event){
     var selectedAddressElement = $(event.target);
-    $(".fn-withdrawal-address-main-text").removeClass("cssSelected");
-    $(".fn-withdrawal-address-main-text").removeClass("fnSelected");
+    $(".fn-product-address-main-text").removeClass("cssSelected");
+    $(".fn-product-address-main-text").removeClass("fnSelected");
     $(selectedAddressElement).addClass("cssSelected");
     $(selectedAddressElement).addClass("fnSelected");
     g_App.getViewProductAddressAdd().showShowFinalOrderButton();
@@ -321,6 +321,7 @@ ControllerClick.prototype.selectProductAddress = function(event){
 ControllerClick.prototype.deleteProductAddress = function(event){
 
 }
+
 
 ControllerClick.prototype.addProductAddressToAccount = function(event) {
     var addressToAddToAccount = $("#productAddressToAdd").val();
@@ -334,7 +335,7 @@ ControllerClick.prototype.addProductAddressToAccount = function(event) {
                 g_App.getViewAddressAdd().showErrorForTakenAddress();
             } else {
                 // Add the address to the list in the UI
-                g_App.getViewAddressAdd().addAddressToList(addressToAddToAccount);
+                g_App.getViewProductAddressAdd().addAddressToList(addressToAddToAccount);
             }
         }, "json");
     } else {

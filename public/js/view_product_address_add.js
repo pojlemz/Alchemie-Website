@@ -40,8 +40,8 @@ ViewProductAddressAdd.prototype.showListOfProductAddresses = function(callbackOn
 ViewProductAddressAdd.prototype.getHtmlForProductAddress = function(address){
     // address = '0x012345678902345678901234567890123456789'
     var html = "";
-    html += '<div class="css-withdrawal-address fn-withdrawal-address" value="'+address+'">';
-    html +=     '<div class="css-withdrawal-address-main-text fn-withdrawal-address-main-text cssCursorPointer" clickcontroller="selectProductAddress" aria-describedby="sizing-addon1" value="'+address+'">'+address+'</div>'
+    html += '<div class="css-withdrawal-address fn-product-address" value="'+address+'">';
+    html +=     '<div class="css-withdrawal-address-main-text fn-product-address-main-text cssCursorPointer" clickcontroller="selectProductAddress" aria-describedby="sizing-addon1" value="'+address+'">'+address+'</div>'
     html +=     '<div class="cssCursorPointer css-withdrawal-address-delete" clickcontroller="deleteWithdrawalAddress" value="{{'+address+'}}">'
     html +=         '<div class="css-withdrawal-address-delete-image"></div>';
     html +=     '</div>';
@@ -53,7 +53,7 @@ ViewProductAddressAdd.prototype.addAddressToList = function(address){
     var self = this;
     $(".fnAlertBox .fnShowErrorForTakenAddress").remove();
     htmlMessage = '<div class="alert alert-success fnShowErrorForTakenAddress">Address added to list for logged in user.</div>';
-    $('.fn-owned-addresses-added').prepend(self.getHtmlForProductAddress(address));
+    $('.fn-product-address-list').prepend(self.getHtmlForProductAddress(address));
 }
 
 ViewProductAddressAdd.prototype.showErrorForInvalidAddress = function(){
