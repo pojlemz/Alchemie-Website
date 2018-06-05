@@ -268,13 +268,17 @@ ControllerClick.prototype.beginOrder = function(event){
     var productAddressSelected = $("#product-address-selected").text();
     var prices = g_App.getViewProductPrices().getLockedPrices();
     var quantities = {};
+    var pricesAsDict = {};
     var quantityItems = $(".fnQty");
     for (var i = 0; i < quantityItems.length; i++){
         var productCode = $(quantityItems[i]).attr('value');
         var productQuantity = parseInt($(quantityItems[i]).val());
         quantities[productCode] = productQuantity;
     }
-    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(prices), quantities: JSON.stringify(quantities)}, function( data ) {
+    for (var i = 0; i < prices.length; i++){
+        pricesAsDict[prices[i]['instrument']] = prices[i];
+    }
+    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
         console.log(data);
     });
 }
