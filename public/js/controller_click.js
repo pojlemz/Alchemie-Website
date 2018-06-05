@@ -265,10 +265,7 @@ ControllerClick.prototype.submitWithdrawal = function(event){
 
 ControllerClick.prototype.beginOrder = function(event){
     g_App.getViewProductPrices().copyCurrentPricesToLockedPrices();
-    g_App.getViewProductAddressAdd().hideShowFinalOrderButton();
-    g_App.getViewProductAddressAdd().showListOfProductAddresses(function(msg){
-        g_App.getViewModals().showModal('fn-select-a-gold-address');
-    });
+
 }
 
 ControllerClick.prototype.confirmProductOrder = function(event){
@@ -316,7 +313,10 @@ ControllerClick.prototype.selectProductAddress = function(event){
     $(".fn-product-address-main-text").removeClass("fnSelected");
     $(selectedAddressElement).addClass("cssSelected");
     $(selectedAddressElement).addClass("fnSelected");
-    g_App.getViewProductAddressAdd().showShowFinalOrderButton();
+    // This next line closes the modals and sets the product address accordingly in the UI.
+    $("#product-address-selected").text($(event.target).attr("value"));
+    this.closeModals();
+    // g_App.getViewProductAddressAdd().showShowFinalOrderButton();
 }
 
 ControllerClick.prototype.deleteProductAddress = function(event){
@@ -343,4 +343,11 @@ ControllerClick.prototype.addProductAddressToAccount = function(event) {
         // TODO: Show the right error message here
         g_App.getViewAddressAdd().showErrorForInvalidAddress();
     }
+}
+
+ControllerClick.prototype.beginSelectProductAddress = function(event){
+    g_App.getViewProductAddressAdd().hideShowFinalOrderButton();
+    g_App.getViewProductAddressAdd().showListOfProductAddresses(function(msg){
+        g_App.getViewModals().showModal('fn-select-a-gold-address');
+    });
 }

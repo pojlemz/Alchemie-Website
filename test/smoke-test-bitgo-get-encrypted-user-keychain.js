@@ -12,7 +12,7 @@ const params = {
     recipients: [
         {
             amount: 3000000,
-            address: "2N7Ru2nBQPaZtcaMpRGf73SoFfyVLw9LFBu",
+            address: "2N7Ru2nBQPaZtcaMpRGf73SoFfyVLw9LFBu"
         }
     ]
 };

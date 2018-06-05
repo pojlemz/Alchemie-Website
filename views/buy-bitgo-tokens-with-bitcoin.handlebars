@@ -11,6 +11,12 @@
         <!-- <p>Please send Bitcoin to the following address and then we will credit your account with some gold tokens.</p> -->
         <!-- <div id="BTCPayQRCode"><img src="https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:{{bitGoAddress}}"></img></div> -->
         <!-- <br/> -->
+        <!-- Example split danger button -->
+        <p>Select an address you would like to receive your product tokens.</p>
+        <div class="input-group input-group-lg css-product-address-selector cssCursorPointer" clickcontroller="beginSelectProductAddress">
+            <div class="input-group-addon swatch-light css-right-arrow-select" id="sizing-addon1" clickcontroller="addAddressToAccount"></div>
+            <div id="product-address-selected" class="form-control css-address-selected" placeholder="0x0123456789012345678901234567890123456789" aria-describedby="sizing-addon1"> Click Here To Select An Address </div>
+        </div>
         <p>Use the form below to enter quantities for your order.</p>
         <div class="container-fluid">
             <div class="row css-heading-dillon-gage-product">
@@ -50,7 +56,7 @@
             </div>
         </div>
         <div class="css-purchase-button-panel">
-            <a type="button" class="btn btn-success css-button-complete-withdrawal" clickcontroller="beginOrder"> Begin Order </a>
+            <a type="button" class="btn btn-success css-button-complete-withdrawal" clickcontroller="beginOrder"> Order Now </a>
         </div>
         <!--<script src="/js/price_interval.js"></script> -->
     </div>

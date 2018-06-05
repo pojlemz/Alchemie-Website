@@ -711,14 +711,35 @@ footer{
   top: 40px;
 }
 
-.css-modal-order-content {
-  width: 650px;
-}
-
 .css-footer-dillon-gage-product-modal {
   padding-right: 50px;
 }
 
 .css-dillon-gage-product-list {
   max-height: 260px;
+}
+
+.css-right-arrow-select {
+  background: url(../images/icon-arrow-right.png) repeat 0 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 1px;
+  background-color: #5cb85c;
+}
+
+.css-product-address-selector {
+  margin-bottom: 20px;
+}
+
+.css-address-selected {
+  background-color: #bceebc;
+}
+
+.css-modal-select-product-address {
+  width: 650px;
+  margin-bottom: 20px;
+}
+
+.css-modal-select-product-address .css-modal-order-content {
+  padding-bottom: 30px;
 }
