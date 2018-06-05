@@ -265,7 +265,18 @@ ControllerClick.prototype.submitWithdrawal = function(event){
 
 ControllerClick.prototype.beginOrder = function(event){
     g_App.getViewProductPrices().copyCurrentPricesToLockedPrices();
-
+    var productAddressSelected = $("#product-address-selected").text();
+    var prices = g_App.getViewProductPrices().getLockedPrices();
+    var quantities = {};
+    var quantityItems = $(".fnQty");
+    for (var i = 0; i < quantityItems.length; i++){
+        var productCode = $(quantityItems[i]).attr('value');
+        var productQuantity = parseInt($(quantityItems[i]).val());
+        quantities[productCode] = productQuantity;
+    }
+    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(prices), quantities: JSON.stringify(quantities)}, function( data ) {
+        console.log(data);
+    });
 }
 
 ControllerClick.prototype.confirmProductOrder = function(event){

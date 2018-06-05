@@ -55,6 +55,7 @@ var routeSubmitWithdrawal = require('./routes/submit-withdrawal');
 var routeGetPrices = require('./routes/json-get-prices');
 var routeJsonLockTradesAndGetResponse = require('./routes/json-lock-trades-and-get-response');
 var routeJsonAddProductAddressToEmail = require('./routes/json-add-product-address-to-email')
+var routeJsonBeginOrderAndGetResponse = require('./routes/json-begin-order-and-get-response');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -192,6 +193,7 @@ app.use('/', routeSubmitWithdrawal);
 app.use('/', routeGetPrices);
 app.use('/', routeJsonLockTradesAndGetResponse);
 app.use('/', routeJsonAddProductAddressToEmail);
+app.use('/', routeJsonBeginOrderAndGetResponse);
 
 require('./server/server_interval');
 
