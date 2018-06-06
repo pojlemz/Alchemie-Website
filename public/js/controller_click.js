@@ -280,11 +280,25 @@ ControllerClick.prototype.beginOrder = function(event){
     }
     $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
         console.log(data);
-        var productAddress = data.productAddress;
+        var depositAddress = data.depositAddress;
         var img = document.createElement("IMG");
-        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+productAddress;
+        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
         $('#DillonGageQRCode').children().remove();
         $('#DillonGageQRCode').append(img);
+        var keys = Object.keys(quantities);
+        var grandTotal = 0;
+        for (var i = 0; i < keys.length; i++){
+            // keys example: ['1KILOG', '100G']
+            var code = keys[i];
+            var qty = parseInt(quantities[code]);
+            var unitPrice = Number(pricesAsDict[code]['price']).toFixed(8);
+            var total = Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8);
+            grandTotal += parseFloat(Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8));
+            $(".fn-order-total[value='"+code+"']").text(total);
+            $(".fn-order-qty[value='"+code+"']").text(qty);
+            $(".fn-order-unit-price[value='"+code+"']").text(unitPrice);
+        }
+        $(".fn-final-cost").text(grandTotal.toFixed(8) + 'BTC');
         g_App.getViewModals().showModal("fn-confirm-place-order");
     });
 }

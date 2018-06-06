@@ -27,6 +27,6 @@ const requestLoop = setInterval(function(){
             }
         });
     }
-}, 60000 * 5);
+}, 1000 * 5);
 
 module.exports = requestLoop;

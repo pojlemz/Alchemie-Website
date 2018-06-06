@@ -11,8 +11,9 @@ var pgClient = require('./pg-client');
 
 module.exports.addPrice = function(instrument, price, callback){
     // First check to see that user exists and insert a row if the user doesn't exist.
-    var query2 = "INSERT INTO price (instrument, price) VALUES ($1, $2);";
-    var params2 = [instrument, price];
+    const millisecondssinceunixepoch = new Date().getTime();
+    var query2 = "INSERT INTO price (instrument, price, millisecondssinceunixepoch) VALUES ($1, $2, $3);";
+    var params2 = [instrument, price, millisecondssinceunixepoch];
     pgClient.runQuery(query2, params2, callback);
 }
 
