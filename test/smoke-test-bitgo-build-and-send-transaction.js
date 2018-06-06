@@ -1,115 +1,97 @@
 require('dotenv').config({path: '../.env'});
 
-/*
-const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.ACCESS_TOKEN });
-const unspentList = ['f0a8c2b57cae044d71ac091fbed140a490a6129504eb0fc213cf8b56674a4e98:0',
-    '5c1437ed20cf9ccc71e7e1cc8fb0a317029b96b990e485d7e647883545546e89:0',
-    '93665d079606111ef69c16a3ffb4e623089b8673489e6b548994e0dd1ad15794:0',
-    'a1b4706511bf2413cf859531f6452774cfb1290139a3cdba7009b09a614a1d07:0',
-    '8c6da4a1d564b2479b7a6802bee35953e7336cf0b99a6cbe981914f4a00d7a42:1',
-    'e01441ab4950afd9630ba4d36e4c7171590582c23daf59dbd6a7df95b73ec518:0',
-    'e01441ab4950afd9630ba4d36e4c7171590582c23daf59dbd6a7df95b73ec518:2',
-    '0f38c78c2e2da9068266bead15e0b591254289e2e85e8983f5ebafa2441f4fa6:0',
-    '0f38c78c2e2da9068266bead15e0b591254289e2e85e8983f5ebafa2441f4fa6:1',
-    '46c8287215cc34ba9411778516bdbfd7b5c713e89cab10d5a1bd823406206ee3:1',
-    '0da031603ba7e3c64ae4e62c7c7b5773c45fe24a942c4debfde210df5ef5e60e:0',
-    '1e6e63bf0a436bcb1f2643359ee26f366fa5ddea7844809e1ff299a954547fee:1',
-    'a00a0b1407aac116fed64179c73348525c7f11a377be1c253d6faaa376b47ffd:0',
-    'a00a0b1407aac116fed64179c73348525c7f11a377be1c253d6faaa376b47ffd:1'
-];
-*/
-// const params = {address: "2N6WNRJzgwokT2qKLSCoYovBJqUmN5Ay8Dr", fee: 210000, amount: 100000, walletPassphrase: 'secretpassphrase1a5df8380e0e30', unspents: unspentList};
-// const recipients = {};
-// recipients['2MwR7f7TjPVrphbQ98Y3x8VKNNJbpe4WZHy'] = 19176207 - 200000 - 150000;
-// recipients['2N6WNRJzgwokT2qKLSCoYovBJqUmN5Ay8Dr'] = 200000;
-
-// bitgo.unlock({ otp: '985357' }).then(function(unlockResponse) {
-/*
-bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
-    wallet.send(params,
-        function(err, result) {
-            if (err) { console.log('Error sending coins!'); console.dir(err); return process.exit(-1); }
-            console.dir(result);
-        }
-    );
-});
-*/
-//
-// Send money from a wallet on BitGo
-// This is the advanced example using createTransaction / sendTransaction,
-// which allows you to specify fees and the keychain used for signing the transaction.
-// Defaults to work on BitGo test environment at https://test.bitgo.com
-//
-// Copyright 2014, BitGo, Inc.  All Rights Reserved.
-//
-
 var BitGoJS = require('bitgo');
 const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
 const walletId = process.env.WALLET_ID;
 const walletPassphrase = 'secretpassphrase1a5df8380e0e30';
-const destinationAddress = "2N6WNRJzgwokT2qKLSCoYovBJqUmN5Ay8Dr";
-const amountSatoshis = 30000;
-const fee = 10000;
+// const fee = 10000;
 
 const params = {
     recipients: [
         {
-            amount: 30000,
-            address: "2N6WNRJzgwokT2qKLSCoYovBJqUmN5Ay8Dr",
+            amount: 3000000,
+            address: "2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN"
         }
     ]
 };
 
-// Set recipients
-const recipients = {};
-recipients[destinationAddress] = amountSatoshis;
+// transaction size of in x 180 + out x + 10 plus or minus in
 
 bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
-    wallet.prebuildTransaction(params).then(function (transaction) {
-        // print transaction details
-        console.dir(transaction);
-        const params2 = {
-            txHex: transaction.txHex
-        };
-        wallet.submitTransaction(params2).then(function(transaction) {
-            console.dir(transaction);
+    wallet.getEncryptedUserKeychain({}, function(err, keychain) {
+        if (err) {
+            console.log('Error getting encrypted keychain!');
+            console.dir(err);
+            return process.exit(-1);
+        }
+        console.log('Got encrypted user keychain');
+
+        keychain.xprv = bitgo.decrypt({ password: walletPassphrase, input: keychain.encryptedPrv });
+        wallet.prebuildTransaction(params).then(function (transaction) {
+            // print transaction details
+            // TODO: Write code to estimate fee
+            var params3 = {
+                "txPrebuild": {
+                    "txHex": transaction.txHex,
+                    "txInfo": {
+                        "nP2SHInputs": 1,
+                        "nSegwitInputs": 0,
+                        "nOutputs": 2,
+                        "unspents": [
+                            {
+                                "chain": 0,
+                                "index": 18,
+                                "redeemScript": '52210337c1c44429f5a57337cbab77ff5373932723943e6229b88cbb4d7167ece9e1aa2103ad8b01704e190052933c5dbec6a8f20f997ab4d64a1b797364987c883236656d21025b8d8d6c693d88ae419029f32741444812bde3b9cad3c36bbc4f5c53bad48a5753ae',
+                                "id": 'c174dcbf91cb7ea5566c1967d07daad1359640a26d230d5c065e05d152aaf3c2:0',
+                                "address": '2N1syCER4bdFs2cM8dZtQaHaD2FrE6NBTfE',
+                                "value": 10000000,
+                                "isSegwit": false
+                            }
+                        ],
+                        "changeAddress": "2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN",
+                        "changeAddresses": ["2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN"]
+                    },
+                    "feeInfo": {
+                        "size": 218,
+                        "fee": 654,
+                        "feeRate": 3000,
+                        "payGoFee": 0,
+                        "payGoFeeString": "0"
+                    }
+                },
+                "prv": keychain.xprv
+            };
+            // console.dir(transaction);
+            wallet.signTransaction(params3, function (err, transaction) {
+                if (err) {
+                    console.log('Failed to sign transaction!');
+                    console.dir(err);
+                    return process.exit(-1);
+                }
+                const params2 = {
+                    txHex: transaction.txHex
+                };
+                wallet.submitTransaction(params2).then(function (transaction) {
+                    console.dir(transaction);
+                });
+                console.dir(transaction);
+            });
         });
     });
 });
 
-    // wallet.createTransaction({
-    //         recipients: recipients,
-    //         fee: fee,
-    //         walletPassphrase: 'secretpassphrase1a5df8380e0e30'
-    //     },
-    //     function (err, transaction) {
-    //         if (err) {
-    //             console.log('Failed to create transaction!');
-    //             console.dir(err);
-    //             return process.exit(-1);
-    //         }
-    //
-    //         console.dir(transaction);
-    //         console.log('Signing transaction');
-    //         wallet.signTransaction({
-    //                 transactionHex: transaction.transactionHex,
-    //                 unspents: transaction.unspents,
-    //                 keychain: keychain
-    //             },
-    //             function (err, transaction) {
-    //                 if (err) {
-    //                     console.log('Failed to sign transaction!');
-    //                     console.dir(err);
-    //                     return process.exit(-1);
-    //                 }
-    //
-    //                 console.dir(transaction);
-    //                 console.log('Sending transaction');
-    //                 wallet.sendTransaction({tx: transaction.tx}, function (err, callback) {
-    //                     console.log('Transaction sent: ' + callback.tx);
-    //                 });
-    //             }
-    //         );
-    //     }
-    // );
-    // });
+/*
+Got encrypted user keychain
+{ txHex: '0100000001cafa7e0c0a3e86fd402e7a63d1b92f8faf66da8f45561abd37d288c6da280a0201000000b600473044022074cddd1e151002335c7e0ab16be85decf65f564bdc631fd2676c78b9c2ada75b02205d121060f83ed0c15a60048d607fcd308c96a04c5427e4b216232985136ff74c0100004c6952210263fbb9074fab4d61d33953c3f930a87a4e0ff3aa8f58a8a93c002183c35c77e821031bdc694faba0fd2a86bb0c7651c9b2e40be8677ab32421c2ee049b61100f333221033c85066e5656d89b5cdb2fc7ea7b327b3da42bd253e0346e2524f4051892660753aeffffffff02a08601000000000017a914c199e91b9e28022b8cc3170824525be04fa4d1278712c24a000000000017a914050a48738f40a56c9142542af8581941b035fc68872f341400' }
+Unhandled rejection Error: Expected Buffer, got undefined requestId=cji3jnv73678kq3ru8shpslbc
+    at errFromResponse (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/bitgo.js:84:15)
+    at handleResponseError (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/bitgo.js:101:11)
+From previous event:
+    at Request.req.then (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/bitgo.js:389:40)
+    at Request.superagent.Request.result (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/bitgo.js:70:15)
+    at Wallet.submitTransaction (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/v2/wallet.js:946:4)
+    at /Users/danielbruce/Documents/Programming/alchemy-website/test/smoke-test-bitgo-build-and-send-transaction.js:73:24
+    at runCallback (timers.js:785:20)
+    at tryOnImmediate (timers.js:747:5)
+    at processImmediate [as _immediateCallback] (timers.js:718:5)
+ */
