@@ -298,7 +298,7 @@ ControllerClick.prototype.beginOrder = function(event){
             $(".fn-order-qty[value='"+code+"']").text(qty);
             $(".fn-order-unit-price[value='"+code+"']").text(unitPrice);
         }
-        $(".fn-final-cost").text(grandTotal.toFixed(8) + 'BTC');
+        $(".fn-final-cost").text(grandTotal.toFixed(8) + ' BTC');
         g_App.getViewModals().showModal("fn-confirm-place-order");
     });
 }
