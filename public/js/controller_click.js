@@ -280,6 +280,12 @@ ControllerClick.prototype.beginOrder = function(event){
     }
     $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
         console.log(data);
+        var productAddress = data.productAddress;
+        var img = document.createElement("IMG");
+        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+productAddress;
+        $('#DillonGageQRCode').children().remove();
+        $('#DillonGageQRCode').append(img);
+        g_App.getViewModals().showModal("fn-confirm-place-order");
     });
 }
 

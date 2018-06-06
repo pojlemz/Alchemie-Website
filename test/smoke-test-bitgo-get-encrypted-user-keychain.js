@@ -4,8 +4,6 @@ var BitGoJS = require('bitgo');
 const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
 const walletId = process.env.WALLET_ID;
 const walletPassphrase = 'secretpassphrase1a5df8380e0e30';
-const destinationAddress = "2N7Ru2nBQPaZtcaMpRGf73SoFfyVLw9LFBu";
-const amountSatoshis = 30000;
 // const fee = 10000;
 
 const params = {
@@ -19,10 +17,6 @@ const params = {
 
 // transaction size of in x 180 + out x + 10 plus or minus in
 
-// Set recipients
-const recipients = {};
-recipients[destinationAddress] = amountSatoshis;
-
 bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
     wallet.getEncryptedUserKeychain({}, function(err, keychain) {
         if (err) {
@@ -33,11 +27,6 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
         console.log('Got encrypted user keychain');
 
         keychain.xprv = bitgo.decrypt({ password: walletPassphrase, input: keychain.encryptedPrv });
-
-        // Set recipients
-        const recipients = {};
-        recipients[destinationAddress] = amountSatoshis;
-
         wallet.prebuildTransaction(params).then(function (transaction) {
             // print transaction details
             // TODO: Write code to estimate fee
@@ -51,10 +40,10 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
                         "unspents": [
                             {
                                 "chain": 0,
-                                "index": 3,
-                                "redeemScript": "5221024e11e2233ba01dc7940e5cb9fed244eb9889221a47d6f3b9f6ebece06a2af72621039703f3eeddc16c70bbaa097b7a142b94742d4c3da0f3997f8d0e59fa21ebc5fc2103c73ed3ffd55b28da339214f20a9665d0d6ff1e4e0202e46be6a649706167241a53ae",
-                                "id": "e197d9e085e3e0fb50c59a856ecdba2c1c465abef210bf52f10fc230c6d0a26e:0",
-                                "address": "2N65JKxUzbY4fiML7aAZcSKPLwhEUgJqNEb",
+                                "index": 5,
+                                "redeemScript": '5221020419d166ab2337b3630b8c065829137022ba217e545d7ea32aceea11084381f22103e74f5ebd9bffb6d441741b05628036b12124bd3137f181566f5616c8951f62c62102e996b76297d33b5a369b0570108391a58aa01bd99a896eacf3d97ea0b2f7e0d553ae',
+                                "id": '5f2d049ae28736accd69e33ccc3b98157cf1803ef5c7d69b15af46864b7e2706:0',
+                                "address": '2NCWko9dFrJt5JFwxHgMR4zQHHPoNHZ6tq2',
                                 "value": 5000000,
                                 "isSegwit": false
                             }
