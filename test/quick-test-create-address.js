@@ -12,7 +12,7 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
     // console.log(JSON.stringify(wallet));
     wallet.createAddress({chain: 0}).then(function(address) {
         // print new address
-        console.dir(address.address);
+        console.dir(address);
     });
 });
 

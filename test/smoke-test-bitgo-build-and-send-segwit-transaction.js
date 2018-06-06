@@ -9,8 +9,8 @@ const walletPassphrase = 'secretpassphrase1a5df8380e0e30';
 const params = {
     recipients: [
         {
-            amount: 100000,
-            address: "2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN"
+            amount: 1000000,
+            address: "2N7Ru2nBQPaZtcaMpRGf73SoFfyVLw9LFBu"
         }
     ]
 };
@@ -34,21 +34,22 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
                 "txPrebuild": {
                     "txHex": transaction.txHex,
                     "txInfo": {
-                        "nP2SHInputs": 1,
-                        "nSegwitInputs": 0,
+                        "nP2SHInputs": 0,
+                        "nSegwitInputs": 1,
                         "nOutputs": 2,
                         "unspents": [
                             {
-                                "chain": 0,
-                                "index": 16,
-                                "redeemScript": '52210263fbb9074fab4d61d33953c3f930a87a4e0ff3aa8f58a8a93c002183c35c77e821031bdc694faba0fd2a86bb0c7651c9b2e40be8677ab32421c2ee049b61100f333221033c85066e5656d89b5cdb2fc7ea7b327b3da42bd253e0346e2524f4051892660753ae',
-                                "id": 'aeccfef18e2a6d3528007498222546ce6d973ab2319f4c60998a681617bfd81c:0',
-                                "address": '2NE44DyA3wzaY7x518xMaxKo8FQBXJQikPn',
-                                "value": 500000,
-                                "isSegwit": false
+                                "chain": 11,
+                                "index": 43,
+                                "redeemScript": '0020e22cafde6f9dd68877e8a9afc7b931799c0c4d7e0f9f6ac9f560d51a932353f1',
+                                "id": '2f72e6722283cdc586b1ba00f9cab48412e3ccb179c654d67f70fce59306d6ef:1',
+                                "address": '2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN',
+                                "value": 1998878,
+                                "isSegwit": true,
+                                "witnessScript": '52210256a5575955c31917cf9271ce3d211d88150d046ededb2ff55ddf77e558a40fb02102dd12fb9f88602739fde59a6c212e98e860fbba1a0ef9a1929e39840a016e188121021befcce7626449a15cfd4ccd44b03cb8899c77eed1d3b31a43c04bc367c1bb0653ae'
                             }
                         ],
-                        "changeAddress": "2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN"
+                        "changeAddress": "2N2vEpSXBFKikusSFoAZDFc4FPaemkhjoiP"
                     },
                     "feeInfo": {
                         "size": 218,
@@ -78,5 +79,3 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
         });
     });
 });
-
-// Unhandled rejection Error: Expected Buffer, got undefined requestId=cji3hjveo0isvrlry8lbh7zd1
