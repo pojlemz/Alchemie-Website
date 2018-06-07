@@ -13,7 +13,7 @@ module.exports.createOrderPromise = function(newOrderPromise, callback){
     // INSERT INTO testtable VALUES(15, :'content');
     // client.query("INSERT INTO users (email, password, name) VALUES ('"+"a@a.com"+"', '"+"b7b7b7b7"+"','"+"aaa"+"');", [], function(err, res) {
     var query = "INSERT INTO orderpromise (email, cointype, depositaddress, productaddress, expirymillisecondssinceunixepoch) VALUES ($1, $2, $3, $4, $5);";
-    var params = [newOrderPromise.email, newOrderPromise.cointype, newOrderPromise.depositAddress, newOrderPromise.productAddress, newOrderPromise.expirymillisecondssinceunixepoch];
+    var params = [newOrderPromise.email, newOrderPromise.coinType, newOrderPromise.depositAddress, newOrderPromise.productAddress, newOrderPromise.expiryMillisecondsSinceUnixEpoch];
     pgClient.runQuery(query, params, callback);
 }
 
@@ -23,8 +23,8 @@ module.exports.getOrderPromiseById = function(id, callback){
     pgClient.runQuery(query, params, callback);
 }
 
-module.exports.getListOfRowsByUser = function(address, callback){
-    var query = "SELECT * FROM orderpromise WHERE address=$1;";
+module.exports.getOrderPromiseByDepositAddress = function(address, callback){
+    var query = "SELECT * FROM orderpromise WHERE depositaddress=$1;";
     var params = [address];
-    pgClient.runQueryMultiSelect(query, params, callback);
+    pgClient.runQuery(query, params, callback);
 }

@@ -18,21 +18,18 @@ module.exports.addPrice = function(instrument, price, callback){
 }
 
 module.exports.getLatestPrice = function(instrument, callback){
-    // null or false indicates that the user has not been kyced
     var query = "SELECT * FROM price WHERE instrument=$1 AND time_created=(SELECT MAX(time_created) FROM price WHERE instrument=$1 GROUP BY instrument);";
     var params = [instrument];
     pgClient.runQuery(query, params, callback);
 }
 
 module.exports.getLatestPrices = function(callback){
-    // null or false indicates that the user has not been kyced
     var query = "SELECT * FROM price p1 INNER JOIN (SELECT instrument, MAX(time_created) AS latest_time FROM price GROUP BY instrument) p2 ON p1.instrument=p2.instrument AND p1.time_created=p2.latest_time;";
     var params = [];
     pgClient.runQueryMultiSelect(query, params, callback);
 }
 
 module.exports.getLatestPricesInBitcoin = function(callback){
-    // null or false indicates that the user has not been kyced
     var query = "SELECT * FROM price p1 INNER JOIN (SELECT instrument, MAX(time_created) AS latest_time FROM price GROUP BY instrument) p2 ON p1.instrument=p2.instrument AND p1.time_created=p2.latest_time;";
     var params = [];
     pgClient.runQueryMultiSelect(query, params, function(err,res){
@@ -45,4 +42,20 @@ module.exports.getLatestPricesInBitcoin = function(callback){
             callback(err, res);
         }
     });
+}
+
+module.exports.getPriceById = function(id, callback){
+    var query = "SELECT * FROM price WHERE id=$1;";
+    var params = [id];
+    pgClient.runQuery(query, params, callback);
+}
+
+module.exports.getPricesByIdArray = function(idArray, callback){
+    cleanedArray = [];
+    for (var i = 0; i < idArray.length; i++){
+        cleanedArray.push(parseInt(idArray[i]));
+    }
+    var query = "SELECT * FROM price WHERE id IN ('" + cleanedArray.join("','") + "')";
+    var params = [];
+    pgClient.runQueryMultiSelect(query, params, callback);
 }
