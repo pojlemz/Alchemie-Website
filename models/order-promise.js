@@ -12,8 +12,8 @@ module.exports.createOrderPromise = function(newOrderPromise, callback){
     // Note that this is created from a pending user (password already hashed etc.)
     // INSERT INTO testtable VALUES(15, :'content');
     // client.query("INSERT INTO users (email, password, name) VALUES ('"+"a@a.com"+"', '"+"b7b7b7b7"+"','"+"aaa"+"');", [], function(err, res) {
-    var query = "INSERT INTO orderpromise (email, cointype, depositaddress, productaddress, expirymillisecondssinceunixepoch) VALUES ($1, $2, $3, $4, $5);";
-    var params = [newOrderPromise.email, newOrderPromise.coinType, newOrderPromise.depositAddress, newOrderPromise.productAddress, newOrderPromise.expiryMillisecondsSinceUnixEpoch];
+    var query = "INSERT INTO orderpromise (email, cointype, depositaddress, productaddress, expirymillisecondssinceunixepoch, grandtotal) VALUES ($1, $2, $3, $4, $5, $6);";
+    var params = [newOrderPromise.email, newOrderPromise.coinType, newOrderPromise.depositAddress, newOrderPromise.productAddress, newOrderPromise.expiryMillisecondsSinceUnixEpoch, newOrderPromise.grandTotal];
     pgClient.runQuery(query, params, callback);
 }
 

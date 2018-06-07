@@ -63,6 +63,7 @@ router.post('/begin-order-and-get-response', ensureAuthenticated, function(req, 
                     newOrderPromise.depositAddress = depositAddress;
                     newOrderPromise.productAddress = productAddress;
                     newOrderPromise.expiryMillisecondsSinceUnixEpoch = new Date().getTime() + (1000 * 600);
+                    newOrderPromise.grandTotal = grandTotal;
                     OrderPromise.createOrderPromise(newOrderPromise, function (err, res) {
                         OrderPromise.getOrderPromiseByDepositAddress(depositAddress, function(err, res){
                             // We can assume that our prices are good at this point so now we prepare to store order data in a table.
