@@ -280,11 +280,7 @@ ControllerClick.prototype.beginOrder = function(event){
     }
     $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
         console.log(data);
-        var depositAddress = data.depositAddress;
-        var img = document.createElement("IMG");
-        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
-        $('#DillonGageQRCode').children().remove();
-        $('#DillonGageQRCode').append(img);
+        // The following block of code fills the numerical parts of the modal
         var keys = Object.keys(quantities);
         var grandTotal = 0;
         for (var i = 0; i < keys.length; i++){
@@ -300,6 +296,14 @@ ControllerClick.prototype.beginOrder = function(event){
         }
         $(".fn-final-cost").text(grandTotal.toFixed(8) + ' BTC');
         g_App.getViewModals().showModal("fn-confirm-place-order");
+        // The following block of code appends the correct QR code to the modal that asks for payment.
+        var depositAddress = data.depositAddress;
+        var img = document.createElement("IMG");
+        // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
+        // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
+        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress+"?amount="+grandTotal.toFixed(8)
+        $('#DillonGageQRCode').children().remove();
+        $('#DillonGageQRCode').append(img);
     });
 }
 

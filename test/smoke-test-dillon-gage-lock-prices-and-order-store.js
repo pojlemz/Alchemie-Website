@@ -14,7 +14,9 @@ request.post(url,
             "items":
                 [
                     {"code":"1KILOG","transactionType":"buy","qty":"1"},
-                    {"code":"1GP","transactionType":"buy","qty":"5"}
+                    {"code":"100GPAMP","transactionType":"buy","qty":"5"},
+                    {"code":"10GP","transactionType":"buy","qty":"1"},
+                    {"code":"1GP","transactionType":"buy","qty":"1"}
                 ]
         }
     }
@@ -22,6 +24,10 @@ request.post(url,
         if (typeof(body) === 'undefined') {
             console.error("Error when getting body.");
             console.log(error);
+        } else if (body.error || error) {
+            console.error("Error with locking request.");
+            console.log(error);
+            console.log(body);
         } else {
             console.log(body);
             var url2 = host + '/FizServices/ExecuteTrade/' + privateToken;
