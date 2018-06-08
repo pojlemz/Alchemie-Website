@@ -15,6 +15,7 @@ const https = require('https');
 const fs = require('fs');
 const helmet = require('helmet');
 
+
 // Incoming web requests
 var routeIndex = require('./routes/index');
 var routeUsers = require('./routes/users');
@@ -56,6 +57,7 @@ var routeGetPrices = require('./routes/json-get-prices');
 var routeJsonLockTradesAndGetResponse = require('./routes/json-lock-trades-and-get-response');
 var routeJsonAddProductAddressToEmail = require('./routes/json-add-product-address-to-email')
 var routeJsonBeginOrderAndGetResponse = require('./routes/json-begin-order-and-get-response');
+var routeJsonGetProducts = require('./routes/json-get-products');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -194,6 +196,7 @@ app.use('/', routeGetPrices);
 app.use('/', routeJsonLockTradesAndGetResponse);
 app.use('/', routeJsonAddProductAddressToEmail);
 app.use('/', routeJsonBeginOrderAndGetResponse);
+app.use('/', routeJsonGetProducts);
 
 require('./server/server_interval');
 
