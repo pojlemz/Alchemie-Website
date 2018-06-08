@@ -1,14 +1,15 @@
+const productsDict = require('../server/constants-products');
 const request = require('request');
 const host = process.env.DILLON_GAGE_API_ENDPOINT;
 const privateToken = process.env.DILLON_GAGE_PRIVATE_TOKEN;
-const instruments = ['100G', '1KILOG'];
+const products = Object.keys(productsDict);
 const Price = require('../models/price');
 const markupPriceForCustomer = require('../server/markup-price-for-customer');
 
 const requestLoop = setInterval(function(){
     // Get prices for various Dillon Gage products and store them in a Postgres table.
-    for (var i = 0 ; i < instruments.length; i++){
-        const instrument = instruments[i];
+    for (var i = 0 ; i < products.length; i++){
+        const instrument = products[i];
         var url = host + '/FizServices/GetPrices/'+privateToken+'/'+ instrument;
         request({
             uri: url,

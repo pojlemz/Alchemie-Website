@@ -50,6 +50,10 @@ App.prototype.getControllerClick = function(){
     return this._controllerClick;
 }
 
+App.prototype.getControllerChange = function(){
+    return this._controllerChange;
+}
+
 App.prototype.getViewAddressAdd = function(){
     return this._viewAddressAdd;
 }
@@ -102,4 +106,8 @@ App.prototype.getViewProductPrices = function(){
 
 App.prototype.getViewProductAddressAdd = function(){
     return this._viewProductAddressAdd;
+}
+
+App.prototype.getViewProducts = function(){
+    return this._viewProducts;
 }

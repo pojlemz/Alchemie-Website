@@ -273,17 +273,20 @@ ControllerClick.prototype.beginOrder = function(event){
     for (var i = 0; i < quantityItems.length; i++){
         var productCode = $(quantityItems[i]).attr('value');
         var productQuantity = parseInt($(quantityItems[i]).val());
-        quantities[productCode] = productQuantity;
+        if (productQuantity > 0){
+            quantities[productCode] = productQuantity;
+        }
     }
     for (var i = 0; i < prices.length; i++){
         pricesAsDict[prices[i]['instrument']] = prices[i];
     }
+    g_App.getViewProducts().populateProductListInModal(Object.keys(quantities));
     $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
         console.log(data);
         // The following block of code fills the numerical parts of the modal
         var keys = Object.keys(quantities);
         var grandTotal = 0;
-        for (var i = 0; i < keys.length; i++){
+        for (var i = 0; i < keys.length; i++) {
             // keys example: ['1KILOG', '100G']
             var code = keys[i];
             var qty = parseInt(quantities[code]);
