@@ -9,7 +9,7 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
     // print the wallets
     wallet.transactions({}, function(err, result) {
         // print unspents
-        console.dir(JSON.stringify(result));
-        console.dir(result['transactions'].length);
+        console.dir(result);
+        // console.dir(result['transactions'].length);
     });
 });

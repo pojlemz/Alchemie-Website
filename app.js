@@ -193,7 +193,7 @@ app.use('/', routeWithdrawalAddressAdd);
 app.use('/', routeWithdrawalAddressRemove);
 app.use('/', routeSubmitWithdrawal);
 app.use('/', routeGetPrices);
-app.use('/', routeJsonLockTradesAndGetResponse);
+// app.use('/', routeJsonLockTradesAndGetResponse);
 app.use('/', routeJsonAddProductAddressToEmail);
 app.use('/', routeJsonBeginOrderAndGetResponse);
 app.use('/', routeJsonGetProducts);

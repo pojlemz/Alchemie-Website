@@ -64,17 +64,20 @@ router.post('/begin-order-and-get-response', ensureAuthenticated, function(req, 
                     newOrderPromise.productAddress = productAddress;
                     newOrderPromise.expiryMillisecondsSinceUnixEpoch = new Date().getTime() + (1000 * 600);
                     newOrderPromise.grandTotal = grandTotal;
+                    newOrderPromise.status = "Unpaid";
+                    newOrderPromise.transactionOutput = "";
                     OrderPromise.createOrderPromise(newOrderPromise, function (err, res) {
                         OrderPromise.getOrderPromiseByDepositAddress(depositAddress, function(err, res){
                             // We can assume that our prices are good at this point so now we prepare to store order data in a table.
-                            const orderPromiseId = res.id;
+                            // TODO: Handle error here in case the order promise wasn't created properly
+                            const transactionId = res.transactionid;
                             var keys = Object.keys(dictOfOrders);
                             var callbackCount = 0;
                             var isError = false;
                             for (var i = 0; i < keys.length; i++) {
                                 newOrderPromiseProduct = {};
-                                newOrderPromiseProduct.orderPromiseId = orderPromiseId;
-                                newOrderPromiseProduct.code = keys[i];
+                                newOrderPromiseProduct.transactionId = transactionId;
+                                newOrderPromiseProduct.product = keys[i];
                                 newOrderPromiseProduct.qty = dictOfOrders[keys[i]]['qty'];
                                 newOrderPromiseProduct.priceId = dictOfOrders[keys[i]]['id'];
                                 OrderPromiseProduct.createOrderPromiseProduct(newOrderPromiseProduct, function(err, res){

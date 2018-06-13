@@ -314,40 +314,40 @@ ControllerClick.prototype.confirmProductOrder = function(event){
 
 }
 
-ControllerClick.prototype.showFinalOrder = function(event){
-    // Creates a lock token on the server
-    // Gets prices and metrics corresponding to the lock token
-    // Show the modal that lets you place an order on the locked prices (you have 20 seconds to place the order)
-    var postBody = {}; //{items:[{"code":"1KILOG","transactionType":"buy","qty":"10"},{"code":"1GP","transactionType":"buy","qty":"50"}]};
-    postBody['items'] = [];
-    var arrayOfQuantitiesEntered = $(".fnQty");
-    for (var i = 0; i < arrayOfQuantitiesEntered.length; i++){
-        var productCode = $(arrayOfQuantitiesEntered[i]).attr('value');
-        var value = parseInt($(arrayOfQuantitiesEntered[i]).val()).toFixed(0);
-        postBody['items'].push({code: productCode, "transactionType":"buy","qty":value});
-    }
-    $.post("/lock-trades-and-get-response", {items: JSON.stringify(postBody['items'])}, function( data ) {
-        if (data.response === 'success'){
-            g_App.getViewUserMessages().removeMessagesFromUserAlertBox();
-            var values = data.values;
-            var finalCost = 0;
-            for (var i = 0; i < values.length; i++){
-                var code = values[i]['product'];
-                var unitPrice = values[i]['unitPriceBtc'];
-                var qty = values[i]['qty'];
-                var total = values[i]['totalPriceBtc'];
-                $(".fn-order-total[value='"+code+"']").text(total.toFixed(8));
-                $(".fn-order-qty[value='"+code+"']").text(qty);
-                $(".fn-order-unit-price[value='"+code+"']").text(unitPrice.toFixed(8));
-                finalCost += total;
-            }
-            $(".fn-final-cost").text(finalCost.toFixed(8) + ' BTC');
-            g_App.getViewModals().showModal("fn-confirm-place-order");
-        } else {
-            g_App.getViewUserMessages().showCustomErrorMessage("An error occurred while trying to process your order.");
-        }
-    }, "json");
-}
+// ControllerClick.prototype.showFinalOrder = function(event){
+//     // Creates a lock token on the server
+//     // Gets prices and metrics corresponding to the lock token
+//     // Show the modal that lets you place an order on the locked prices (you have 20 seconds to place the order)
+//     var postBody = {}; //{items:[{"code":"1KILOG","transactionType":"buy","qty":"10"},{"code":"1GP","transactionType":"buy","qty":"50"}]};
+//     postBody['items'] = [];
+//     var arrayOfQuantitiesEntered = $(".fnQty");
+//     for (var i = 0; i < arrayOfQuantitiesEntered.length; i++){
+//         var productCode = $(arrayOfQuantitiesEntered[i]).attr('value');
+//         var value = parseInt($(arrayOfQuantitiesEntered[i]).val()).toFixed(0);
+//         postBody['items'].push({code: productCode, "transactionType":"buy","qty":value});
+//     }
+//     $.post("/lock-trades-and-get-response", {items: JSON.stringify(postBody['items'])}, function( data ) {
+//         if (data.response === 'success'){
+//             g_App.getViewUserMessages().removeMessagesFromUserAlertBox();
+//             var values = data.values;
+//             var finalCost = 0;
+//             for (var i = 0; i < values.length; i++){
+//                 var code = values[i]['product'];
+//                 var unitPrice = values[i]['unitPriceBtc'];
+//                 var qty = values[i]['qty'];
+//                 var total = values[i]['totalPriceBtc'];
+//                 $(".fn-order-total[value='"+code+"']").text(total.toFixed(8));
+//                 $(".fn-order-qty[value='"+code+"']").text(qty);
+//                 $(".fn-order-unit-price[value='"+code+"']").text(unitPrice.toFixed(8));
+//                 finalCost += total;
+//             }
+//             $(".fn-final-cost").text(finalCost.toFixed(8) + ' BTC');
+//             g_App.getViewModals().showModal("fn-confirm-place-order");
+//         } else {
+//             g_App.getViewUserMessages().showCustomErrorMessage("An error occurred while trying to process your order.");
+//         }
+//     }, "json");
+// }
 
 ControllerClick.prototype.selectProductAddress = function(event){
     var selectedAddressElement = $(event.target);
