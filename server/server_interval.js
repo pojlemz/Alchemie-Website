@@ -42,11 +42,11 @@ const requestLoop = setInterval(function(){
             // For each unspent, look up the corresponding value in the orderpromise table
             const utxoArray = unspents.unspents;
             for (var i = 0; i < utxoArray.length; i++) {
-                const address = utxoArray[i].address;
+                const utxo = utxoArray[i];
                 const blockHeight = utxoArray[i].blockHeight;
                 const value = utxoArray[i].value;
-                OrderPromise.getOrderPromiseByDepositAddress(address, function(err, orderPromise){
-                    handleOrderPromise(orderPromise, address, blockHeight, value);
+                OrderPromise.getOrderPromiseByDepositAddress(utxo.address, function(err, orderPromise){
+                    handleOrderPromise(orderPromise, utxo, blockHeight, value);
                 });
             }
         });

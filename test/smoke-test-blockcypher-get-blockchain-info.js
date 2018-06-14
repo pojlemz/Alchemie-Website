@@ -1,7 +1,6 @@
 const request = require('request');
 
 // $.get('https://api.blockcypher.com/v1/btc/main').then(function(d) {console.log(d)});
-
 var url = 'https://api.blockcypher.com/v1/btc/main';
 request({
     uri: url,
