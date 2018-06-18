@@ -100,7 +100,7 @@ ControllerClick.prototype.newPassword = function(event){
     var secondPassword = $("#change-password-confirm-password").val();
 
     if (firstPassword === secondPassword){
-        var email = $("#temporary-data-email").attr('value');
+        var email = $("#temporary-data-email").attr('associate');
         var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret-for-specific-email?email="+email;
         $.ajax(urlHas2FA).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
             if (msg) {
@@ -132,7 +132,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
     var secondPassword = $("#change-password-confirm-password").val();
 
     if (firstPassword === secondPassword){
-        // var email = $("#temporary-data-email").attr('value');
+        // var email = $("#temporary-data-email").attr('associate');
         // // TODO: Check that password reset link is valid.
         // var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret-for-specific-email?email="+email;
         // $.ajax(urlHas2FA).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
@@ -232,7 +232,7 @@ ControllerClick.prototype.selectWithdrawalAddress = function(event){
 }
 
 ControllerClick.prototype.deleteWithdrawalAddress = function(event){
-    this._addressToDelete = $(event.target).attr("value");
+    this._addressToDelete = $(event.target).attr("associate");
     g_App.getViewModals().showModal("fn-confirm-delete-withdrawal-address-modal");
 }
 
@@ -241,7 +241,7 @@ ControllerClick.prototype.confirmDeleteWithdrawalAddress = function(event){
     var url2FAIsValidCode = g_App.getAjaxUrlPrefix() + "/withdrawal-address-remove?address="+self._addressToDelete;
     $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
-            $(".fn-withdrawal-address[value=" + self._addressToDelete+"]").remove();
+            $(".fn-withdrawal-address[associate=" + self._addressToDelete+"]").remove();
             self.closeModals();
         }
     });
@@ -249,13 +249,13 @@ ControllerClick.prototype.confirmDeleteWithdrawalAddress = function(event){
 
 ControllerClick.prototype.submitWithdrawal = function(event){
     // var self = this;
-    var address = $(".fnSelected").attr('value');
+    var address = $(".fnSelected").attr('associate');
     var amount = $("#withdrawalAmount").val();
 
     // var url = g_App.getAjaxUrlPrefix() + "/submit-withdrawal";
     // $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
     //     if (msg) {
-    //         $(".fn-withdrawal-address[value=" + self._addressToDelete+"]").remove();
+    //         $(".fn-withdrawal-address[associate=" + self._addressToDelete+"]").remove();
     //         self.closeModals();
     //     }
     // });
@@ -271,7 +271,7 @@ ControllerClick.prototype.beginOrder = function(event){
     var pricesAsDict = {};
     var quantityItems = $(".fnQty");
     for (var i = 0; i < quantityItems.length; i++){
-        var productCode = $(quantityItems[i]).attr('value');
+        var productCode = $(quantityItems[i]).attr('associate');
         var productQuantity = parseInt($(quantityItems[i]).val());
         if (productQuantity > 0){
             quantities[productCode] = productQuantity;
@@ -293,9 +293,9 @@ ControllerClick.prototype.beginOrder = function(event){
             var unitPrice = Number(pricesAsDict[code]['price']).toFixed(8);
             var total = Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8);
             grandTotal += parseFloat(Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8));
-            $(".fn-order-total[value='"+code+"']").text(total);
-            $(".fn-order-qty[value='"+code+"']").text(qty);
-            $(".fn-order-unit-price[value='"+code+"']").text(unitPrice);
+            $(".fn-order-total[associate='"+code+"']").text(total);
+            $(".fn-order-qty[associate='"+code+"']").text(qty);
+            $(".fn-order-unit-price[associate='"+code+"']").text(unitPrice);
         }
         $(".fn-final-cost").text(grandTotal.toFixed(8) + ' BTC');
         g_App.getViewModals().showModal("fn-confirm-place-order");
@@ -322,9 +322,9 @@ ControllerClick.prototype.confirmProductOrder = function(event){
 //     postBody['items'] = [];
 //     var arrayOfQuantitiesEntered = $(".fnQty");
 //     for (var i = 0; i < arrayOfQuantitiesEntered.length; i++){
-//         var productCode = $(arrayOfQuantitiesEntered[i]).attr('value');
-//         var value = parseInt($(arrayOfQuantitiesEntered[i]).val()).toFixed(0);
-//         postBody['items'].push({code: productCode, "transactionType":"buy","qty":value});
+//         var productCode = $(arrayOfQuantitiesEntered[i]).attr('associate');
+//         var associate = parseInt($(arrayOfQuantitiesEntered[i]).val()).toFixed(0);
+//         postBody['items'].push({code: productCode, "transactionType":"buy","qty":associate});
 //     }
 //     $.post("/lock-trades-and-get-response", {items: JSON.stringify(postBody['items'])}, function( data ) {
 //         if (data.response === 'success'){
@@ -356,7 +356,7 @@ ControllerClick.prototype.selectProductAddress = function(event){
     $(selectedAddressElement).addClass("cssSelected");
     $(selectedAddressElement).addClass("fnSelected");
     // This next line closes the modals and sets the product address accordingly in the UI.
-    $("#product-address-selected").text($(event.target).attr("value"));
+    $("#product-address-selected").text($(event.target).attr("associate"));
     this.closeModals();
     // g_App.getViewProductAddressAdd().showShowFinalOrderButton();
 }

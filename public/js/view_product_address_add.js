@@ -40,9 +40,9 @@ ViewProductAddressAdd.prototype.showListOfProductAddresses = function(callbackOn
 ViewProductAddressAdd.prototype.getHtmlForProductAddress = function(address){
     // address = '0x012345678902345678901234567890123456789'
     var html = "";
-    html += '<div class="css-withdrawal-address fn-product-address" value="'+address+'">';
-    html +=     '<div class="css-withdrawal-address-main-text fn-product-address-main-text cssCursorPointer" clickcontroller="selectProductAddress" aria-describedby="sizing-addon1" value="'+address+'">'+address+'</div>'
-    html +=     '<div class="cssCursorPointer css-product-address-delete" clickcontroller="deleteProductAddress" style="display:none" value="{{'+address+'}}">'
+    html += '<div class="css-withdrawal-address fn-product-address" associate="'+address+'">';
+    html +=     '<div class="css-withdrawal-address-main-text fn-product-address-main-text cssCursorPointer" clickcontroller="selectProductAddress" aria-describedby="sizing-addon1" associate="'+address+'">'+address+'</div>'
+    html +=     '<div class="cssCursorPointer css-product-address-delete" clickcontroller="deleteProductAddress" style="display:none" associate="{{'+address+'}}">'
     html +=         '<div class="css-product-address-delete-image"></div>';
     html +=     '</div>';
     html += '</div>';

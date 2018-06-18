@@ -78,7 +78,7 @@ App.prototype.sendPostRequest = function(path, params, method) {
             var hiddenField = document.createElement("input");
             hiddenField.setAttribute("type", "hidden");
             hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
+            hiddenField.setAttribute("associate", params[key]);
 
             form.appendChild(hiddenField);
         }

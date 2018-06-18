@@ -82,9 +82,9 @@ ViewWithdrawalAddressAdd.prototype.initialize = function(){
 ViewWithdrawalAddressAdd.prototype.getHtmlForWithdrawalAddress = function(address){
     // address = '0x012345678902345678901234567890123456789'
     var html = '';
-    html += '<div class="css-withdrawal-address fn-withdrawal-address" value="'+address+'">';
-    html +=     '<div class="css-withdrawal-address-main-text fn-withdrawal-address-main-text cssCursorPointer" clickcontroller="selectWithdrawalAddress" aria-describedby="sizing-addon1" value="'+address+'"> '+address+' </div>';
-    html +=     '<div class="cssCursorPointer css-withdrawal-address-delete" clickcontroller="deleteWithdrawalAddress" value="'+address+'">';
+    html += '<div class="css-withdrawal-address fn-withdrawal-address" associate="'+address+'">';
+    html +=     '<div class="css-withdrawal-address-main-text fn-withdrawal-address-main-text cssCursorPointer" clickcontroller="selectWithdrawalAddress" aria-describedby="sizing-addon1" associate="'+address+'"> '+address+' </div>';
+    html +=     '<div class="cssCursorPointer css-withdrawal-address-delete" clickcontroller="deleteWithdrawalAddress" associate="'+address+'">';
     html +=         '<div class="css-withdrawal-address-delete-image"></div>';
     html +=     '</div>';
     html += '</div>';

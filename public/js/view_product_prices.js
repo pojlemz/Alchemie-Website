@@ -48,7 +48,7 @@ ViewProductPrices.prototype.updatePrices = function(){
     var jsonPrices = this._prices;
     if (this._isAvailable){
         for (var i = 0; i < jsonPrices.length; i++) {
-            var selector = ".fnPrice[value='" + jsonPrices[i].instrument + "']";
+            var selector = ".fnPrice[associate='" + jsonPrices[i].instrument + "']";
             $(selector).text(jsonPrices[i].price.toFixed(8));
         }
         this.updateGrandTotal();
@@ -62,7 +62,7 @@ ViewProductPrices.prototype.updateGrandTotal = function() {
         var prices = this._prices;
         var grandTotal = 0;
         for (var i = 0; i < prices.length; i++) {
-            var selector = ".fnQty[value='" + prices[i].instrument + "']";
+            var selector = ".fnQty[associate='" + prices[i].instrument + "']";
             var qty = parseInt($(selector).val());
             if (isNaN(qty)){
                 qty = 0;

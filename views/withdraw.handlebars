@@ -16,9 +16,9 @@
     </div>
     <div class="css-withdrawal-address-list fn-withdrawal-address-list">
         {{#each addresses}}
-            <div class="css-withdrawal-address fn-withdrawal-address" value="{{address}}">
-                <div class="css-withdrawal-address-main-text fn-withdrawal-address-main-text cssCursorPointer" clickcontroller="selectWithdrawalAddress" aria-describedby="sizing-addon1" value="{{address}}"> {{address}} </div>
-                <div class="cssCursorPointer css-withdrawal-address-delete" clickcontroller="deleteWithdrawalAddress" value="{{address}}">
+            <div class="css-withdrawal-address fn-withdrawal-address" associate="{{address}}">
+                <div class="css-withdrawal-address-main-text fn-withdrawal-address-main-text cssCursorPointer" clickcontroller="selectWithdrawalAddress" aria-describedby="sizing-addon1" associate="{{address}}"> {{address}} </div>
+                <div class="cssCursorPointer css-withdrawal-address-delete" clickcontroller="deleteWithdrawalAddress" associate="{{address}}">
                     <div class="css-withdrawal-address-delete-image"></div>
                 </div>
             </div>
