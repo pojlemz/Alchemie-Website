@@ -417,6 +417,7 @@ footer{
 
 .css-main-display {
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #BTCPayQRCode {
@@ -781,6 +782,7 @@ footer{
   /*left: 0;
   right: 0;*/
   height: 150px;
+  width: 480px;
 }
 
 .css-dillon-gage-product-list {
@@ -788,5 +790,5 @@ footer{
   top: 240px;
   bottom: 170px;
   overflow: auto;
-  width: 480px;
+  width: 490px;
 }
