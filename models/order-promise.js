@@ -1,10 +1,15 @@
 // A model that describes who has been promised a particular order.
 
 // orderpromise
+// transactionid - int
 // email - text
 // cointype - text
-// address - text
-// expirymillisecondssinceunixepoch - BIGINT
+// depositaddress - text
+// productaddress - text
+// expirymillisecondssinceunixepoch - bigint
+// grandtotal - float8
+// status - text
+// transactionoutput - text
 
 var pgClient = require('./pg-client');
 
@@ -39,4 +44,10 @@ module.exports.setTransactionOutputByDepositAddress = function(address, transact
     var query = "UPDATE orderpromise SET transactionoutput=$1 WHERE depositaddress=$2;";
     var params = [transactionOutput, address];
     pgClient.runQuery(query, params, callback);
+}
+
+module.exports.getOrderPromiseAndProductsByDepositAddress = function(address, callback){
+    var query = "SELECT * FROM orderpromise op INNER JOIN orderpromiseproduct opp ON op.transactionid=opp.transactionid WHERE depositaddress=$1;";
+    var params = [address];
+    pgClient.runQueryMultiSelect(query, params, callback);
 }

@@ -10,7 +10,7 @@ request.post(url,
     {json:
         {
             "transactionId": "123456",
-            "includeRetailPrices": "yes",          // optional
+            "includeRetailPrices": "no",          // optional
             "items":
                 [
                     {"code":"1KILOG","transactionType":"buy","qty":"1"},
@@ -38,7 +38,6 @@ request.post(url,
                     "transactionId":"123456",
                     "referenceNumber":"123456",
                     "shippingOption":"hold",
-                    "dropShipInfo": {"name": "Retail Customer", "address1": "123 Hickory Lane", "address2": "", "address4":"+1 416 996-1688", "city": "Madison", "state":"CT", "postalCode":"06443", "country": "US"},
                     "lockToken":body.lockToken,
                     "traderId":"dan@blockunity.com"
                 }

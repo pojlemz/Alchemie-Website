@@ -198,7 +198,9 @@ app.use('/', routeJsonAddProductAddressToEmail);
 app.use('/', routeJsonBeginOrderAndGetResponse);
 app.use('/', routeJsonGetProducts);
 
-require('./server/server_interval');
+require('./server/server-interval-5-seconds');
+require('./server/server-interval-30-seconds');
+require('./server/server-interval-5-minutes');
 
 // Set Port
 if (process.env.NODE_ENV !== 'production') {

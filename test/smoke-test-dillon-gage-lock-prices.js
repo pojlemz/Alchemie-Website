@@ -5,7 +5,7 @@ const host = process.env.DILLON_GAGE_API_ENDPOINT;
 const privateToken = process.env.DILLON_GAGE_PRIVATE_TOKEN;
 
 // var url = host + '/FizServices/GetPrices/'+publicToken+'/1GP';
-var url = host + '/FizServices/LockPrices/'+privateToken;
+var url = host + '/FizServices/LockPrices/' + privateToken;
 request.post(url,
 {json:
     {

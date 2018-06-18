@@ -1,13 +1,14 @@
+const handleConfirmedOrder = require('../server/handle-confirmed-order');
 const getBlockHeight = require('../server/get-block-height');
 const OrderPromise = require('../models/order-promise');
 
-module.exports = function handleOrderPromise(orderPromise, utxo, blockHeight, value) {
-    const address = utxo.address;
+module.exports = function handleOrderPromise(orderPromise, output, blockHeight, value) {
+    const address = output.address;
     if (orderPromise === null || typeof(orderPromise) === 'undefined') {
         const status = orderPromise.status;
         if (status === "Unpaid" || status === "Paid") {
             if (orderPromise.grandtotal <= value) {
-                OrderPromise.setTransactionOutputByDepositAddress(address, utxo.id, function(err, res) {
+                OrderPromise.setTransactionOutputByDepositAddress(address, output.id, function(err, res) {
                     // We can consider the order to be paid here since the value of the unspent is less than the total.
                     getBlockHeight(function (err, res) {
                         const blockHeightDifference = res.height - blockHeight;
@@ -17,6 +18,7 @@ module.exports = function handleOrderPromise(orderPromise, utxo, blockHeight, va
                                 if (err) {
                                     console.log(err); // Reports an error in case any have occurred.
                                 }
+                                handleConfirmedOrder(orderPromise, output);
                             });
                         } else {
                             OrderPromise.setOrderStatusByDepositAddress(address, "Paid", function(err, res){
