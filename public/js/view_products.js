@@ -10,7 +10,7 @@ ViewProducts.prototype.getHtmlForProductInList = function(key, object){
     // key/object combination looks something like the following:
     // '1KILOG': {name: 'KILO GOLD BAR', image: '1kg-gold-bar.png'},
     var html = "";
-    html += '<div class="container-fluid css-dillon-gage-product-list">';
+    //html += '<div class="container-fluid css-dillon-gage-product-list">';
     html +=     '<div class="row css-row-dillon-gage-product">';
     html +=         '<img src="'+object['image']+'" class="img-thumbnail css-dillon-gage-thumbnail" alt="gold-bar">';
     html +=         '<div class="css-dillon-gage-product-label">';
@@ -23,7 +23,7 @@ ViewProducts.prototype.getHtmlForProductInList = function(key, object){
     html +=             '<b class="fnPrice" associate="'+key+'">0.00 BTC</b>';
     html +=         '</div>';
     html +=     '</div>';
-    html += '</div>';
+    //html += '</div>';
     return html;
 }
 
@@ -42,26 +42,26 @@ ViewProducts.prototype.populateProductList = function(){
     }, "json");
 }
 
-ViewProducts.prototype.getHtmlForProductInList = function(key, object){
-    // key/object combination looks something like the following:
-    // '1KILOG': {name: 'KILO GOLD BAR', image: '1kg-gold-bar.png'},
-    var html = "";
-    html += '<div class="container-fluid css-dillon-gage-product-list">';
-    html +=     '<div class="row css-row-dillon-gage-product">';
-    html +=         '<img src="'+object['image']+'" class="img-thumbnail css-dillon-gage-thumbnail" alt="gold-bar">';
-    html +=         '<div class="css-dillon-gage-product-label">';
-    html +=             '<b>'+object['name']+'</b>';
-    html +=         '</div>';
-    html +=         '<div class="input-group input-group-md css-dillon-gage-amount">';
-    html +=             '<input type="text" class="form-control fnQty" associate="'+key+'" placeholder="0" changecontroller="inputPurchaseQuantity">';
-    html +=         '</div>';
-    html +=         '<div class="css-dillon-gage-product-price">';
-    html +=             '<b class="fnPrice" associate="'+key+'">0.00 BTC</b>';
-    html +=         '</div>';
-    html +=     '</div>';
-    html += '</div>';
-    return html;
-}
+// ViewProducts.prototype.getHtmlForProductInList = function(key, object){
+//     // key/object combination looks something like the following:
+//     // '1KILOG': {name: 'KILO GOLD BAR', image: '1kg-gold-bar.png'},
+//     var html = "";
+//     html += '<div class="container-fluid css-dillon-gage-product-list">';
+//     html +=     '<div class="row css-row-dillon-gage-product">';
+//     html +=         '<img src="'+object['image']+'" class="img-thumbnail css-dillon-gage-thumbnail" alt="gold-bar">';
+//     html +=         '<div class="css-dillon-gage-product-label">';
+//     html +=             '<b>'+object['name']+'</b>';
+//     html +=         '</div>';
+//     html +=         '<div class="input-group input-group-md css-dillon-gage-amount">';
+//     html +=             '<input type="text" class="form-control fnQty" associate="'+key+'" placeholder="0" changecontroller="inputPurchaseQuantity">';
+//     html +=         '</div>';
+//     html +=         '<div class="css-dillon-gage-product-price">';
+//     html +=             '<b class="fnPrice" associate="'+key+'">0.00 BTC</b>';
+//     html +=         '</div>';
+//     html +=     '</div>';
+//     html += '</div>';
+//     return html;
+// }
 
 ViewProducts.prototype.populateProductListInModal = function(keys){
     // keys = ['1KILOG', '10GP']
