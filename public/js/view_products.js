@@ -12,7 +12,7 @@ ViewProducts.prototype.getHtmlForProductInList = function(key, object){
     var html = "";
     //html += '<div class="container-fluid css-dillon-gage-product-list">';
     html +=     '<div class="row css-row-dillon-gage-product">';
-    html +=         '<div class="fn-order-once css-order-once cssCursorPointer">';
+    html +=         '<div class="fn-order-once css-order-once cssCursorPointer" changecontroller="inputPurchaseQuantity" associate="' + key + '">';
     html +=             '<img src="'+object['image']+'" class="img-thumbnail css-dillon-gage-thumbnail" alt="gold-bar">';
     html +=             '<div class="css-dillon-gage-product-label">';
     html +=                 '<b>'+object['name']+'</b>';
