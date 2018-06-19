@@ -563,6 +563,7 @@ footer{
 
 .css-row-dillon-gage-product {
   height: 70px;
+  margin-top: 10px;
 }
 
 .css-row-dillon-gage-product-modal {
@@ -571,6 +572,9 @@ footer{
 
 .css-dillon-gage-thumbnail {
   float:left;
+  position: relative;
+  bottom: 5px;
+  left: 5px;
 }
 
 .css-dillon-gage-thumbnail-modal {
@@ -591,7 +595,7 @@ footer{
 }
 
 .css-dillon-gage-product-label {
-  top: 20px;
+  top: 15px;
   position: relative;
   left: 20px;
   float: left;
@@ -609,7 +613,7 @@ footer{
 .css-dillon-gage-product-price {
   width: 110px;
   float: right;
-  top: 20px;
+  top: 15px;
   position: relative;
 }
 
@@ -788,7 +792,14 @@ footer{
 .css-dillon-gage-product-list {
   position: fixed;
   top: 240px;
-  bottom: 170px;
+  bottom: 60px;
   overflow: auto;
   width: 490px;
+}
+
+.css-order-once {
+  background-color: #bceebc;
+  height: 100%;
+  padding-top: 10px;
+  border-radius: 6px;
 }
