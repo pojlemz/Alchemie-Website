@@ -4,15 +4,17 @@ const OrderPromise = require('../models/order-promise');
 
 module.exports = function handleOrderPromise(orderPromise, output, blockHeight, value) {
     const address = output.address;
-    if (orderPromise === null || typeof(orderPromise) === 'undefined') {
+    if (orderPromise !== null || typeof(orderPromise) !== 'undefined') {
         const status = orderPromise.status;
         if (status === "Unpaid" || status === "Paid") {
-            if (orderPromise.grandtotal <= value) {
+            if (orderPromise.grandtotal * 100000000 <= value) {
                 OrderPromise.setTransactionOutputByDepositAddress(address, output.id, function(err, res) {
                     // We can consider the order to be paid here since the value of the unspent is less than the total.
                     getBlockHeight(function (err, res) {
-                        const blockHeightDifference = res.height - blockHeight;
-                        if (blockHeightDifference >= 6) {
+                        const blockHeightDifference = res.body.height - blockHeight;
+                        // TODO: Revise this block height difference stuff.
+                        // if (blockHeightDifference >= 6 && blockHeight !== 99999999) {
+                        if (blockHeight !== 99999999) {
                             OrderPromise.setOrderStatusByDepositAddress(address, "Confirmed", function(err, res){
                                 // Here we pass the transaction off to dealing with a confirmed output.
                                 if (err) {
