@@ -19,24 +19,23 @@ router.post('/begin-order-and-get-response', ensureAuthenticated, function(req, 
     // TODO: What type of response are we going to get from this call?
     // TODO: Send back a response with the expiry time of the prices
     const response = res;
-    const quantities = JSON.parse(req.body.quantities);
-    var keys = Object.keys(quantities);
+    const quantities = JSON.parse(req.body.quantities); // We get the quantities of products being ordered which should be exactly one of each.
+    var keys = Object.keys(quantities); // keys will be a list of one product code. ie. ['1KILOG']
     var totalQuantity = 0;
     for (var i = 0; i < keys.length; i++) {
         var code = keys[i];
         totalQuantity += quantities[code];
     }
-    if (totalQuantity === 1) {
+    if (totalQuantity === 1) { // We have to make sure that exactly one product is being ordered for shipping purposes.
         HasBeenKyced.getHasBeenKycedByEmail(req.user.email, function (err, res) {
-            if (res !== null && res.kyced) { // User has been successfully kyced so take them to the modal where they can send BTC
+            if (res !== null && res.kyced) { // User has been successfully kyced so take them to the modal where they can send BTC.
                 const productAddress = req.body.productAddress;
                 const prices = JSON.parse(req.body.prices);
-
                 bitgo.coin(coinType).wallets().get({id: walletId}).then(function (wallet) {
                     // print the wallets
                     wallet.createAddress({chain: 0}).then(function (address) {
                         // TODO: Go through quantities and prices and then add up what the order total would be
-                        var dictOfOrders = {}; // This variable is where we will build all of the detail for the order
+                        var dictOfOrders = {}; // This variable is where we will build all of the detail for the order.
                         // We check that all the prices are at least under a minute old.
                         // We also rebuild the orders from price table using price ids since user data cannot be trusted.
                         var keys = Object.keys(quantities);
