@@ -18,8 +18,10 @@ const HasBeenKyced = require("../models/has-been-kyced");
 router.post('/begin-order-and-get-response', ensureAuthenticated, function(req, res) {
     // TODO: What type of response are we going to get from this call?
     // TODO: Send back a response with the expiry time of the prices
-    var totalQuantity = 0;
+    const response = res;
+    const quantities = JSON.parse(req.body.quantities);
     var keys = Object.keys(quantities);
+    var totalQuantity = 0;
     for (var i = 0; i < keys.length; i++) {
         var code = keys[i];
         totalQuantity += quantities[code];
@@ -29,8 +31,7 @@ router.post('/begin-order-and-get-response', ensureAuthenticated, function(req, 
             if (res !== null && res.kyced) { // User has been successfully kyced so take them to the modal where they can send BTC
                 const productAddress = req.body.productAddress;
                 const prices = JSON.parse(req.body.prices);
-                const quantities = JSON.parse(req.body.quantities);
-                const response = res;
+
                 bitgo.coin(coinType).wallets().get({id: walletId}).then(function (wallet) {
                     // print the wallets
                     wallet.createAddress({chain: 0}).then(function (address) {

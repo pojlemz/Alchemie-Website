@@ -12,7 +12,7 @@ ViewProducts.prototype.getHtmlForProductInList = function(key, object){
     var html = "";
     //html += '<div class="container-fluid css-dillon-gage-product-list">';
     html +=     '<div class="row css-row-dillon-gage-product">';
-    html +=         '<div class="fn-order-once css-order-once cssCursorPointer" changecontroller="inputPurchaseQuantity" associate="' + key + '">';
+    html +=         '<div class="fn-order-once css-order-once cssCursorPointer" clickcontroller="buyOne" associate="' + key + '">';
     html +=             '<img src="'+object['image']+'" class="img-thumbnail css-dillon-gage-thumbnail" alt="gold-bar">';
     html +=             '<div class="css-dillon-gage-product-label">';
     html +=                 '<b>'+object['name']+'</b>';
@@ -40,7 +40,7 @@ ViewProducts.prototype.populateProductList = function(){
             var html = self.getHtmlForProductInList(keys[i], products[keys[i]]);
             $(".fn-dillon-gage-product-list").append(html);
         }
-        g_App.getControllerChange().resetChangeControllerForSelector('.fn-dillon-gage-product-list');
+        g_App.getControllerClick().resetClickControllerForSelector('.fn-dillon-gage-product-list');
     }, "json");
 }
 
