@@ -29,7 +29,9 @@ const OrderPromise = require('../models/order-promise');
 //     isSegwit: false
 // }
 
-module.exports = function handleOrderPromise(orderPromise, output, blockHeight, value) {
+module.exports = function handleOrderPromise(orderPromise, output) {
+    const blockHeight = output.blockHeight;
+    const value = output.value;
     const address = output.address;
     if (orderPromise !== null || typeof(orderPromise) !== 'undefined') {
         const status = orderPromise.status;

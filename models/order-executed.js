@@ -18,3 +18,9 @@ module.exports.createOrderExecuted = function (newOrderExecuted, callback) {
         pgClient.runQuery(query2, params2, callback);
     });
 }
+
+module.exports.getOrderExecutedByTransactionId = function (transactionId, callback) {
+    var query = "SELECT * FROM orderexecuted WHERE transactionid=$1;";
+    var params = [transactionId];
+    pgClient.runQuery(query, params, callback);
+}
