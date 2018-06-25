@@ -2,14 +2,17 @@ const sendMaximumSpendableIfThresholdReached = require('../server/send-maximum-s
 const MintReady = require('../models/mint-ready');
 const SellReady = require('../models/sell-ready');
 const OrderExecuted = require('../models/order-executed');
+const OrderPromise = require('../models/order-promise');
 
-module.exports = function handleFilledOrder(orderPromise, utxo, confirmationNumber) {
+module.exports = function handleFilledOrder(orderPromise, utxo, done) {
     const transactionId = orderPromise.transactionid;
     OrderExecuted.getOrderExecutedByTransactionId(transactionId, function(err, res){
         if (err) {
             console.error("Error getting order executed from database.");
+            done();
         } else if (res === null || typeof(res) === 'undefined') {
             console.error("The order was never filled/executed since there is no record.");
+            done();
         } else {
             const confirmationNumber = res.confirmationnumber;
             // TODO: Nest callbacks so that utxo is cleared last - ie. we change utxos to cleared in the last case.
@@ -19,7 +22,7 @@ module.exports = function handleFilledOrder(orderPromise, utxo, confirmationNumb
             newSellReady.transactionId = transactionId;
             newSellReady.coinType = orderPromise.cointype;
             newSellReady.grandTotal = orderPromise.grandtotal;
-            SellReady.createSellReady(newSellReady, function (err, res) {
+            SellReady.createSellReady(newSellReady, function (err, res) { // This is an idempotent request.
                 // TODO: Trigger the sell order here.
                 // Mint Shyft tokens on the Blockchain. (Put record in table)
                 const depositAddress = orderPromise.depositaddress;
@@ -32,13 +35,13 @@ module.exports = function handleFilledOrder(orderPromise, utxo, confirmationNumb
                     newMintReady.qty = 1;
                     newMintReady.transactionOutput = utxo.id;
                     newMintReady.confirmationNumber = confirmationNumber;
-                    MintReady.createMintReady(newMintReady, function (err, res) {
+                    MintReady.createMintReady(newMintReady, function (err, res) { // This is an idempotent request.
                         // TODO: Mint all mint ready transactions here.
                         // Make Bitcoin transaction and send most Bitcoin from BitGo wallet to exchange.
-                        // TODO: combine all change transactions with new transaction output.
-                        const depositAddress = orderPromise.depositaddress;
+                        // TODO: Combine all change transactions with new transaction output.
                         OrderPromise.setOrderStatusByDepositAddress(depositAddress, "Ready", function (err, res) {
                             // Send ready utxos here along with change utxos.
+                            done();
                         });
                     })
                 });

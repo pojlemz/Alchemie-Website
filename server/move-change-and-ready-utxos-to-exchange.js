@@ -1,18 +1,20 @@
 const getChangeUtxos = require('../server/get-change-utxos');
+const getReadyUtxos = require('../server/get-ready-utxos');
 
-const getAvailableUtxosAsBitgoList = require('../server/get-available-utxos-as-bitgo-list');
 var BitGoJS = require('bitgo');
 const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
 const walletId = process.env.WALLET_ID;
-const walletPassphrase = 'secretpassphrase1a5df8380e0e30';
+const walletPassphrase = process.env.BITGO_PASSPHRASE;
 const networkBTC = process.env.BITCOIN_NETWORK;
 const destinationAddress = process.env.DESTINATION_BITCOIN_ADDRESS;
 const maxFee = process.env.BITCOIN_MAX_FEE;
 
-module.exports = function moveChangeAndReadyUtxosToExchange() {
+module.exports = function moveChangeAndReadyUtxosToExchange(callback) {
     getChangeUtxos(function(err, res) {
+        // TODO: handle error case.
         const changeUtxos = res;
         getReadyUtxos(function(err, res){
+            // TODO: handle error case.
             const allUtxos = res.concat(changeUtxos);
             const allUtxoCount = allUtxos.length;
             var finalUnspents = [];
@@ -44,7 +46,7 @@ module.exports = function moveChangeAndReadyUtxosToExchange() {
                         if (err) {
                             console.log('Error getting encrypted keychain!');
                             console.dir(err);
-                            return process.exit(-1);
+                            callback(err, null);
                         }
                         console.log('Got encrypted user keychain');
 
@@ -76,15 +78,15 @@ module.exports = function moveChangeAndReadyUtxosToExchange() {
                                 if (err) {
                                     console.log('Failed to sign transaction!');
                                     console.dir(err);
-                                    return process.exit(-1);
+                                    callback(err, null);
                                 }
                                 const params2 = {
                                     txHex: transaction.txHex
                                 };
                                 wallet.submitTransaction(params2).then(function (transaction) {
                                     console.dir(transaction);
+                                    callback(null, transaction);
                                 });
-                                console.dir(transaction);
                             });
                         });
                     });

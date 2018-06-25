@@ -10,6 +10,7 @@
   "author": "Daniel Bruce",
   "dependencies": {
     "ascii-hex": "^1.0.1",
+    "async-lock": "^1.1.3",
     "aws-sdk": "^2.188.0",
     "bcryptjs": "*",
     "bitgo": "^4.22.0",

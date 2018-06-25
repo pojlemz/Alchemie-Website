@@ -22,7 +22,7 @@ const gmailAddress = process.env.GMAIL_ADDRESS;
 // qty
 // priceid
 
-module.exports = function handleConfirmedOrder(orderPromise, utxo) {
+module.exports = function handleConfirmedOrder(orderPromise, utxo, done) {
     // This is where we try to fill the order with Dillon Gage.
     // If the order is filled then we move it's status to filled and it is labelled rejected otherwise.
     const depositAddress = orderPromise.depositaddress;
@@ -37,7 +37,7 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
         request.post(url,
             {json:
                 {
-                    "transactionId": transactionId,
+                    "transactionId": transactionId.toFixed(0),
                     "includeRetailPrices": "no",
                     "items": items
                 }
@@ -51,8 +51,9 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
                             console.log(err); // Reports an error in case any have occurred.
                         }
                         console.log("This order has been set to 'Rejected'");
+                        done();
                     });
-                } else if (body.error || error) {
+                } else if (body.error || error || response.statusCode === 500) {
                     console.error("Error when locking prices with Dillon Gage");
                     console.log(error);
                     OrderPromise.setOrderStatusByDepositAddress(depositAddress, "Rejected", function(err, res) {
@@ -60,6 +61,7 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
                             console.log(err); // Reports an error in case any have occurred.
                         }
                         console.log("This order has been set to 'Rejected'");
+                        done();
                     });
                 } else {
                     console.log(body);
@@ -69,8 +71,8 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
                     /* "inventoryLocation":"DGI", */
                     request.post(url2, {json:
                         {
-                            "transactionId":transactionId,
-                            "referenceNumber":transactionId,
+                            "transactionId":transactionId.toFixed(0),
+                            "referenceNumber":transactionId.toFixed(0),
                             "shippingOption":"hold",
                             "lockToken":lockToken,
                             "traderId":gmailAddress
@@ -86,6 +88,7 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
                             }
                             OrderPromise.setOrderStatusByDepositAddress(depositAddress, "Rejected", function(err, res) {
                                 console.log("This order has been set to 'Rejected'");
+                                done();
                             });
                         } else {
                             console.log(body);
@@ -98,12 +101,14 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
                             newOrderExecuted.status = body.status;
                             newOrderExecuted.confirmationNumber = body.confirmationNumber;
                             // Log the executed order into the table.
+                            // TODO: Check if the order has been executed and if it has been then just carry on.
                             OrderExecuted.createOrderExecuted(newOrderExecuted, function(err, res) {
                                 // Change the order to 'Filled'
+                                // TODO: handle error here.
                                 OrderPromise.setOrderStatusByDepositAddress(depositAddress, "Filled", function (err, res) {
-                                    console.log("This order has been set to 'Rejected'");
+                                    // TODO: handle error here.
                                     // handle the filled order
-                                    handleFilledOrder(orderPromise, utxo, newOrderExecuted.confirmationNumber);
+                                    handleFilledOrder(orderPromise, utxo, done);
                                 });
                             });
                         }
