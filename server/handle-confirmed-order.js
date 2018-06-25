@@ -103,7 +103,7 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo) {
                                 OrderPromise.setOrderStatusByDepositAddress(depositAddress, "Filled", function (err, res) {
                                     console.log("This order has been set to 'Rejected'");
                                     // handle the filled order
-                                    handleFilledOrder(orderPromise, utxo);
+                                    handleFilledOrder(orderPromise, utxo, newOrderExecuted.confirmationNumber);
                                 });
                             });
                         }

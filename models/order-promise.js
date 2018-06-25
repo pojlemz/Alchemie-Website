@@ -51,3 +51,15 @@ module.exports.getOrderPromiseAndProductsByDepositAddress = function(address, ca
     var params = [address];
     pgClient.runQueryMultiSelect(query, params, callback);
 }
+
+module.exports.getUnpaidPaidConfirmedAndFilledUnspents = function(callback) {
+    var query = "SELECT * FROM orderpromise WHERE status='Unpaid' OR status='Paid' OR status='Confirmed' OR status='Filled'";
+    var params = [];
+    pgClient.runQueryMultiSelect(query, params, callback);
+}
+
+module.exports.getReadyUnspents = function(callback) {
+    var query = "SELECT * FROM orderpromise WHERE status='Ready'";
+    var params = [];
+    pgClient.runQueryMultiSelect(query, params, callback);
+}
