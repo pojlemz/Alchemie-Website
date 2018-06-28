@@ -37,7 +37,7 @@ var request = require('request');
 // });
 
 // This route is entered when you click the 'Upload File' button.
-router.post('/kyc-upload', function(req, res) {
+router.post('/kyc-upload', ensureAuthenticated, function(req, res) {
     if (req.user.email){
         var response = res;
         DocumentInReview.getIsDocumentInReviewByEmail(req.user.email, function(err, res){
@@ -118,6 +118,15 @@ function createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, ra
             });
         })
     });
+}
+
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()) {
+        return next();
+    } else {
+        //req.flash('error_msg','You are not logged in');
+        res.redirect('/login');
+    }
 }
 
 // function getFilesizeInBytes(filename) {
