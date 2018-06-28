@@ -79,6 +79,7 @@ router.post('/kyc-upload', ensureAuthenticated, function(req, res) {
 
 function createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, randomlyGeneratedHash, file, req, res) {
     const response = res;
+    // TODO: Make sure that KYC server is running for handling user data
     mkdirp(directoryFromRoot, function(err) {
         console.log(directoryFromRoot);
         // sampleFile.mv('../uploads/' + foldername, function(err) {
@@ -101,9 +102,15 @@ function createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, ra
                             uri: url,
                             method: ""
                         }, function(error, res, body) {
-                            // @NOTE: Now that we have finished with the file, we can send a request for the kyc data to be recorded.
-                            req.flash('success_msg', 'You have successfully uploaded a document. We will be in touch.');
-                            response.redirect('/');
+                            if (typeof(body) !== 'undefined') { // && body.response === "success"){
+                                // TODO: Consider other types of responses here
+                                // @NOTE: Now that we have finished with the file, we can send a request for the kyc data to be recorded.
+                                req.flash('success_msg', 'You have successfully uploaded a document. We will be in touch.');
+                                response.redirect('/');
+                            } else {
+                                console.error("Could not get positive response from KYC importer. Perhaps the server isn't running or that database is down.");
+                                // TODO: Consider better feedback than an error message here.
+                            }
                         });
                     });
                     // client.putFile(newFileName, newFileName, function(err, res){
