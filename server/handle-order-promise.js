@@ -79,5 +79,6 @@ module.exports = function handleOrderPromise(orderPromise, output) {
         // In this case the unspent transaction doesn't correspond to an orderpromise in the table
         // TODO: Find a way to handle unspent outputs that don't correspond to any orders (ie. outgoing change outputs)
         console.error("An unspent was found for an address that doesn't have any order promises in the table.");
+        //
     }
 }
