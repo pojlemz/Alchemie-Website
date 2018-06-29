@@ -30,3 +30,9 @@ module.exports.getOwnedAddressByAddress = function(address, callback){
     var params = address;
     pgClient.runQuery(query, params, callback);
 }
+
+module.exports.getOwnedAddressByEmail = function(email, callback) {
+    var query = "SELECT * FROM ownedaddress WHERE email=$1";
+    var params = [email];
+    pgClient.runQueryMultiSelect(query, params, callback);
+}

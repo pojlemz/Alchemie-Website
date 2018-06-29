@@ -27,6 +27,7 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo, done) {
     // If the order is filled then we move it's status to filled and it is labelled rejected otherwise.
     const depositAddress = orderPromise.depositaddress;
     OrderPromise.getOrderPromiseAndProductsByDepositAddress(depositAddress, function(err, res){
+        // res should contain exactly one item
         var items = [];
         const transactionId = orderPromise.transactionid;
         for (var i = 0; i < res.length; i++){

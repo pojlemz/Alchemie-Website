@@ -41,7 +41,7 @@ module.exports = function handleOrderPromise(orderPromise, output) {
         const key = orderPromise.transactionid;
         lock.acquire(key, function(done) {
             if (status === "Unpaid" || status === "Paid") {
-                if (orderPromise.grandtotal * 100000000 <= value) {
+                if (orderPromise.grandtotal * 100000000 <= value) { // This checks to ensure that the user sent enough BTC
                     OrderPromise.setTransactionOutputByDepositAddress(address, output.id, function (err, res) {
                         // We can consider the order to be paid here since the value of the unspent is less than the total.
                         getBlockHeight(function (err, res) {

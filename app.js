@@ -45,13 +45,13 @@ var routeBuyTokens = require('./routes/buy-tokens');
 var routeSubmitYourInformation = require('./routes/submit-your-information');
 var routeKycUpload = require('./routes/kyc-upload');
 var routeInformationIsInReview = require('./routes/information-is-in-review');
-var routeKycApprove = require('./routes/kyc-approve');
-var routeKycDeny = require('./routes/kyc-deny');
+// var routeKycApprove = require('./routes/kyc-approve');
+// var routeKycDeny = require('./routes/kyc-deny');
 // var routeDeposit = require('./routes/deposit');
 // var routeWithdraw = require('./routes/withdraw');
-var routeWithdrawalAddressAdd = require('./routes/withdrawal-address-add');
-var routeWithdrawalAddressRemove = require('./routes/withdrawal-address-remove');
-var routeSubmitWithdrawal = require('./routes/submit-withdrawal');
+// var routeWithdrawalAddressAdd = require('./routes/withdrawal-address-add');
+// var routeWithdrawalAddressRemove = require('./routes/withdrawal-address-remove');
+// var routeSubmitWithdrawal = require('./routes/submit-withdrawal');
 var routeGetPrices = require('./routes/json-get-prices');
 var routeJsonLockTradesAndGetResponse = require('./routes/json-lock-trades-and-get-response');
 var routeJsonAddProductAddressToEmail = require('./routes/json-add-product-address-to-email')
@@ -98,7 +98,47 @@ if (process.env.NODE_ENV === 'production') {
         cookie: {httpOnly: true, secure: true}
     }));
 } else {
-    // Express Session
+    // Express Sessionvar express = require('express');
+// var router = express.Router();
+// var ForgottenPasswordLink = require('../models/forgotten-password-link');
+// var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
+// var host = require('../server/host');
+// var User = require('../models/user');
+// const HasBeenKyced = require("../models/has-been-kyced");
+// const DocumentInReview = require("../models/document-in-review");
+//
+// router.get('/kyc-deny',function(req, res) {
+//     // body parameters: key, password, code2fa
+//     var ipAddress = req.connection.remoteAddress;
+//     var desiredHostAddress = process.env.KYC_HOST;
+//     var email = req.query.email;
+//
+//     req.checkBody('email', 'Email required').notEmpty();
+//     req.checkBody('email', 'Email is not valid').isEmail();
+//     var errors = req.validationErrors();
+//
+//     if(errors){
+//         console.log(errors);
+//     } else {
+//         // Check that the IP address matches the IP contained in .env
+//         // Disable pending status for the address
+//         // Enable has-been-kyced for the address
+//         if (ipAddress === desiredHostAddress) {
+//             DocumentInReview.setIsDocumentInReviewByEmail(email, false, function (err, res) {
+//                 if (err) {
+//                     console.log(err);
+//                 }
+//                 HasBeenKyced.setHasBeenKycedByEmail(email, false, function (err, res) {
+//                     if (err) {
+//                         console.log(err);
+//                     }
+//                 });
+//             });
+//         }
+//     }
+// });
+//
+// module.exports = router;
     app.use(session({
         /*cookieName: 'session',*/
         /*duration: 30 * 60 * 1000,*/
@@ -184,13 +224,13 @@ app.use('/', routeBuyTokens);
 app.use('/', routeSubmitYourInformation);
 app.use('/', routeKycUpload);
 app.use('/', routeInformationIsInReview);
-app.use('/', routeKycApprove);
-app.use('/', routeKycDeny);
+// app.use('/', routeKycApprove);
+// app.use('/', routeKycDeny);
 // app.use('/', routeDeposit);
 // app.use('/', routeWithdraw);
-app.use('/', routeWithdrawalAddressAdd);
-app.use('/', routeWithdrawalAddressRemove);
-app.use('/', routeSubmitWithdrawal);
+// app.use('/', routeWithdrawalAddressAdd);
+// app.use('/', routeWithdrawalAddressRemove);
+// app.use('/', routeSubmitWithdrawal);
 app.use('/', routeGetPrices);
 // app.use('/', routeJsonLockTradesAndGetResponse);
 app.use('/', routeJsonAddProductAddressToEmail);
