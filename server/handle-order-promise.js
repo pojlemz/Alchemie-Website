@@ -4,6 +4,7 @@ const OrderPromise = require('../models/order-promise');
 
 var AsyncLock = require('async-lock');
 var lock = new AsyncLock();
+var reportErrorOnlyOnce = false;
 
 // ‌‌console.log(orderPromise)
 // ‌anonymous {
@@ -36,7 +37,7 @@ module.exports = function handleOrderPromise(orderPromise, output) {
     const blockHeight = output.blockHeight;
     const value = output.value;
     const address = output.address;
-    if (orderPromise !== null || typeof(orderPromise) !== 'undefined') {
+    if (orderPromise !== null && typeof(orderPromise) !== 'undefined') {
         const status = orderPromise.status;
         const key = orderPromise.transactionid;
         lock.acquire(key, function(done) {
@@ -78,5 +79,10 @@ module.exports = function handleOrderPromise(orderPromise, output) {
     } else {
         // In this case the unspent transaction doesn't correspond to an orderpromise in the table
         // TODO: Find a way to handle unspent outputs that don't correspond to any orders (ie. outgoing change outputs)
+        if (!reportErrorOnlyOnce){
+            console.warn("An unspent was found for an address that doesn't have any order promises in the table.");
+            reportErrorOnlyOnce = true;
+        }
+
     }
 }
