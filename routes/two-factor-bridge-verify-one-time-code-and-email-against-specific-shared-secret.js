@@ -5,9 +5,12 @@ var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 // Accepts an incoming request and then acts as a bridge between client side code and 2fa server
 
 // localhost:3000/verify-one-time-code-and-email-against-shared-secret?code=000000&sharedSecret=xe26kektvv
-router.get('/verify-one-time-code-and-email-against-specific-shared-secret', ensureAuthenticated, function(req, res){
+router.post('/two-factor-bridge-verify-one-time-code-and-email-against-specific-shared-secret', ensureAuthenticated, function(req, res){
     var response = res;
-    TwoFactorAuthenticator.verifyOneTimeCodeAndEmailAgainstSharedSecret(req.user.email, req.query.code, req.query.sharedSecret, function(err, res){
+    const email = req.user.email;
+    const code = req.body.code;
+    const sharedSecret = req.body.sharedSecret;
+    TwoFactorAuthenticator.verifyOneTimeCodeAndEmailAgainstSharedSecret(email, code, sharedSecret, function(err, res){
         if (err) {
             console.log(err); // Reports an error in case any have occurred.
         }

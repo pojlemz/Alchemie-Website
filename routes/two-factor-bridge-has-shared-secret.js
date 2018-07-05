@@ -5,9 +5,10 @@ var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 // Accepts an incoming request and then acts as a bridge between client side code and 2fa server
 
 // localhost:3000/two-factor-bridge-has-shared-secret
-router.get('/two-factor-bridge-has-shared-secret', ensureAuthenticated, function(req, res){
+router.post('/two-factor-bridge-has-shared-secret', ensureAuthenticated, function(req, res){
     var response = res;
-    TwoFactorAuthenticator.hasSharedSecret(req.user.email, function(err, res){
+    const email = req.user.email;
+    TwoFactorAuthenticator.hasSharedSecret(email, function(err, res){
         if (err) {
             console.log(err); // Reports an error in case any have occurred.
         }

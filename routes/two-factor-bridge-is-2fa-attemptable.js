@@ -6,9 +6,10 @@ var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 
 // Queries to see if user is locked out of attempting to sign into 2fa.
 // localhost:3000/is-2fa-attemptable
-router.get('/two-factor-bridge-is-2fa-attemptable', ensureAuthenticated, function(req, res){
+router.post('/two-factor-bridge-is-2fa-attemptable', ensureAuthenticated, function(req, res){
     var response = res;
-    TwoFactorAuthenticator.isAttemptable(req.user.email, function(err, res){
+    const email = req.user.email;
+    TwoFactorAuthenticator.isAttemptable(email, function(err, res){
         if (err) {
             console.log(err); // Reports an error in case any have occurred.
         }

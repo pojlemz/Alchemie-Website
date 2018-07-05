@@ -47,11 +47,10 @@ ControllerClick.prototype.addAddressToAccount = function(event){
 ControllerClick.prototype.enable2FA = function(event){
     var code2fa = $("#2faCode").val();
     var secret2fa = thirdparty.base32.decode($("#2faSecret").text());
-    var url = g_App.getAjaxUrlPrefix() + "/verify-one-time-code-and-email-against-specific-shared-secret?code="+code2fa+"&sharedSecret="+secret2fa;
-    $.ajax(url).done(function(msg) { // This calls the 2fa backend with the entered code verifying that it is valid against the shared secret.
+    // This calls the 2fa backend with the entered code verifying that it is valid against the shared secret.
+    $.post("/two-factor-bridge-verify-one-time-code-and-email-against-specific-shared-secret", {code: code2fa, sharedSecret: secret2fa}, function(msg) {
         if (msg) { // If the code is valid against this shared secret:
-            var url2 = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-set-shared-secret?code="+code2fa+"&sharedSecret="+secret2fa;
-            $.ajax(url2).done(function(msg) { // This sets the shared secret
+            $.post("/two-factor-bridge-set-shared-secret", {code: code2fa, sharedSecret: secret2fa}, function( msg ) {
                 if (msg) {
                     // Shared secret has been successfully updated so carry out UI actions to notify user
                     g_App.sendPostRequest('/login-shared-secret-set', {}, 'get');
@@ -59,22 +58,21 @@ ControllerClick.prototype.enable2FA = function(event){
                     // This should be unreachable code
                     console.error("Unable to set code for user because user probably already has a code.");
                 }
-            });
+            }, "json");
         } else {
             // If the code does not match the shared secret
             g_App.getViewUserMessages().showErrorForIncorrect2FASetupCode()
         }
-    });
+    }, "json");
 }
 
 ControllerClick.prototype.remove2FA = function(event){
-    var urlAttemptable = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-is-2fa-attemptable";
-    $.ajax(urlAttemptable).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    // var urlAttemptable = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-is-2fa-attemptable";
+    $.post("/two-factor-bridge-is-2fa-attemptable", {}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
             var code2fa = $("#2faCode").val();
-            var url = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-delete-shared-secret?code=" + code2fa;
             // @TODO: Add code here to see if 2FA is attemptable
-            $.ajax(url).done(function (msg) { // This calls the backend with the entered code verifying that it is valid against the shared secret.
+            $.post( "/two-factor-bridge-delete-shared-secret", {code: code2fa}, function (msg) { // This calls the backend with the entered code verifying that it is valid against the shared secret.
                 if (msg) { // If the code was successfully deleted
                     // Shared secret has been successfully deleted so carry out UI actions to notify user
                     g_App.sendPostRequest('/login-shared-secret-removed', {}, 'get');
@@ -82,11 +80,11 @@ ControllerClick.prototype.remove2FA = function(event){
                     // If the code does not match the shared secret then carry out UI actions to report that the code could not be deleted.
                     g_App.getViewUserMessages().showErrorForIncorrect2FARemovalCode();
                 }
-            });
+            }, "json");
         } else {
             g_App.getViewUserMessages().showErrorForTooManyAttemptsAt2FACode();
         }
-    });
+    }, "json");
 }
 
 ControllerClick.prototype.forgotYourPassword = function(event){
@@ -101,11 +99,9 @@ ControllerClick.prototype.newPassword = function(event){
 
     if (firstPassword === secondPassword){
         var email = $("#temporary-data-email").attr('associate');
-        var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret-for-specific-email?email="+email;
-        $.ajax(urlHas2FA).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        $.post("/two-factor-bridge-has-shared-secret-for-specific-email", {email: email}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
             if (msg) {
-                var url2FAIsAttemptable = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-is-2fa-attemptable-for-specific-email?email="+email;
-                $.ajax(url2FAIsAttemptable).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+                $.post("/two-factor-bridge-is-2fa-attemptable-for-specific-email", {email: email}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
                     if (msg) {
                         // 2 factor is enabled and not blocked so prompt the user to enter their code.
                         g_App.getViewModals().showModal("fn-password-change-2fa-modal");
@@ -113,13 +109,13 @@ ControllerClick.prototype.newPassword = function(event){
                         // This code is run if the user has attempted to put a 2FA code in too many times.
                         g_App.getViewModals().showModal("fn-2fa-not-attemptable");
                     }
-                });
+                }, "json");
             } else {
                 var passwordKey = $("#temporary-data-reset-password-link").val();
                 // 2 factor is disabled so submit request to server.
                 g_App.sendPostRequest('/submit-reset-password', {key: passwordKey, password: firstPassword});
             }
-        });
+        }, "json");
     } else {
         // Display an error message letting the user know that their passwords don't match
         g_App.getViewUserMessages().showErrorForMismatchingPasswords();
@@ -132,18 +128,17 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
     var secondPassword = $("#change-password-confirm-password").val();
 
     if (firstPassword === secondPassword){
-        // var email = $("#temporary-data-email").attr('associate');
+        var email = $("#temporary-data-email").attr('associate');
         // // TODO: Check that password reset link is valid.
         // var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret-for-specific-email?email="+email;
         // $.ajax(urlHas2FA).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         //     // TODO: Check that 2FA Code is valid
         //     if (msg) {
         var firstPassword = $("#change-password-new-password").val();
-        var passwordKey = $("#temporary-data-reset-password-link").val();
+        var passwordKey = $("#temporary-data-reset-password-link").attr('associate');
         var code2fa = $("#change-password-2fa-input").val();
         // 2 factor is disabled so submit request to server.
-        var url2FAIsValidCode = g_App.getAjaxUrlPrefix() + "/verify-one-time-code-and-email?code="+code2fa;
-        $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        $.post( "/two-factor-bridge-verify-one-time-code-and-email", {code: code2fa, email: email}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
             if (msg) {
                 // This code executed when the user successfully enters their code.
                 g_App.sendPostRequest('/submit-reset-password', {key: passwordKey, password: firstPassword, code2fa: code2fa});
@@ -151,7 +146,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
                 // This code is run when the user successfully enters their code.
                 g_App.getViewModals().showErrorForIncorrect2FACode("fn-2fa-not-attemptable");
             }
-        });
+        }, "json");
         //     } else {
         //         // 2 factor is disabled so submit request to server.
         //         g_App.sendPostRequest('/submit-reset-password', {key: passwordKey, password: firstPassword});
@@ -179,11 +174,9 @@ ControllerClick.prototype.fileRealUploadButton = function(event){
 
 ControllerClick.prototype.addWithdrawalAddress = function(event){
     // First we check that the entered password is the same as the confirmed password.
-    var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret";
-    $.ajax(urlHas2FA).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    $.post( "/two-factor-bridge-has-shared-secret", {}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
-            var url2FAIsAttemptable = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-is-2fa-attemptable";
-            $.ajax(url2FAIsAttemptable).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+            $.post("/two-factor-bridge-is-2fa-attemptable", {}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
                 if (msg) {
                     // 2 factor is enabled and not blocked so prompt the user to enter their code.
                     g_App.getViewModals().showModal("fn-add-withdrawal-address-2fa-modal");
@@ -191,7 +184,7 @@ ControllerClick.prototype.addWithdrawalAddress = function(event){
                     // This code is run if the user has attempted to put a 2FA code in too many times.
                     g_App.getViewModals().showModal("fn-2fa-not-attemptable");
                 }
-            });
+            }, "json");
         } else {
             // 2 factor is disabled so submit request to server.
             var address = $("#withdrawalAddressToAdd").val();
@@ -200,15 +193,14 @@ ControllerClick.prototype.addWithdrawalAddress = function(event){
                 g_App.getViewWithdrawalAddressAdd().handleAddWithdrawalMessage(msg);
             });
         }
-    });
+    }, "json");
 }
 
 ControllerClick.prototype.twoFactorAddWithdrawalAddress = function(event){
     var self = this;
     var code2fa = $("#add-withdrawal-address-2fa-input").val();
     // 2 factor is disabled so submit request to server.
-    var url2FAIsValidCode = g_App.getAjaxUrlPrefix() + "/verify-one-time-code-and-email?code="+code2fa;
-    $.ajax(url2FAIsValidCode).done(function(msg) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    $.post("/verify-one-time-code-and-email", {code: code2fa}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
             // This code executed when the user successfully enters their code.
             var address = $("#withdrawalAddressToAdd").val();
@@ -220,7 +212,7 @@ ControllerClick.prototype.twoFactorAddWithdrawalAddress = function(event){
             // This code is run when the user unsuccessfully enters their code.
             g_App.getViewUserMessages().showErrorForIncorrect2FACode("fn-2fa-not-attemptable");
         }
-    });
+    }, "json");
 }
 
 ControllerClick.prototype.selectWithdrawalAddress = function(event){
@@ -307,7 +299,7 @@ ControllerClick.prototype.beginOrder = function(event){
         img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress+"?amount="+grandTotal.toFixed(8)
         $('#DillonGageQRCode').children().remove();
         $('#DillonGageQRCode').append(img);
-    });
+    }, "json");
 }
 
 ControllerClick.prototype.confirmProductOrder = function(event){
@@ -440,5 +432,5 @@ ControllerClick.prototype.buyOne = function(event){
         img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress+"?amount="+grandTotal.toFixed(8)
         $('#DillonGageQRCode').children().remove();
         $('#DillonGageQRCode').append(img);
-    });
+    }, "json");
 }

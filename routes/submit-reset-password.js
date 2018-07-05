@@ -11,18 +11,21 @@ router.post('/submit-reset-password',function(req, res) {
     var request = req;
     var key = req.body.key;
     var password = req.body.password;
-    var passwordLink = host + "/reset-your-password?key=" + key;
     var code2fa = req.body.code2fa;
+    var passwordLink = host + "/reset-your-password?key=" + key;
 
     // Validation
     req.checkBody('key', 'Key required').notEmpty();
     req.checkBody('password', 'Password required').notEmpty();
 
     var errors = req.validationErrors();
-    if(errors) {
-        res.render('login',{
-            errors:errors
-        });
+    if (errors) {
+        console.error("Errors found");
+        for (var i = 0; i < errors.length; i++){
+            console.log(errors[i]);
+        }
+        request.flash('error_msg', "There was an error with the data you provided.");
+        response.redirect('/login');
     } else {
         if (typeof(code2fa) === 'undefined' || code2fa === null) {
             code2fa = "000000"; // I don't know how the 2fa server would handle an undefined input.
@@ -31,7 +34,7 @@ router.post('/submit-reset-password',function(req, res) {
             // get email or report invalid key
             if (res === null) {
                 request.flash('error_msg', "The link provided doesn't belong to any email address in our system.");
-                response.redirect('login');
+                response.redirect('/login');
             } else {
                 // @TODO: check for link expiry
                 var currentTime = new Date().getTime();
