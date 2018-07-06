@@ -3,7 +3,10 @@ var router = express.Router();
 var ForgottenPasswordLink = require('../models/forgotten-password-link');
 var host = require('../server/host');
 
-router.get('/reset-your-password',function(req, res) {
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
+router.get('/reset-your-password', function(req, res) {
     // start session variable containing the link (needed for next call)
     var key = req.query.key; // ie. dbe57232f67d5b365c7505ef5374716b81b528f1
     var passwordLink = host + '/reset-your-password?key='+key;

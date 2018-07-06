@@ -31,7 +31,8 @@ ViewProducts.prototype.getHtmlForProductInList = function(key, object){
 
 ViewProducts.prototype.populateProductList = function(){
     var self = this;
-    $.post("/get-products", {}, function( data ) {
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/get-products", {_csrf: csrfToken}, function( data ) {
         $(".fn-dillon-gage-product-list").empty();
         self._productList = data;
         var products = data;

@@ -4,6 +4,8 @@ var random2faKeyGenerator = require('../server/random-2fa-key-generator');
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 var base32 = require('thirty-two');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
 // Get Homepage
 router.get('/two-factor-options', ensureAuthenticated, function(req, res){
     var response = res;

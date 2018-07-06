@@ -10,6 +10,7 @@
     <p>This page allows you to setup two factor authentication.</p>
     <br/>
     <form method="post" action="/click-add-2fa">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <p>Scan this QR Code with Google Authenticator</p>
         <img src="{{qrImage}}"/>
         <br/>

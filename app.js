@@ -3,7 +3,7 @@ require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bodyParser = require('./server/body-parser');
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
@@ -14,6 +14,7 @@ const fileUpload = require('express-fileupload');
 const https = require('https');
 const fs = require('fs');
 const helmet = require('helmet');
+const csrfProtection = require('./server/csrf-protection');
 
 // Incoming web requests
 var routeIndex = require('./routes/index');
@@ -150,6 +151,7 @@ if (process.env.NODE_ENV === 'production') {
     }));
 }
 
+app.use(csrfProtection);
 // default options
 app.use(fileUpload());
 
@@ -185,6 +187,7 @@ app.use(function (req, res, next) {
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
   res.locals.user = req.user || null;
+  res.locals.csrfToken = req.csrfToken();
   res.locals.google_recaptcha_public = process.env.GOOGLE_RECAPTCHA_PUBLIC;
   next();
 });

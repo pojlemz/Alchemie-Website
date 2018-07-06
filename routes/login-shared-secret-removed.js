@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../server/passport');
 
-router.post('/login-shared-secret-removed',
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
+router.post('/login-shared-secret-removed',parseForm,
     passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login-shared-secret-removed',failureFlash: true}),
     function(req, res) {
         res.redirect('/');

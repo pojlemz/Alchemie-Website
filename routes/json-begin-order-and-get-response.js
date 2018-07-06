@@ -13,9 +13,12 @@ const HasBeenKyced = require("../models/has-been-kyced");
 // TODO: Ensure that the user has been kyced here.
 // TODO: Scan order to make sure that it only includes one item.
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 // TODO: Handle all postgres sql error cases.
 // TODO: Check that chosen product address is valid.
-router.post('/begin-order-and-get-response', ensureAuthenticated, function(req, res) {
+router.post('/begin-order-and-get-response',parseForm, ensureAuthenticated, function(req, res) {
     // TODO: What type of response are we going to get from this call?
     // TODO: Send back a response with the expiry time of the prices
     const response = res;

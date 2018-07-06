@@ -10,7 +10,10 @@ var secretKey = process.env.GOOGLE_RECAPTCHA;
 var ForgottenPasswordLinks = require('../models/forgotten-password-link');
 var User = require('../models/user');
 
-router.post('/forgotten-password-submitted',function(req, res) {
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
+router.post('/forgotten-password-submitted',parseForm,function(req, res) {
     req.checkBody('email', 'Email required').notEmpty();
     var errors = req.validationErrors();
     console.log(errors);

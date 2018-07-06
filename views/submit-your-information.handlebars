@@ -9,6 +9,7 @@
     <!--<h2 class="page-header">Dashboard</h2>-->
     <!-- <p>Enter addresses below that you wish to claim under the Alchemy umbrella.</p> -->
     <form action="/kyc-upload" class="dropzone css-dropzone" id="my-awesome-dropzone" encType="multipart/form-data" method="post">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <p class="css-heading-for-id-address">Please Fill In The Form Below</p>
         <p> Before we can mint gold tokens for you, it is necessary for you to provide us with some information about who you are. Please fill in the form below telling us about yourself so that we can validate your identity. </p>
         <div class="css-inputs-for-document-upload">

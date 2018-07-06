@@ -31,4 +31,12 @@ contract MetaCoin {
 	function getBalance(address addr) returns(uint) {
 		return balances[addr];
 	}
+
+	function mintAndSign () {
+
+	}
+
+	function mintAndCosign () {
+
+	}
 }

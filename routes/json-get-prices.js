@@ -4,9 +4,12 @@ var router = express.Router();
 const Price = require('../models/price');
 var pgClient = require('../models/pg-client');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 // Try the following line in the browser to test retrieval of owned addresses
 // http://localhost:3000/get-owned-addresses-by-email
-router.post('/get-prices', ensureAuthenticated, function(req, res){
+router.post('/get-prices',parseForm, ensureAuthenticated, function(req, res){
     // Ensure user is authenticated.
     var response = res;
     Price.getLatestPricesInBitcoin(function(err, res){

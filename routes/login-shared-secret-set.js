@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../server/passport');
 
-router.post('/login-shared-secret-set',
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
+router.post('/login-shared-secret-set',parseForm,
     passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login-shared-secret-set',failureFlash: true}),
     function(req, res) {
         res.redirect('/');

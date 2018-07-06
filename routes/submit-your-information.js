@@ -4,6 +4,9 @@ const requestIp = require('request-ip');
 const HasBeenKyced = require("../models/has-been-kyced");
 const DocumentInReview = require('../models/document-in-review');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 // Get Homepage
 router.get('/submit-your-information', ensureAuthenticated, function(req, res){
     var response = res;

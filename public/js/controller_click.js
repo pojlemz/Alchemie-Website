@@ -26,7 +26,8 @@ ControllerClick.prototype.resetClickControllerForSelector = function(selector){
 
 ControllerClick.prototype.addAddressToAccount = function(event){
     var addressToAddToAccount = $("#addressToAddToAccount").val();
-    $.post("/add-owned-address-to-email", { address: addressToAddToAccount}, function( msg ) {
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/add-owned-address-to-email", { address: addressToAddToAccount, _csrf: csrfToken}, function( msg ) {
         // Try the following line of code in the Javascript console:
         // thirdparty.web3.utils.isAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
         if (thirdparty.web3.utils.isAddress(addressToAddToAccount)) {
@@ -48,9 +49,10 @@ ControllerClick.prototype.enable2FA = function(event){
     var code2fa = $("#2faCode").val();
     var secret2fa = thirdparty.base32.decode($("#2faSecret").text());
     // This calls the 2fa backend with the entered code verifying that it is valid against the shared secret.
-    $.post("/two-factor-bridge-verify-one-time-code-and-email-against-specific-shared-secret", {code: code2fa, sharedSecret: secret2fa}, function(msg) {
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/two-factor-bridge-verify-one-time-code-and-email-against-specific-shared-secret", {code: code2fa, sharedSecret: secret2fa, _csrf: csrfToken}, function(msg) {
         if (msg) { // If the code is valid against this shared secret:
-            $.post("/two-factor-bridge-set-shared-secret", {code: code2fa, sharedSecret: secret2fa}, function( msg ) {
+            $.post("/two-factor-bridge-set-shared-secret", {code: code2fa, sharedSecret: secret2fa, _csrf: csrfToken}, function( msg ) {
                 if (msg) {
                     // Shared secret has been successfully updated so carry out UI actions to notify user
                     g_App.sendPostRequest('/login-shared-secret-set', {}, 'get');
@@ -68,11 +70,12 @@ ControllerClick.prototype.enable2FA = function(event){
 
 ControllerClick.prototype.remove2FA = function(event){
     // var urlAttemptable = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-is-2fa-attemptable";
-    $.post("/two-factor-bridge-is-2fa-attemptable", {}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/two-factor-bridge-is-2fa-attemptable", {_csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
             var code2fa = $("#2faCode").val();
             // @TODO: Add code here to see if 2FA is attemptable
-            $.post( "/two-factor-bridge-delete-shared-secret", {code: code2fa}, function (msg) { // This calls the backend with the entered code verifying that it is valid against the shared secret.
+            $.post( "/two-factor-bridge-delete-shared-secret", {code: code2fa, _csrf: csrfToken}, function (msg) { // This calls the backend with the entered code verifying that it is valid against the shared secret.
                 if (msg) { // If the code was successfully deleted
                     // Shared secret has been successfully deleted so carry out UI actions to notify user
                     g_App.sendPostRequest('/login-shared-secret-removed', {}, 'get');
@@ -99,9 +102,10 @@ ControllerClick.prototype.newPassword = function(event){
 
     if (firstPassword === secondPassword){
         var email = $("#temporary-data-email").attr('associate');
-        $.post("/two-factor-bridge-has-shared-secret-for-specific-email", {email: email}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        var csrfToken = $('#csrf').attr('associate');
+        $.post("/two-factor-bridge-has-shared-secret-for-specific-email", {email: email, _csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
             if (msg) {
-                $.post("/two-factor-bridge-is-2fa-attemptable-for-specific-email", {email: email}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+                $.post("/two-factor-bridge-is-2fa-attemptable-for-specific-email", {email: email, _csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
                     if (msg) {
                         // 2 factor is enabled and not blocked so prompt the user to enter their code.
                         g_App.getViewModals().showModal("fn-password-change-2fa-modal");
@@ -126,7 +130,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
     // First we check that the entered password is the same as the confirmed password.
     var firstPassword = $("#change-password-new-password").val();
     var secondPassword = $("#change-password-confirm-password").val();
-
+    var csrfToken = $('#csrf').attr('associate');
     if (firstPassword === secondPassword){
         var email = $("#temporary-data-email").attr('associate');
         // // TODO: Check that password reset link is valid.
@@ -138,7 +142,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
         var passwordKey = $("#temporary-data-reset-password-link").attr('associate');
         var code2fa = $("#change-password-2fa-input").val();
         // 2 factor is disabled so submit request to server.
-        $.post( "/two-factor-bridge-verify-one-time-code-and-email", {code: code2fa, email: email}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+        $.post( "/two-factor-bridge-verify-one-time-code-and-email", {code: code2fa, email: email, _csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
             if (msg) {
                 // This code executed when the user successfully enters their code.
                 g_App.sendPostRequest('/submit-reset-password', {key: passwordKey, password: firstPassword, code2fa: code2fa});
@@ -173,10 +177,11 @@ ControllerClick.prototype.fileRealUploadButton = function(event){
 }
 
 ControllerClick.prototype.addWithdrawalAddress = function(event){
+    var csrfToken = $('#csrf').attr('associate');
     // First we check that the entered password is the same as the confirmed password.
-    $.post( "/two-factor-bridge-has-shared-secret", {}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    $.post( "/two-factor-bridge-has-shared-secret", {_csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
-            $.post("/two-factor-bridge-is-2fa-attemptable", {}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+            $.post("/two-factor-bridge-is-2fa-attemptable", {_csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
                 if (msg) {
                     // 2 factor is enabled and not blocked so prompt the user to enter their code.
                     g_App.getViewModals().showModal("fn-add-withdrawal-address-2fa-modal");
@@ -199,8 +204,9 @@ ControllerClick.prototype.addWithdrawalAddress = function(event){
 ControllerClick.prototype.twoFactorAddWithdrawalAddress = function(event){
     var self = this;
     var code2fa = $("#add-withdrawal-address-2fa-input").val();
+    var csrfToken = $('#csrf').attr('associate');
     // 2 factor is disabled so submit request to server.
-    $.post("/verify-one-time-code-and-email", {code: code2fa}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+    $.post("/verify-one-time-code-and-email", {code: code2fa, _csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
         if (msg) {
             // This code executed when the user successfully enters their code.
             var address = $("#withdrawalAddressToAdd").val();
@@ -251,7 +257,8 @@ ControllerClick.prototype.submitWithdrawal = function(event){
     //         self.closeModals();
     //     }
     // });
-    $.post( "/submit-withdrawal", { address: address, amount: amount }, function( data ) {
+    var csrfToken = $('#csrf').attr('associate');
+    $.post( "/submit-withdrawal", { address: address, amount: amount, _csrf: csrfToken}, function( data ) {
     }, "json");
 }
 
@@ -273,7 +280,8 @@ ControllerClick.prototype.beginOrder = function(event){
         pricesAsDict[prices[i]['instrument']] = prices[i];
     }
     g_App.getViewProducts().populateProductListInModal(Object.keys(quantities));
-    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities), _csrf: csrfToken}, function( data ) {
         console.log(data);
         // The following block of code fills the numerical parts of the modal
         var keys = Object.keys(quantities);
@@ -363,7 +371,8 @@ ControllerClick.prototype.addProductAddressToAccount = function(event) {
     // Try the following line of code in the Javascript console:
     // thirdparty.web3.utils.isAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
     if (thirdparty.web3Utils.isAddress(addressToAddToAccount)) {
-        $.post("/add-product-address-to-email", { address: addressToAddToAccount}, function( msg ) {
+        var csrfToken = $('#csrf').attr('associate');
+        $.post("/add-product-address-to-email", { address: addressToAddToAccount, _csrf: csrfToken}, function( msg ) {
             // console.log(JSON.stringify(msg)); // This line of code produces a message like the following:
             // {"response":"failure","email":null,"address":null}
             if (msg.response === 'failure') { // If address is then report an error in the view.
@@ -406,7 +415,8 @@ ControllerClick.prototype.buyOne = function(event){
         pricesAsDict[prices[i]['instrument']] = prices[i];
     }
     g_App.getViewProducts().populateProductListInModal(Object.keys(quantities));
-    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities)}, function( data ) {
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities), _csrf: csrfToken}, function( data ) {
         console.log(data);
         // The following block of code fills the numerical parts of the modal
         var keys = Object.keys(quantities);

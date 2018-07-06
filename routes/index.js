@@ -2,15 +2,15 @@ var express = require('express');
 var router = express.Router();
 var requestIp = require('request-ip');
 
-const csrf = require('../server/csrf');
-const parseForm = require('../server/parse-form');
-
 const BitgoAddress = require('../models/bitgo-address');
 const BitGoJS = require('bitgo');
 
 const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.BITGO_ACCESS_TOKEN});
 const walletId = process.env.WALLET_ID;
 const coinType = process.env.BITCOIN_NETWORK;
+
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){

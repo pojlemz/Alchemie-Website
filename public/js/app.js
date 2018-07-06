@@ -82,6 +82,13 @@ App.prototype.sendPostRequest = function(path, params, method) {
             form.appendChild(hiddenField);
         }
     }
+    // Create a hidden field for the cross site request forgery tokens
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "_csrf");
+    hiddenField.setAttribute("value",$('#csrf').attr('associate'));
+    form.appendChild(hiddenField);
+
     document.body.appendChild(form);
     form.submit();
 }

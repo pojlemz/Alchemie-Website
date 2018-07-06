@@ -4,6 +4,9 @@ var router = express.Router();
 var User = require('../models/user');
 var PendingUser = require('../models/pending-user');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 router.get('/complete-registration', function(req, res){
     var randomHash = req.query.key;
     console.log('Success entering complete-registration route');

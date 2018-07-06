@@ -6,7 +6,8 @@ function ViewProductPrices(){
 
 ViewProductPrices.prototype.initialize = function(){
     var fetchPricesAndUpdate = function(){
-        $.post( "/get-prices", {}, function( data ) {
+        var csrfToken = $('#csrf').attr('associate');
+        $.post( "/get-prices", {'_csrf': csrfToken}, function( data ) {
             if (data.response === 'error') {
 
                 g_App.getViewProductPrices().setIsPriceAvailable(false);

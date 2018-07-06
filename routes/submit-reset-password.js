@@ -5,7 +5,10 @@ var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 var host = require('../server/host');
 var User = require('../models/user');
 
-router.post('/submit-reset-password',function(req, res) {
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
+router.post('/submit-reset-password',parseForm, function(req, res) {
     // body parameters: key, password, code2fa
     var response = res;
     var request = req;

@@ -13,6 +13,8 @@ const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToke
 const walletId = process.env.WALLET_ID;
 const coinType = process.env.BITCOIN_NETWORK;
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
 // Get Homepage
 router.get('/webhook-approve-withdrawal', ensureAuthenticated, function(req, res){
     console.log("Request:");

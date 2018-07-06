@@ -2,13 +2,16 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 var router = express.Router();
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 // @NOTE: For encoding and decoding filenames we use
 // https://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
 
 // default options
 router.use(fileUpload());
 
-router.post('/kyc-upload', function(req, res) {
+router.post('/kyc-upload',parseForm, function(req, res) {
     if (!req.files)
         return res.status(400).send('No uploads were uploaded.');
 

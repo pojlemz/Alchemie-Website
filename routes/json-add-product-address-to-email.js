@@ -4,9 +4,12 @@ var router = express.Router();
 var pgClient = require('../models/pg-client');
 const web3Utils = require('web3-utils');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 // Try the following line in the browser to test retrieval of owned addresses
 // http://localhost:3000/add-owned-address-to-email?address=0x0000000000000000000000000000000000000000000000000
-router.post('/add-product-address-to-email', ensureAuthenticated, function(req, res){
+router.post('/add-product-address-to-email',parseForm, ensureAuthenticated, function(req, res){
     // Ensure user is authenticated.
     if (web3Utils.isAddress(req.body.address)) {
         var response = res;

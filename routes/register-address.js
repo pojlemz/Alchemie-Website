@@ -1,4 +1,8 @@
 // Get Homepage
+
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 router.get('/register-address', ensureAuthenticated, function(req, res){
     res.render('index');
 });

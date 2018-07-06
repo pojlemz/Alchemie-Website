@@ -28,6 +28,9 @@ const uploadToS3 = require('../server/upload-to-s3');
 const util = require('util');
 var request = require('request');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
+
 // const knox = require('knox');
 
 // var client = knox.createClient({
@@ -37,7 +40,7 @@ var request = require('request');
 // });
 
 // This route is entered when you click the 'Upload File' button.
-router.post('/kyc-upload', ensureAuthenticated, function(req, res) {
+router.post('/kyc-upload',parseForm, ensureAuthenticated, function(req, res) {
     if (req.user.email){
         var response = res;
         DocumentInReview.getIsDocumentInReviewByEmail(req.user.email, function(err, res){

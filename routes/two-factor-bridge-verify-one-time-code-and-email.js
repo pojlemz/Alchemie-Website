@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 
+const csrfProtection = require('../server/csrf-protection');
+const parseForm = require('../server/parse-form');
 // Accepts an incoming request and then acts as a bridge between client side code and 2fa server
 
 // localhost:3000/verify-one-time-code-and-email?code=000000
-router.post('/two-factor-bridge-verify-one-time-code-and-email', function(req, res){
+router.post('/two-factor-bridge-verify-one-time-code-and-email',parseForm, function(req, res){
     var response = res;
     const email = req.body.email;
     const code = req.body.code;
