@@ -16,6 +16,7 @@ contract Alchemy is EIP20Interface {
     mapping (bytes32 => bool) m_signedConfirmationNumbers; // this variable is used to approve confirmation numbers by the signer
     mapping (bytes32 => bool) m_cosignedConfirmationNumbers; // this variable is used to approve confirmation numbers by the cosigner
     mapping (bytes32 => address) m_mintConfirmationRecipient; // A mapping from confirmations to recipients
+    mapping (bytes32 => bytes32) m_confirmationToProductType; // A mapping from confirmations to product types
 
     mapping (bytes32 => mapping(address => uint256)) m_balance // For each confirmation # and address, this is a balance (product owned)
 
@@ -43,10 +44,13 @@ contract Alchemy is EIP20Interface {
         }
     }
 
-    function mintAndSign(bytes32 _confirmationNumber, address _recipient) public { // Signs and mints if cosigned as well
+    // Note: As soon as we both sign and cosign a confirmation number then minting occurs
+
+    function mintAndSign(bytes32 _confirmationNumber, address _recipient, bytes32 _productType) public { // Signs and mints if cosigned as well
         if (!m_signedConfirmationNumbers[_confirmationNumber]) { // If confirmation number has not been signed yet.
             m_signedConfirmationNumbers[_confirmationNumber] = true; // Sign this confirmation number.
             m_mintConfirmationRecipient[_confirmationNumber] = _recipient; // Sets the recipient of this confirmation number.
+            m_confirmationToProductType[_confirmationNumber] = _productType;
             if (m_cosignedConfirmationNumbers[_confirmationNumber]) { // If confirmation number has been cosigned.
                 mint(_confirmationNumber, _recipient); // Mint one unit of tokens for confirmation number and recipient.
             }
@@ -62,8 +66,8 @@ contract Alchemy is EIP20Interface {
         }
     }
 
-    function mint(bytes32 _confirmationNumber, address _recipient) internal {
-        m_balance(_confirmationNumber, _recipient) = 1000000000000000000;
+    function mint(bytes32 _confirmationNumber, address _recipient) internal { // Mints a fresh balance
+        m_balance[_confirmationNumber][_recipient] = 1000000000000000000; // Mint a fresh balance of tokens for the product.
     }
 
     // uint256 constant private MAX_UINT256 = 2**256 - 1;
@@ -142,24 +146,5 @@ contract Alchemy is EIP20Interface {
             }
         }
     }
-
-    // This function enables a way for users to provide 2 of 3 style votes to
-    function voteToReassignAdministrator(uint8 _votingAdministratorType, uint8 _delegateAdministratorType, address _addressVote) {
-        if (msg.sender == administrator[_votingAdministratorType]) {
-            uint8 totalVotes = 0;
-            administratorVote[_votingAdministratorType][_delegateAdministratorType] = _addressVote;
-            if (administratorVote[0][_delegateAdministratorType] == _addressVote){
-                totalVotes++;
-            }
-            if (administratorVote[1][_delegateAdministratorType] == _addressVote){
-                totalVotes++;
-            }
-            if (administratorVote[2][_delegateAdministratorType] == _addressVote){
-                totalVotes++;
-            }
-            if (totalVotes >= 2){
-                administrator[_delegateAdministratorType] = _addressVote;
-            }
-        }
-    }*/
+    */
 }

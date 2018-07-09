@@ -148,7 +148,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
                 g_App.sendPostRequest('/submit-reset-password', {key: passwordKey, password: firstPassword, code2fa: code2fa});
             } else {
                 // This code is run when the user successfully enters their code.
-                g_App.getViewModals().showErrorForIncorrect2FACode("fn-2fa-not-attemptable");
+                g_App.getViewModals().showErrorMessageInModal("fn-password-change-2fa-modal", "The code you entered is incorrect.");
             }
         }, "json");
         //     } else {
@@ -159,7 +159,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){
     } else {
         // Display an error message letting the user know that their passwords don't match
         // This line of code should never be executed.
-        g_App.getViewUserMessages().showErrorForMismatchingPasswords();
+        g_App.getViewModals().showErrorMessageInModal("fn-password-change-2fa-modal", "Your passwords don't match.");
     }
 }
 
