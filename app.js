@@ -192,12 +192,12 @@ app.use('/', routeJsonAddProductAddressToEmail);
 app.use('/', routeJsonBeginOrderAndGetResponse);
 app.use('/', routeJsonGetProducts);
 
+// Runs server side code on various time intervals.
 require('./server/server-interval-5-seconds');
 // require('./server/server-interval-30-seconds');
 // require('./server/server-interval-5-minutes');
 
-// This segment of code is concerned with setting up the actual server
-// Set Port
+// This segment of code is concerned with setting up the actual server to serve the 'app'
 if (process.env.NODE_ENV !== 'production') { // If the node environment is 'production'
     app.set('port', (process.env.PORT || 3000)); // Set port environment variable to specific value
     app.listen(app.get('port'), function(){ // Allow app to listen on that port
