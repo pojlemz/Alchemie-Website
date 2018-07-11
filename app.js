@@ -1,5 +1,6 @@
-require('dotenv').config();
+require('dotenv').config(); // This reads the .env file in the root directory of the project and uses its values.
 
+// Adding different modules to the project
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -63,12 +64,12 @@ var os = require("os");
 var RateLimit = require('express-rate-limit');
 
 // Init App
-var app = express();
+var app = express(); // I
 
 // View Engine
-app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout:'layout'}));
-app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views')); // Set handlebars views to correspond to the views folder
+app.engine('handlebars', exphbs({defaultLayout:'layout'})); // Part of setting engine to handlebars
+app.set('view engine', 'handlebars'); // Set the view engine to handlebars
 
 // Attach the rate limiter middleware
 var limiter = new RateLimit({
@@ -79,88 +80,43 @@ var limiter = new RateLimit({
 app.use(limiter); //  apply to all requests
 
 app.use(helmet({ // Parse the http headers for security reasons
-    frameguard: {action: 'deny'}
+    frameguard: {action: 'deny'} // Use a deny
 }));
 
 // BodyParser Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.json()); // Middleware for parsing the body of requests
+app.use(bodyParser.urlencoded({ extended: false })); // Middleware for encoding urls
+app.use(cookieParser()); // Middleware for parsing cookies
 
 // Set Static Folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // Adds the public folder to the front end
 
-if (process.env.NODE_ENV === 'production') {
-    // Express Session
-    app.use(session({
-        secret: process.env.SESSION_SECRET,
+if (process.env.NODE_ENV === 'production') { // If we are running the production version of the app
+    app.use(session({ // Use a session that saves the following information
+        secret: process.env.SESSION_SECRET, // Session secret
         saveUninitialized: true,
-        resave: true,
-        cookie: {httpOnly: true, secure: true}
+        resave: true, // resave
+        cookie: {httpOnly: true, secure: true} // cookie security
     }));
-} else {
-    // Express Sessionvar express = require('express');
-// var router = express.Router();
-// var ForgottenPasswordLink = require('../models/forgotten-password-link');
-// var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
-// var host = require('../server/host');
-// var User = require('../models/user');
-// const HasBeenKyced = require("../models/has-been-kyced");
-// const DocumentInReview = require("../models/document-in-review");
-//
-// router.get('/kyc-deny',function(req, res) {
-//     // body parameters: key, password, code2fa
-//     var ipAddress = req.connection.remoteAddress;
-//     var desiredHostAddress = process.env.KYC_HOST;
-//     var email = req.query.email;
-//
-//     req.checkBody('email', 'Email required').notEmpty();
-//     req.checkBody('email', 'Email is not valid').isEmail();
-//     var errors = req.validationErrors();
-//
-//     if(errors){
-//         console.log(errors);
-//     } else {
-//         // Check that the IP address matches the IP contained in .env
-//         // Disable pending status for the address
-//         // Enable has-been-kyced for the address
-//         if (ipAddress === desiredHostAddress) {
-//             DocumentInReview.setIsDocumentInReviewByEmail(email, false, function (err, res) {
-//                 if (err) {
-//                     console.log(err);
-//                 }
-//                 HasBeenKyced.setHasBeenKycedByEmail(email, false, function (err, res) {
-//                     if (err) {
-//                         console.log(err);
-//                     }
-//                 });
-//             });
-//         }
-//     }
-// });
-//
-// module.exports = router;
-    app.use(session({
-        /*cookieName: 'session',*/
-        /*duration: 30 * 60 * 1000,*/
-        /*activeDuration: 5 * 60 * 1000,*/
-        secret: process.env.SESSION_SECRET,
+} else { // If we are running the development version of the app
+    app.use(session({  // Use a session that saves the following information
+        secret: process.env.SESSION_SECRET, // Session secret
         saveUninitialized: true,
         resave: true,
-        cookie: {httpOnly: true, secure: false}
+        cookie: {httpOnly: true, secure: false} // Cookie security set to false since website fails if it is not
     }));
 }
 
-app.use(csrfProtection);
+app.use(csrfProtection); // Use the cross site request forgery protection middleware
 // default options
-app.use(fileUpload());
+app.use(fileUpload()); // Use the file upload middleware
 
 // Passport init
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); // Use an initialized version of passport (passport is for validating logins)
+app.use(passport.session()); // Use passport sessions
 
 // Express Validator
-app.use(expressValidator({
+app.use(expressValidator({ // Express validator validates input on the body/query of post/get requests
   errorFormatter: function(param, msg, value) {
       var namespace = param.split('.')
       , root    = namespace.shift()
@@ -178,25 +134,21 @@ app.use(expressValidator({
 }));
 
 // Connect Flash
-app.use(flash());
+app.use(flash()); // Use the flash middleware to send messages back to the user
 
 // Global Vars
 app.use(function (req, res, next) {
-  res.locals.host = host;
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  res.locals.user = req.user || null;
-  res.locals.csrfToken = req.csrfToken();
-  res.locals.google_recaptcha_public = process.env.GOOGLE_RECAPTCHA_PUBLIC;
-  next();
+  res.locals.host = host; // Set the host variable in handlebars view
+  res.locals.success_msg = req.flash('success_msg'); // Set local variable success_msg to display in handlebars view
+  res.locals.error_msg = req.flash('error_msg'); // Set local variable error_msg to display in handlebars view
+  res.locals.error = req.flash('error'); // Set the error variable to display in handlebars view
+  res.locals.user = req.user || null; // Set the user variable to the email of the user that is logged in
+  res.locals.csrfToken = req.csrfToken(); // Set the cross site request forgery token in the view to be included in all post requests
+  res.locals.google_recaptcha_public = process.env.GOOGLE_RECAPTCHA_PUBLIC; // Set the view so that Google Related front end knows what api key to use to get captchas
+  next(); // Call the next function in the list of arguments
 });
 
-// app.use(function(req, res, next) {
-//     var clientIp = requestIp.getClientIp(req); // on localhost > 127.0.0.1
-//     next();
-// });
-
+// Get app to use all routes defined earlier
 app.use('/', routeIndex);
 // app.use('/users', users); // old code
 app.use('/', routeUsers);
@@ -241,24 +193,25 @@ app.use('/', routeJsonBeginOrderAndGetResponse);
 app.use('/', routeJsonGetProducts);
 
 require('./server/server-interval-5-seconds');
-require('./server/server-interval-30-seconds');
-require('./server/server-interval-5-minutes');
+// require('./server/server-interval-30-seconds');
+// require('./server/server-interval-5-minutes');
 
+// This segment of code is concerned with setting up the actual server
 // Set Port
-if (process.env.NODE_ENV !== 'production') {
-    app.set('port', (process.env.PORT || 3000));
-    app.listen(app.get('port'), function(){
-        console.log('Server started on port '+app.get('port'));
+if (process.env.NODE_ENV !== 'production') { // If the node environment is 'production'
+    app.set('port', (process.env.PORT || 3000)); // Set port environment variable to specific value
+    app.listen(app.get('port'), function(){ // Allow app to listen on that port
+        console.log('Server started on port '+app.get('port')); // Message displayed when server begins listening
     });
-} else {
-    app.set('port', (process.env.PORT || 3000));
-    var sslPath = process.env.SSL_PATH; // '/etc/letsencrypt/live/yourdomain.example.com/';
-    var options = {
-        key: fs.readFileSync(sslPath + 'privkey.pem'),
-        cert: fs.readFileSync(sslPath + 'fullchain.pem')
+} else { // If node environment variable is development
+    app.set('port', (process.env.PORT || 3000)); // Set port environment variable to specific value
+    var sslPath = process.env.SSL_PATH; // On your filesystem, this is where your security certificate is. ie. '/etc/letsencrypt/live/yourdomain.example.com/';
+    var options = { // Set options for where SSL key and SSL certificate will be stored.
+        key: fs.readFileSync(sslPath + 'privkey.pem'), // This is the SSL key
+        cert: fs.readFileSync(sslPath + 'fullchain.pem') // This is the SSL certificate
     };
-    const server = https.createServer(options, app);
-    server.listen(app.get('port'), function(){
-        console.log('Server started on port '+app.get('port'));
+    const server = https.createServer(options, app); // This is the server variable that we set to an https server
+    server.listen(app.get('port'), function(){ // This is where we tell the server to begin listening on the environment variable 'port'
+        console.log('Server started on port '+app.get('port')); // Message displayed when server begins listening.
     });
 }
