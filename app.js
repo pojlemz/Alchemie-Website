@@ -193,7 +193,7 @@ app.use('/', routeJsonBeginOrderAndGetResponse);
 app.use('/', routeJsonGetProducts);
 
 // Runs server side code on various time intervals.
-require('./server/server-interval-5-seconds');
+require('./server/server-interval-5-seconds'); // This includes code that is triggered to run every 5 minutes.
 // require('./server/server-interval-30-seconds');
 // require('./server/server-interval-5-minutes');
 
