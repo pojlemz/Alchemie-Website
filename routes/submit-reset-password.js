@@ -5,7 +5,6 @@ var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 var host = require('../server/host');
 var User = require('../models/user');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
 
 router.post('/submit-reset-password',parseForm, function(req, res) {

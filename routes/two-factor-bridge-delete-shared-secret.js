@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 // Accepts an incoming request and then acts as a bridge between client side code and 2fa server
 
 // localhost:3000/two-factor-bridge-delete-shared-secret?code=000000
@@ -18,14 +18,5 @@ router.post('/two-factor-bridge-delete-shared-secret',parseForm, ensureAuthentic
         response.send(res); // Sends the json response back to the client endpoint
     });
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
-}
 
 module.exports = router;

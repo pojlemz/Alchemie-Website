@@ -4,8 +4,7 @@ const requestIp = require('request-ip');
 const HasBeenKyced = require("../models/has-been-kyced");
 const DocumentInReview = require('../models/document-in-review');
 
-const csrfProtection = require('../server/csrf-protection');
-const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // Get Homepage
 router.get('/submit-your-information', ensureAuthenticated, function(req, res){
@@ -24,14 +23,5 @@ router.get('/submit-your-information', ensureAuthenticated, function(req, res){
         }
     });
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
-}
 
 module.exports = router;

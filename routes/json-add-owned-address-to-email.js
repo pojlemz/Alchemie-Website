@@ -4,8 +4,8 @@ var router = express.Router();
 var pgClient = require('../models/pg-client');
 var web3 = require('web3');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // Try the following line in the browser to test retrieval of owned addresses
 // http://localhost:3000/add-owned-address-to-email?address=0x0000000000000000000000000000000000000000000000000
@@ -54,13 +54,5 @@ router.post('/add-owned-address-to-email',parseForm, ensureAuthenticated, functi
     //     res.send(JSON.stringify({response: "failure", email: null, address: null}));
     // }
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        res.send('You are not logged in.');
-    }
-}
 
 module.exports = router;

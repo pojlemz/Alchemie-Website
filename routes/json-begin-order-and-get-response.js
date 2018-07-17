@@ -13,8 +13,8 @@ const HasBeenKyced = require("../models/has-been-kyced");
 // TODO: Ensure that the user has been kyced here.
 // TODO: Scan order to make sure that it only includes one item.
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // TODO: Handle all postgres sql error cases.
 // TODO: Check that chosen product address is valid.
@@ -140,15 +140,6 @@ router.post('/begin-order-and-get-response',parseForm, ensureAuthenticated, func
         console.error("This order should include exactly one product, but for some reason it doesn't.")
     }
 });
-
-function ensureAuthenticated(req, res, next){
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
-}
 
 module.exports = router;
 

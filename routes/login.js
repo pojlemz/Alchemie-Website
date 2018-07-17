@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../server/passport');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+
 
 // Login
 // router.post('/login', function(req, res) {
@@ -18,7 +18,7 @@ router.post('/login',parseForm,
     //res.redirect('/');
 );
 
-router.get('/login',csrfProtection, function(req, res){
+router.get('/login', function(req, res){
     res.render('login');
 });
 

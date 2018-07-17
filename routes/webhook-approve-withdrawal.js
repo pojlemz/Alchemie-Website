@@ -13,8 +13,8 @@ const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToke
 const walletId = process.env.WALLET_ID;
 const coinType = process.env.BITCOIN_NETWORK;
 
-const csrfProtection = require('../server/csrf-protection');
-const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
+
 // Get Homepage
 router.get('/webhook-approve-withdrawal', ensureAuthenticated, function(req, res){
     console.log("Request:");
@@ -22,14 +22,5 @@ router.get('/webhook-approve-withdrawal', ensureAuthenticated, function(req, res
     console.log("Result:")
     console.log(res);
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
-}
 
 module.exports = router;

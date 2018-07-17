@@ -4,8 +4,8 @@ var router = express.Router();
 const Price = require('../models/price');
 var pgClient = require('../models/pg-client');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // Try the following line in the browser to test retrieval of owned addresses
 // http://localhost:3000/get-owned-addresses-by-email
@@ -22,13 +22,5 @@ router.post('/get-prices',parseForm, ensureAuthenticated, function(req, res){
         }
     });
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        res.send('You are not logged in.');
-    }
-}
 
 module.exports = router;

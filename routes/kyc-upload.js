@@ -28,8 +28,8 @@ const uploadToS3 = require('../server/upload-to-s3');
 const util = require('util');
 var request = require('request');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // const knox = require('knox');
 
@@ -128,15 +128,6 @@ function createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, ra
             });
         })
     });
-}
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
 }
 
 // function getFilesizeInBytes(filename) {

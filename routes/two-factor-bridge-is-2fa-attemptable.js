@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 // Accepts an incoming request and then acts as a bridge between client side code and 2fa server
 
 // Queries to see if user is locked out of attempting to sign into 2fa.
@@ -18,14 +18,5 @@ router.post('/two-factor-bridge-is-2fa-attemptable',parseForm, ensureAuthenticat
         response.send(res);
     });
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
-}
 
 module.exports = router;

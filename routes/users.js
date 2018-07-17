@@ -10,10 +10,10 @@ var request = require('request');
 
 var secretKey = process.env.GOOGLE_RECAPTCHA;
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
+
 // Register User
-router.post('/register',parseForm, function(req, res){
+router.post('/register', parseForm, function(req, res){
 	var name = req.body.name;
 	var email = req.body.email;
 	var password = req.body.password;

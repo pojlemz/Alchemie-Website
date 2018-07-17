@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../server/passport');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
 
 router.post('/login-shared-secret-set',parseForm,

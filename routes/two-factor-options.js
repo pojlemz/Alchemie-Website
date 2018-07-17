@@ -4,8 +4,8 @@ var random2faKeyGenerator = require('../server/random-2fa-key-generator');
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 var base32 = require('thirty-two');
 
-const csrfProtection = require('../server/csrf-protection');
-const parseForm = require('../server/parse-form');
+const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
+
 // Get Homepage
 router.get('/two-factor-options', ensureAuthenticated, function(req, res){
     var response = res;
@@ -32,14 +32,5 @@ router.get('/two-factor-options', ensureAuthenticated, function(req, res){
         }
     });
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        //req.flash('error_msg','You are not logged in');
-        res.redirect('/login');
-    }
-}
 
 module.exports = router;

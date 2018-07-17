@@ -2,7 +2,6 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 var router = express.Router();
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
 
 // @NOTE: For encoding and decoding filenames we use

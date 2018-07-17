@@ -10,7 +10,6 @@ var secretKey = process.env.GOOGLE_RECAPTCHA;
 var ForgottenPasswordLinks = require('../models/forgotten-password-link');
 var User = require('../models/user');
 
-const csrfProtection = require('../server/csrf-protection');
 const parseForm = require('../server/parse-form');
 
 router.post('/forgotten-password-submitted',parseForm,function(req, res) {
