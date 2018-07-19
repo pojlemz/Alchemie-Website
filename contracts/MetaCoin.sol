@@ -9,10 +9,12 @@ import "./ConvertLib.sol";
 
 contract MetaCoin {
 	mapping (address => uint) balances;
+	address issuer;
 
 	event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
 	function MetaCoin() {
+		issuer = tx.origin;
 		balances[tx.origin] = 10000;
 	}
 
@@ -24,11 +26,16 @@ contract MetaCoin {
 		return true;
 	}
 
-	function getBalanceInEth(address addr) returns(uint){
+	function getBalanceInEth(address addr) constant returns(uint){
 		return ConvertLib.convert(getBalance(addr),2);
 	}
 
-	function getBalance(address addr) returns(uint) {
+	function getBalance(address addr) constant returns(uint) {
 		return balances[addr];
 	}
+
+	function getIssuers() constant returns(address) {
+	    return issuer;
+	}
+
 }

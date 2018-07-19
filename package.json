@@ -57,6 +57,7 @@
     "rimraf": "^2.6.2",
     "thirty-two": "^1.0.2",
     "truffle-contract": "^3.0.4",
+    "truffle-hdwallet-provider": "0.0.5",
     "valid-filename": "^2.0.1",
     "wallet-address-validator": "^0.1.7",
     "web3": "^0.20.6",
