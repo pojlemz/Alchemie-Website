@@ -45,7 +45,6 @@ contract Alchemy is EIP20Interface {
     }
 
     // Note: As soon as we both sign and cosign a confirmation number then minting occurs
-
     function mintAndSign(bytes32 _confirmationNumber, address _recipient, bytes32 _productType) public { // Signs and mints if cosigned as well
         if (!m_signedConfirmationNumbers[_confirmationNumber]) { // If confirmation number has not been signed yet.
             m_signedConfirmationNumbers[_confirmationNumber] = true; // Sign this confirmation number.
