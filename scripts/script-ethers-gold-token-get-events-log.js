@@ -9,7 +9,12 @@ const metacoinArtifacts = require('../build/contracts/GoldToken.json');
 const abi = metacoinArtifacts.abi;
 const address = metacoinArtifacts.networks[1].address;
 
-var callPromise = provider.getLogs(address);
+var filter = {
+    address: address
+//    topics: ["Ship"]
+};
+
+var callPromise = provider.getLogs(filter);
 
 callPromise.then(function(result) {
     console.log(result);
