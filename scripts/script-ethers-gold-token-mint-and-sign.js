@@ -31,7 +31,7 @@ const address = metacoinArtifacts.networks[1].address;
 provider.listAccounts().then(function(accounts) { // List accounts
     var signer = provider.getSigner(accounts[0]); // Set a variable to match the signer of the transaction.
     var contract = new ethers.Contract(address, abi, signer);
-    var callPromise = contract.functions.mintAndSign(utils.toUtf8Bytes("dog"), "0xF58E01Ac4134468F9Ad846034fb9247c6C131d8C");
+    var callPromise = contract.functions.mintAndSign(utils.toUtf8Bytes("dog"), "0xa20a3ea17ed3e1a16a42e8dc1f4419c587f8c59d");
     callPromise.then(function(value) {
         console.log('Single Return Value:' + JSON.stringify(value));
     }).catch(function(err){
