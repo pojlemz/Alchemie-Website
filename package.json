@@ -24,6 +24,7 @@
     "cryptojs": "^2.5.3",
     "csurf": "^1.9.0",
     "dotenv": "^4.0.0",
+    "ethereumjs-wallet": "^0.6.0",
     "ethers": "^3.0.25",
     "express": "*",
     "express-fileupload": "^0.3.0",
