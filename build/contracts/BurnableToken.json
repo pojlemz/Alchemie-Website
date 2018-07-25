@@ -273,7 +273,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2173,
+                          "referencedDeclaration": 2159,
                           "src": "402:3:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -498,10 +498,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2176,
-                        2177
+                        2162,
+                        2163
                       ],
-                      "referencedDeclaration": 2176,
+                      "referencedDeclaration": 2162,
                       "src": "490:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -647,7 +647,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1796,
+                        "referencedDeclaration": 1782,
                         "src": "718:18:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -745,7 +745,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1796,
+                        "referencedDeclaration": 1782,
                         "src": "765:16:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1223,7 +1223,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2173,
+                          "referencedDeclaration": 2159,
                           "src": "402:3:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1448,10 +1448,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2176,
-                        2177
+                        2162,
+                        2163
                       ],
-                      "referencedDeclaration": 2176,
+                      "referencedDeclaration": 2162,
                       "src": "490:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1597,7 +1597,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1796,
+                        "referencedDeclaration": 1782,
                         "src": "718:18:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1695,7 +1695,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1796,
+                        "referencedDeclaration": 1782,
                         "src": "765:16:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2023,5 +2023,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-25T19:04:31.160Z"
+  "updatedAt": "2018-07-25T21:33:53.756Z"
 }

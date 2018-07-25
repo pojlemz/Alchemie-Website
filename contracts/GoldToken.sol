@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.24;
 
 import './Standard223Token.sol';
 
@@ -8,6 +8,10 @@ import './Standard223Token.sol';
 contract GoldToken is Standard223Token  {
     // Gold tokens can be traded in for gold bars.
 
+    event Ship(
+        bytes32 _emailOfOwner
+    );
+
     address public m_signer;
     address public m_cosigner;
     address public m_administrator;
@@ -16,11 +20,8 @@ contract GoldToken is Standard223Token  {
     mapping (bytes32 => bool) public m_isConfirmationNumberCosigned; // this variable is used to approve confirmation numbers by the cosigner
     mapping (bytes32 => address) public m_mintConfirmationRecipient; // A mapping from confirmations to recipients
 
-    mapping (uint => bytes32) public m_shippingEmails;
-    uint public m_shippingCount;
-
     // constructor
-    function GoldToken() public {
+    constructor() public {
         m_administrator = msg.sender;
         m_signer = msg.sender;
         m_cosigner = msg.sender;
@@ -39,14 +40,6 @@ contract GoldToken is Standard223Token  {
         return m_cosigner;
     }
 
-    function getShippingCount() public constant returns(uint){
-        return m_shippingCount;
-    }
-
-    function getShippingEmail(uint _index) public constant returns(bytes32){
-        return m_shippingEmails[_index];
-    }
-
     function getSignedConfirmationNumber(bytes32 _confirmationNumber) public constant returns(bool){
         return m_isConfirmationNumberSigned[_confirmationNumber];
     }
@@ -59,23 +52,22 @@ contract GoldToken is Standard223Token  {
         return m_mintConfirmationRecipient[_confirmationNumber];
     }
 
+    modifier onlyAdmin() {
+        require(msg.sender == m_administrator);
+        _;
+    }
+
     // Setter/Main functionality
-    function setAdministrator(address _newAdministrator) public { // sets a new administrator
-        if (msg.sender == m_administrator) { // If this transaction is coming from the administrator
+    function setAdministrator(address _newAdministrator) public onlyAdmin() { // sets a new administrator
             m_administrator = _newAdministrator; // Assign a new administrator based on argument
-        }
     }
 
-    function setSigner(address _newSigner) public { // Sets a new signer
-        if (msg.sender == m_administrator) { // If this transaction is coming from the administrator
+    function setSigner(address _newSigner) public onlyAdmin() { // Sets a new signer
             m_signer = _newSigner; // Assign a new signer based on argument
-        }
     }
 
-    function setCosigner(address _newCosigner) public { // Sets a new cosigner
-        if (msg.sender == m_administrator) { // If this transaction is coming from the administrator
+    function setCosigner(address _newCosigner) public onlyAdmin() { // Sets a new cosigner
             m_cosigner = _newCosigner; // Assign a new cosigner based on argument
-        }
     }
 
     // Note: As soon as we both sign and cosign a confirmation number then minting occurs
@@ -85,6 +77,7 @@ contract GoldToken is Standard223Token  {
 
     // Note: As soon as we both sign and cosign a confirmation number then minting occurs
     function mintAndSign(bytes32 _confirmationNumber, address _recipient) public returns(bool) { // Signs and mints if cosigned as well
+        require(msg.sender == m_signer);
         if (!m_isConfirmationNumberSigned[_confirmationNumber]) { // If confirmation number has not been signed yet.
             m_isConfirmationNumberSigned[_confirmationNumber] = true; // Sign this confirmation number.
             m_mintConfirmationRecipient[_confirmationNumber] = _recipient; // Sets the recipient of this confirmation number.
@@ -97,6 +90,7 @@ contract GoldToken is Standard223Token  {
     }
 
     function mintAndCosign(bytes32 _confirmationNumber) public returns(bool) { // Cosigns and mints if signed as well
+        require(msg.sender == m_cosigner);
         if (!m_isConfirmationNumberCosigned[_confirmationNumber]) { // If confirmation number has not been cosigned yet.
             m_isConfirmationNumberCosigned[_confirmationNumber] = true; // Cosign this confirmation number.
             if (m_isConfirmationNumberSigned[_confirmationNumber]) { // If confirmation number has been signed.
@@ -111,11 +105,10 @@ contract GoldToken is Standard223Token  {
         balances[_recipient] = balances[_recipient].add(1000000000000000000); // Mint a fresh balance of tokens for the product.
     }
 
-    function burn(bytes32 _emailOfOwner) public { // Burns tokens in exchange for a shipment
+    function burnAndShip(bytes32 _emailOfOwner) public { // Burns tokens in exchange for a shipment
         if (balances[msg.sender] >= 1000000000000000000){ // If the token balance exceeds the amount required for a product shipment
             balances[msg.sender] = balances[msg.sender].sub(1000000000000000000); // Subtract the tokens from the user sending the message
-            m_shippingEmails[m_shippingCount] = _emailOfOwner; // Set email of owner
-            m_shippingCount++; // Increase the shipping count for the message sender
+            emit Ship(_emailOfOwner);
         }
     }
 }

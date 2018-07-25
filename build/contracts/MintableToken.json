@@ -405,7 +405,7 @@
         "id": 932,
         "nodeType": "ImportDirective",
         "scope": 1035,
-        "sourceUnit": 1728,
+        "sourceUnit": 1714,
         "src": "56:34:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -437,10 +437,10 @@
               "id": 935,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1727,
+              "referencedDeclaration": 1713,
               "src": "346:7:8",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1727",
+                "typeIdentifier": "t_contract$_Ownable_$1713",
                 "typeString": "contract Ownable"
               }
             },
@@ -454,7 +454,7 @@
           896,
           928,
           1281,
-          1727
+          1713
         ],
         "contractKind": "contract",
         "documentation": "@title Mintable token\n@dev Simple ERC20 Token example, with mintable token creation\nBased on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol",
@@ -462,7 +462,7 @@
         "id": 1034,
         "linearizedBaseContracts": [
           1034,
-          1727,
+          1713,
           1281,
           782,
           896,
@@ -648,10 +648,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2176,
-                        2177
+                        2162,
+                        2163
                       ],
-                      "referencedDeclaration": 2176,
+                      "referencedDeclaration": 2162,
                       "src": "499:7:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -725,7 +725,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2173,
+                            "referencedDeclaration": 2159,
                             "src": "583:3:8",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -754,7 +754,7 @@
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1645,
+                          "referencedDeclaration": 1631,
                           "src": "597:5:8",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -779,10 +779,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2176,
-                        2177
+                        2162,
+                        2163
                       ],
-                      "referencedDeclaration": 2176,
+                      "referencedDeclaration": 2162,
                       "src": "575:7:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -900,7 +900,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1820,
+                        "referencedDeclaration": 1806,
                         "src": "994:16:8",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1052,7 +1052,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1820,
+                        "referencedDeclaration": 1806,
                         "src": "1041:17:8",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1590,7 +1590,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1675,
+                  "referencedDeclaration": 1661,
                   "src": "1302:9:8",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1713,7 +1713,7 @@
         "id": 932,
         "nodeType": "ImportDirective",
         "scope": 1035,
-        "sourceUnit": 1728,
+        "sourceUnit": 1714,
         "src": "56:34:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1745,10 +1745,10 @@
               "id": 935,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1727,
+              "referencedDeclaration": 1713,
               "src": "346:7:8",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1727",
+                "typeIdentifier": "t_contract$_Ownable_$1713",
                 "typeString": "contract Ownable"
               }
             },
@@ -1762,7 +1762,7 @@
           896,
           928,
           1281,
-          1727
+          1713
         ],
         "contractKind": "contract",
         "documentation": "@title Mintable token\n@dev Simple ERC20 Token example, with mintable token creation\nBased on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol",
@@ -1770,7 +1770,7 @@
         "id": 1034,
         "linearizedBaseContracts": [
           1034,
-          1727,
+          1713,
           1281,
           782,
           896,
@@ -1956,10 +1956,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2176,
-                        2177
+                        2162,
+                        2163
                       ],
-                      "referencedDeclaration": 2176,
+                      "referencedDeclaration": 2162,
                       "src": "499:7:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2033,7 +2033,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2173,
+                            "referencedDeclaration": 2159,
                             "src": "583:3:8",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2062,7 +2062,7 @@
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1645,
+                          "referencedDeclaration": 1631,
                           "src": "597:5:8",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -2087,10 +2087,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2176,
-                        2177
+                        2162,
+                        2163
                       ],
-                      "referencedDeclaration": 2176,
+                      "referencedDeclaration": 2162,
                       "src": "575:7:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2208,7 +2208,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1820,
+                        "referencedDeclaration": 1806,
                         "src": "994:16:8",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2360,7 +2360,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1820,
+                        "referencedDeclaration": 1806,
                         "src": "1041:17:8",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2898,7 +2898,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1675,
+                  "referencedDeclaration": 1661,
                   "src": "1302:9:8",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2989,5 +2989,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-25T19:04:31.162Z"
+  "updatedAt": "2018-07-25T21:33:53.783Z"
 }
