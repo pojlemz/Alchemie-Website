@@ -390,6 +390,7 @@ ControllerClick.prototype.beginSelectProductAddress = function(event){
 }
 
 ControllerClick.prototype.buyOne = function(event){
+
     var quantities = {};
     quantities[$(event.target).attr("associate")] = 1;
     g_App.getViewProductPrices().copyCurrentPricesToLockedPrices();
@@ -410,31 +411,40 @@ ControllerClick.prototype.buyOne = function(event){
     }
     g_App.getViewProducts().populateProductListInModal(Object.keys(quantities));
     var csrfToken = $('#csrf').attr('associate');
-    $.post("/begin-order-and-get-response", {productAddress: productAddressSelected, prices: JSON.stringify(pricesAsDict), quantities: JSON.stringify(quantities), _csrf: csrfToken}, function( data ) {
-        console.log(data);
-        // The following block of code fills the numerical parts of the modal
-        var keys = Object.keys(quantities);
-        var grandTotal = 0;
-        for (var i = 0; i < keys.length; i++) {
-            // keys example: ['1KILOG', '100G']
-            var code = keys[i];
-            var qty = parseInt(quantities[code]);
-            var unitPrice = Number(pricesAsDict[code]['price']).toFixed(8);
-            var total = Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8);
-            grandTotal += parseFloat(Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8));
-            $(".fn-order-total[associate='"+code+"']").text(total);
-            $(".fn-order-qty[associate='"+code+"']").text(qty);
-            $(".fn-order-unit-price[associate='"+code+"']").text(unitPrice);
-        }
-        $(".fn-final-cost").text(grandTotal.toFixed(8) + ' BTC');
-        g_App.getViewModals().showModal("fn-confirm-place-order");
-        // The following block of code appends the correct QR code to the modal that asks for payment.
-        var depositAddress = data.depositAddress;
-        var img = document.createElement("IMG");
-        // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
-        // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
-        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress+"?amount="+grandTotal.toFixed(8)
-        $('#DillonGageQRCode').children().remove();
-        $('#DillonGageQRCode').append(img);
-    }, "json");
+    if (thirdparty.web3Utils.isAddress(productAddressSelected)) { // If the address selected by the user is a valid web3 address
+        $.post("/begin-order-and-get-response", {
+            productAddress: productAddressSelected,
+            prices: JSON.stringify(pricesAsDict),
+            quantities: JSON.stringify(quantities),
+            _csrf: csrfToken
+        }, function (data) {
+            console.log(data);
+            // The following block of code fills the numerical parts of the modal
+            var keys = Object.keys(quantities);
+            var grandTotal = 0;
+            for (var i = 0; i < keys.length; i++) {
+                // keys example: ['1KILOG', '100G']
+                var code = keys[i];
+                var qty = parseInt(quantities[code]);
+                var unitPrice = Number(pricesAsDict[code]['price']).toFixed(8);
+                var total = Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8);
+                grandTotal += parseFloat(Number(quantities[code] * pricesAsDict[code]['price']).toFixed(8));
+                $(".fn-order-total[associate='" + code + "']").text(total);
+                $(".fn-order-qty[associate='" + code + "']").text(qty);
+                $(".fn-order-unit-price[associate='" + code + "']").text(unitPrice);
+            }
+            $(".fn-final-cost").text(grandTotal.toFixed(8) + ' BTC');
+            g_App.getViewModals().showModal("fn-confirm-place-order");
+            // The following block of code appends the correct QR code to the modal that asks for payment.
+            var depositAddress = data.depositAddress;
+            var img = document.createElement("IMG");
+            // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
+            // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
+            img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:" + depositAddress + "?amount=" + grandTotal.toFixed(8)
+            $('#DillonGageQRCode').children().remove();
+            $('#DillonGageQRCode').append(img);
+        }, "json");
+    } else { // If the address selected by the user is not a valid web3 address
+        g_App.getViewUserMessages().showCustomErrorMessage("The address you entered is invalid.");
+    }
 }
