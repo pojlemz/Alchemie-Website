@@ -114,7 +114,7 @@
   "bytecode": "0x608060405234801561001057600080fd5b5061060d806100206000396000f300608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806318160ddd1461006757806342966c681461009257806370a08231146100bf578063a9059cbb14610116575b600080fd5b34801561007357600080fd5b5061007c61017b565b6040518082815260200191505060405180910390f35b34801561009e57600080fd5b506100bd60048036038101908080359060200190929190505050610185565b005b3480156100cb57600080fd5b50610100600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610192565b6040518082815260200191505060405180910390f35b34801561012257600080fd5b50610161600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506101da565b604051808215151515815260200191505060405180910390f35b6000600154905090565b61018f33826103f9565b50565b60008060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050919050565b60008073ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff161415151561021757600080fd5b6000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054821115151561026457600080fd5b6102b5826000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546105ac90919063ffffffff16565b6000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002081905550610348826000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546105c590919063ffffffff16565b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508273ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef846040518082815260200191505060405180910390a36001905092915050565b6000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054811115151561044657600080fd5b610497816000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546105ac90919063ffffffff16565b6000808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506104ee816001546105ac90919063ffffffff16565b6001819055508173ffffffffffffffffffffffffffffffffffffffff167fcc16f5dbb4873280815c1ee09dbd06736cffcc184412cf7a71a0fdb75d397ca5826040518082815260200191505060405180910390a2600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040518082815260200191505060405180910390a35050565b60008282111515156105ba57fe5b818303905092915050565b600081830190508281101515156105d857fe5b809050929150505600a165627a7a7230582055d33cf2b64b5cc3a06b3ec42e6395f0b4d8190d0a53b8d49a4adc3b49c938600029",
   "deployedBytecode": "0x608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806318160ddd1461006757806342966c681461009257806370a08231146100bf578063a9059cbb14610116575b600080fd5b34801561007357600080fd5b5061007c61017b565b6040518082815260200191505060405180910390f35b34801561009e57600080fd5b506100bd60048036038101908080359060200190929190505050610185565b005b3480156100cb57600080fd5b50610100600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610192565b6040518082815260200191505060405180910390f35b34801561012257600080fd5b50610161600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506101da565b604051808215151515815260200191505060405180910390f35b6000600154905090565b61018f33826103f9565b50565b60008060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050919050565b60008073ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff161415151561021757600080fd5b6000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054821115151561026457600080fd5b6102b5826000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546105ac90919063ffffffff16565b6000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002081905550610348826000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546105c590919063ffffffff16565b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508273ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef846040518082815260200191505060405180910390a36001905092915050565b6000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054811115151561044657600080fd5b610497816000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546105ac90919063ffffffff16565b6000808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506104ee816001546105ac90919063ffffffff16565b6001819055508173ffffffffffffffffffffffffffffffffffffffff167fcc16f5dbb4873280815c1ee09dbd06736cffcc184412cf7a71a0fdb75d397ca5826040518082815260200191505060405180910390a2600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040518082815260200191505060405180910390a35050565b60008282111515156105ba57fe5b818303905092915050565b600081830190508281101515156105d857fe5b809050929150505600a165627a7a7230582055d33cf2b64b5cc3a06b3ec42e6395f0b4d8190d0a53b8d49a4adc3b49c938600029",
   "sourceMap": "147:723:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;147:723:5;;;;;;;",
-  "deployedSourceMap": "147:723:5:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;373:83:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;373:83:4;;;;;;;;;;;;;;;;;;;;;;;353:73:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;353:73:5;;;;;;;;;;;;;;;;;;;;;;;;;;1133:99:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1133:99:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;610:321;;8:9:-1;5:2;;;30:1;27;20:12;5:2;610:321:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;373:83;417:7;439:12;;432:19;;373:83;:::o;353:73:5:-;396:25;402:10;414:6;396:5;:25::i;:::-;353:73;:::o;1133:99:4:-;1189:7;1211:8;:16;1220:6;1211:16;;;;;;;;;;;;;;;;1204:23;;1133:99;;;:::o;610:321::-;673:4;708:1;693:17;;:3;:17;;;;685:26;;;;;;;;735:8;:20;744:10;735:20;;;;;;;;;;;;;;;;725:6;:30;;717:39;;;;;;;;786:32;811:6;786:8;:20;795:10;786:20;;;;;;;;;;;;;;;;:24;;:32;;;;:::i;:::-;763:8;:20;772:10;763:20;;;;;;;;;;;;;;;:55;;;;840:25;858:6;840:8;:13;849:3;840:13;;;;;;;;;;;;;;;;:17;;:25;;;;:::i;:::-;824:8;:13;833:3;824:13;;;;;;;;;;;;;;;:41;;;;897:3;876:33;;885:10;876:33;;;902:6;876:33;;;;;;;;;;;;;;;;;;922:4;915:11;;610:321;;;;:::o;430:438:5:-;508:8;:14;517:4;508:14;;;;;;;;;;;;;;;;498:6;:24;;490:33;;;;;;;;718:26;737:6;718:8;:14;727:4;718:14;;;;;;;;;;;;;;;;:18;;:26;;;;:::i;:::-;701:8;:14;710:4;701:14;;;;;;;;;;;;;;;:43;;;;765:24;782:6;765:12;;:16;;:24;;;;:::i;:::-;750:12;:39;;;;805:4;800:18;;;811:6;800:18;;;;;;;;;;;;;;;;;;852:1;829:34;;838:4;829:34;;;856:6;829:34;;;;;;;;;;;;;;;;;;430:438;;:::o;1042:110:14:-;1100:7;1127:1;1122;:6;;1115:14;;;;;;1146:1;1142;:5;1135:12;;1042:110;;;;:::o;1214:123::-;1272:9;1297:1;1293;:5;1289:9;;1316:1;1311;:6;;1304:14;;;;;;1331:1;1324:8;;1214:123;;;;:::o",
+  "deployedSourceMap": "147:723:5:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;373:83:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;373:83:4;;;;;;;;;;;;;;;;;;;;;;;353:73:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;353:73:5;;;;;;;;;;;;;;;;;;;;;;;;;;1133:99:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1133:99:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;610:321;;8:9:-1;5:2;;;30:1;27;20:12;5:2;610:321:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;373:83;417:7;439:12;;432:19;;373:83;:::o;353:73:5:-;396:25;402:10;414:6;396:5;:25::i;:::-;353:73;:::o;1133:99:4:-;1189:7;1211:8;:16;1220:6;1211:16;;;;;;;;;;;;;;;;1204:23;;1133:99;;;:::o;610:321::-;673:4;708:1;693:17;;:3;:17;;;;685:26;;;;;;;;735:8;:20;744:10;735:20;;;;;;;;;;;;;;;;725:6;:30;;717:39;;;;;;;;786:32;811:6;786:8;:20;795:10;786:20;;;;;;;;;;;;;;;;:24;;:32;;;;:::i;:::-;763:8;:20;772:10;763:20;;;;;;;;;;;;;;;:55;;;;840:25;858:6;840:8;:13;849:3;840:13;;;;;;;;;;;;;;;;:17;;:25;;;;:::i;:::-;824:8;:13;833:3;824:13;;;;;;;;;;;;;;;:41;;;;897:3;876:33;;885:10;876:33;;;902:6;876:33;;;;;;;;;;;;;;;;;;922:4;915:11;;610:321;;;;:::o;430:438:5:-;508:8;:14;517:4;508:14;;;;;;;;;;;;;;;;498:6;:24;;490:33;;;;;;;;718:26;737:6;718:8;:14;727:4;718:14;;;;;;;;;;;;;;;;:18;;:26;;;;:::i;:::-;701:8;:14;710:4;701:14;;;;;;;;;;;;;;;:43;;;;765:24;782:6;765:12;;:16;;:24;;;;:::i;:::-;750:12;:39;;;;805:4;800:18;;;811:6;800:18;;;;;;;;;;;;;;;;;;852:1;829:34;;838:4;829:34;;;856:6;829:34;;;;;;;;;;;;;;;;;;430:438;;:::o;1042:110:15:-;1100:7;1127:1;1122;:6;;1115:14;;;;;;1146:1;1142;:5;1135:12;;1042:110;;;;:::o;1214:123::-;1272:9;1297:1;1293;:5;1289:9;;1316:1;1311;:6;;1304:14;;;;;;1331:1;1324:8;;1214:123;;;;:::o",
   "source": "pragma solidity ^0.4.24;\n\nimport \"./BasicToken.sol\";\n\n\n/**\n * @title Burnable Token\n * @dev Token that can be irreversibly burned (destroyed).\n */\ncontract BurnableToken is BasicToken {\n\n  event Burn(address indexed burner, uint256 value);\n\n  /**\n   * @dev Burns a specific amount of tokens.\n   * @param _value The amount of token to be burned.\n   */\n  function burn(uint256 _value) public {\n    _burn(msg.sender, _value);\n  }\n\n  function _burn(address _who, uint256 _value) internal {\n    require(_value <= balances[_who]);\n    // no need to require value <= totalSupply, since that would imply the\n    // sender's balance is greater than the totalSupply, which *should* be an assertion failure\n\n    balances[_who] = balances[_who].sub(_value);\n    totalSupply_ = totalSupply_.sub(_value);\n    emit Burn(_who, _value);\n    emit Transfer(_who, address(0), _value);\n  }\n}\n",
   "sourcePath": "/Users/danielbruce/Documents/Programming/alchemy-website/contracts/ERC20/BurnableToken.sol",
   "ast": {
@@ -273,7 +273,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2159,
+                          "referencedDeclaration": 2190,
                           "src": "402:3:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -498,10 +498,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2162,
-                        2163
+                        2193,
+                        2194
                       ],
-                      "referencedDeclaration": 2162,
+                      "referencedDeclaration": 2193,
                       "src": "490:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -647,7 +647,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1782,
+                        "referencedDeclaration": 1813,
                         "src": "718:18:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -745,7 +745,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1782,
+                        "referencedDeclaration": 1813,
                         "src": "765:16:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1223,7 +1223,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2159,
+                          "referencedDeclaration": 2190,
                           "src": "402:3:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1448,10 +1448,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2162,
-                        2163
+                        2193,
+                        2194
                       ],
-                      "referencedDeclaration": 2162,
+                      "referencedDeclaration": 2193,
                       "src": "490:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1597,7 +1597,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1782,
+                        "referencedDeclaration": 1813,
                         "src": "718:18:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1695,7 +1695,7 @@
                         "lValueRequested": false,
                         "memberName": "sub",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1782,
+                        "referencedDeclaration": 1813,
                         "src": "765:16:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2023,5 +2023,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-25T22:09:33.018Z"
+  "updatedAt": "2018-07-26T16:04:00.740Z"
 }

@@ -4,6 +4,7 @@ var utils = require('ethers').utils;
 
 var network = providers.networks.testnet;
 var provider = new providers.JsonRpcProvider('http://localhost:8545', network);
+provider.resetEventsBlock(0);
 
 const metacoinArtifacts = require('../build/contracts/GoldToken.json');
 const abi = metacoinArtifacts.abi;

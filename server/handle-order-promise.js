@@ -1,10 +1,10 @@
-const handleConfirmedOrder = require('../server/handle-confirmed-order');
-const getBlockHeight = require('../server/get-block-height');
-const OrderPromise = require('../models/order-promise');
+const handleConfirmedOrder = require('../server/handle-confirmed-order'); // A function for handling order promises that have been set to confirmed.
+const getBlockHeight = require('../server/get-block-height'); // The function that fetches the block height for the current blockchain
+const OrderPromise = require('../models/order-promise'); // A Postgres model for the table OrderPromises
 
-var AsyncLock = require('async-lock');
-var lock = new AsyncLock();
-var reportErrorOnlyOnce = false;
+var AsyncLock = require('async-lock'); // A module for ensuring utxos only get processed one at a time
+var lock = new AsyncLock(); // Create a variable from the asyncronous module
+var reportErrorOnlyOnce = false; // Create a variable that tells us if a particular warning has occurred
 
 // ‌‌console.log(orderPromise)
 // ‌anonymous {
@@ -33,29 +33,29 @@ var reportErrorOnlyOnce = false;
 //     isSegwit: false
 // }
 
-module.exports = function handleOrderPromise(orderPromise, output) {
-    const blockHeight = output.blockHeight;
-    const value = output.value;
-    const address = output.address;
-    if (orderPromise !== null && typeof(orderPromise) !== 'undefined') {
-        const status = orderPromise.status;
-        const key = orderPromise.transactionid;
-        lock.acquire(key, function(done) {
-            if (status === "Unpaid" || status === "Paid") {
+module.exports = function handleOrderPromise(orderPromise, output) { // function that handles order promises that come in
+    const blockHeight = output.blockHeight; // Set a variable to equal the block height of the unspent output
+    const value = output.value; // Set a variable to equal the value of the output in satoshis
+    const address = output.address; // Set a variable to equal the address that the unspent output is contained in
+    if (orderPromise !== null && typeof(orderPromise) !== 'undefined') { // If the orderPromise for this address exists
+        const status = orderPromise.status; // 'Unpaid', 'Paid', 'Confirmed', 'Filled', 'Ready' etc.
+        const key = orderPromise.transactionid; // Set the key variable used for asynchronous locking to equal the transaction number
+        lock.acquire(key, function(done) { // Lock this process so that the order promise for the unspent transaction is never processed twice simultaneously
+            if (status === "Unpaid" || status === "Paid") { // If the status for the order promise hasn't been confirmed yet
                 if (orderPromise.grandtotal * 100000000 <= value) { // This checks to ensure that the user sent enough BTC
-                    OrderPromise.setTransactionOutputByDepositAddress(address, output.id, function (err, res) {
+                    OrderPromise.setTransactionOutputByDepositAddress(address, output.id, function (err, res) { // Sets the deposit address of the order promise to BitGo id in Postgres table
                         // We can consider the order to be paid here since the value of the unspent is less than the total.
-                        getBlockHeight(function (err, res) {
-                            const blockHeightDifference = res.body.height - blockHeight;
+                        getBlockHeight(function (err, res) { // Sets res to be an integer equal to the chain's block height
+                            const blockHeightDifference = res.body.height - blockHeight; // Gets number of confirmations for this transaction output
                             // TODO: Revise this block height difference stuff.
                             // if (blockHeightDifference >= 6 && blockHeight !== 99999999) {
-                            if (blockHeight !== 99999999) {
-                                OrderPromise.setOrderStatusByDepositAddress(address, "Confirmed", function (err, res) {
+                            if (blockHeight !== 99999999) { // If BitGo tells us that its block height is 99999999 then it hasn't been confirmed yet
+                                OrderPromise.setOrderStatusByDepositAddress(address, "Confirmed", function (err, res) { // Set the order status of the orderpromise to 'Confirmed'
                                     // Here we pass the transaction off to dealing with a confirmed output.
-                                    if (err) {
+                                    if (err) { // If there was an error
                                         console.log(err); // Reports an error in case any have occurred.
                                     }
-                                    handleConfirmedOrder(orderPromise, output, done);
+                                    handleConfirmedOrder(orderPromise, output, done); // Handle the confirmed order passing it the order promise, output and function for releasing the asynchronous lock
                                 });
                             } else {
                                 OrderPromise.setOrderStatusByDepositAddress(address, "Paid", function (err, res) {
@@ -63,25 +63,25 @@ module.exports = function handleOrderPromise(orderPromise, output) {
                                     if (err) {
                                         console.log(err); // Reports an error in case any have occurred.
                                     }
-                                    done();
+                                    done(); //Release the asyncronous lock
                                 });
                             }
                         });
                     });
                 } else {
-                    done();
+                    done(); // Release the asyncronous lock
                 }
             } else {
-                done();
+                done(); // Release the asyncronous lock
             }
         }); // Note that a callback can be added to this lock along with additional options.
         // TODO: Add a branch for all of the rejected states
     } else {
         // In this case the unspent transaction doesn't correspond to an orderpromise in the table
         // TODO: Find a way to handle unspent outputs that don't correspond to any orders (ie. outgoing change outputs)
-        if (!reportErrorOnlyOnce){
-            console.warn("An unspent was found for an address that doesn't have any order promises in the table.");
-            reportErrorOnlyOnce = true;
+        if (!reportErrorOnlyOnce){ // If we haven't reported this warning yet
+            console.warn("An unspent was found for an address that doesn't have any order promises in the table."); // Report warning so we know something unusual is happening with application
+            reportErrorOnlyOnce = true; // Establish that the warning has been reported.
         }
 
     }
