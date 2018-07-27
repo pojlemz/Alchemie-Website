@@ -7,16 +7,16 @@ contract Example {
     // Gold tokens can be traded in for gold bars.
 
     event Greeting(
-        bytes32 _message
+        string _message
     );
 
-    bytes32 public m_message;
+    string public m_message;
 
-    function getLatestGreeting() public constant returns(bytes32) {
+    function getLatestGreeting() public constant returns(string) {
         return m_message;
     }
 
-    function greet(bytes32 _message) public {
+    function greet(string _message) public {
         m_message = _message;
         emit Greeting(_message);
     }

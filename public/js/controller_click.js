@@ -390,7 +390,6 @@ ControllerClick.prototype.beginSelectProductAddress = function(event){
 }
 
 ControllerClick.prototype.buyOne = function(event){
-
     var quantities = {};
     quantities[$(event.target).attr("associate")] = 1;
     g_App.getViewProductPrices().copyCurrentPricesToLockedPrices();

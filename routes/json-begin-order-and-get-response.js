@@ -22,7 +22,7 @@ router.post('/begin-order-and-get-response',parseForm, ensureAuthenticated, func
     // TODO: What type of response are we going to get from this call?
     // TODO: Send back a response with the expiry time of the prices
     const response = res;
-    const quantities = toJSON.parse(req.body.quantities); // We get the quantities of products being ordered which should be exactly one of each.
+    const quantities = JSON.parse(req.body.quantities); // We get the quantities of products being ordered which should be exactly one of each.
     var keys = Object.keys(quantities); // keys will be a list of one product code. ie. ['1KILOG']
     var totalQuantity = 0;
     for (var i = 0; i < keys.length; i++) {

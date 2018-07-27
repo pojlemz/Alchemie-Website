@@ -26,3 +26,10 @@ module.exports.removeMintReady = function(transactionId, callback) {
     const params = [transactionId];
     pgClient.runQuery(query, params, callback);
 }
+
+module.exports.getListOfMintReadys = function(callback){
+    // null or false indicates that the user has not been kyced
+    var query = "SELECT * FROM mintready;";
+    var params = [];
+    pgClient.runQueryMultiSelect(query, params, callback);
+}

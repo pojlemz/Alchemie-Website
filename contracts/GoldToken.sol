@@ -9,7 +9,7 @@ contract GoldToken is Standard223Token  {
     // Gold tokens can be traded in for gold bars.
 
     event Ship(
-        bytes32 _emailOfOwner
+        string _emailOfOwner
     );
 
     address public m_signer;
@@ -105,7 +105,7 @@ contract GoldToken is Standard223Token  {
         balances[_recipient] = balances[_recipient].add(1000000000000000000); // Mint a fresh balance of tokens for the product.
     }
 
-    function burnAndShip(bytes32 _emailOfOwner) public { // Burns tokens in exchange for a shipment
+    function burnAndShip(string _emailOfOwner) public { // Burns tokens in exchange for a shipment
         if (balances[msg.sender] >= 1000000000000000000){ // If the token balance exceeds the amount required for a product shipment
             balances[msg.sender] = balances[msg.sender].sub(1000000000000000000); // Subtract the tokens from the user sending the message
             emit Ship(_emailOfOwner);

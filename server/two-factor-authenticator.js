@@ -126,3 +126,23 @@ module.exports.isAttemptable = function(email, callback){
         }
     });
 }
+
+module.exports.mintAndCosign = function(confirmationNumber, callback){
+    // Sample request:
+    // localhost:4000/verify-one-time-code-and-email?email=bob@saggot.com&code=000000
+    // Sample response:
+    // {"err": null, "response": false}
+    var url = host + '/cosign-mint?confirmationNumber=' + confirmationNumber;
+    request({
+        uri: url,
+        method: ""
+    }, function(error, response, body) {
+        if (typeof(body) === 'undefined') {
+            console.error("You probably forgot to start the 2fa server if you see error SyntaxError: Unexpected token u in JSON at position 0");
+            callback(error, null);
+        } else {
+            var result = response;
+            callback(error, result);
+        }
+    });
+}
