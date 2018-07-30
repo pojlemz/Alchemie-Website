@@ -1,3 +1,4 @@
+const processMintReadyTransactions = require('../server/process-mint-ready-transactions');
 const sendMaximumSpendableIfThresholdReached = require('../server/send-maximum-spendable-if-threshold-reached'); //
 const MintReady = require('../models/mint-ready'); // Database table for tokens to be minted
 const SellReady = require('../models/sell-ready'); // Database table for sell orders ready to be placed
@@ -5,6 +6,7 @@ const OrderExecuted = require('../models/order-executed'); // Database table for
 const OrderPromise = require('../models/order-promise'); // Database table for all order promises
 
 module.exports = function handleFilledOrder(orderPromise, utxo, done) { // This function is called just after a Dillon Gage order is placed and an order is marked 'Filled'
+    console.log("Handling filled order");
     const transactionId = orderPromise.transactionid; // ie. 17
     OrderExecuted.getOrderExecutedByTransactionId(transactionId, function(err, res){ // Get the executed order by transaction id
         if (err) { // If there was an error when getting the executed order
@@ -14,6 +16,7 @@ module.exports = function handleFilledOrder(orderPromise, utxo, done) { // This 
             console.error("The order was never filled/executed since there is no record."); // Print error to console
             done(); // Release the locking mechanism for filled orders
         } else { // If an executed order was successfully fetched
+            console.log("Preparing sell order for the exchange.");
             const confirmationNumber = res.confirmationnumber; // Get the confirmation number from the executed order
             // TODO: Nest callbacks so that utxo is cleared last - ie. we change utxos to cleared in the last case.
             // Trigger a 'Bitcoin Sell' order on the exchange to hedge against volatility. ()
@@ -36,7 +39,7 @@ module.exports = function handleFilledOrder(orderPromise, utxo, done) { // This 
                     newMintReady.transactionOutput = utxo.id; // BitGo id for the transaction ie. 3e098e457dad758db7876d3b71bbac36a4422dd62bd494ee74fd28c110b99766:0
                     newMintReady.confirmationNumber = confirmationNumber; // Dillon Gage confirmation number
                     MintReady.createMintReady(newMintReady, function (err, res) { // This is an idempotent request.
-                        // TODO: Mint all mint ready transactions here.
+                        processMintReadyTransactions();
                         // Make Bitcoin transaction and send most Bitcoin from BitGo wallet to exchange.
                         // TODO: Combine all change transactions with new transaction output.
                         OrderPromise.setOrderStatusByDepositAddress(depositAddress, "Ready", function (err, res) { // Change the order status of the Order Promise to 'Readu'

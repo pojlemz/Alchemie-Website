@@ -65,6 +65,7 @@ module.exports = function handleConfirmedOrder(orderPromise, utxo, done) { // A 
                         done(); // Release the asychronous locking mechanism
                     });
                 } else {
+                    console.log("Successfully locked prices with Dillon Gage");
                     console.log(body); // Print the body of the response from the locking request
                     const lockToken = body.lockToken; // Set variable to equal lock token from response
                     var url2 = host + '/FizServices/ExecuteTrade/' + privateToken; // Set url variable to url that will be called to formally execute the trade

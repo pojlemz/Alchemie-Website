@@ -71,11 +71,6 @@ contract GoldToken is Standard223Token  {
     }
 
     // Note: As soon as we both sign and cosign a confirmation number then minting occurs
-    function abba() public returns(bool) {
-        return false;
-    }
-
-    // Note: As soon as we both sign and cosign a confirmation number then minting occurs
     function mintAndSign(bytes32 _confirmationNumber, address _recipient) public returns(bool) { // Signs and mints if cosigned as well
         require(msg.sender == m_signer);
         if (!m_isConfirmationNumberSigned[_confirmationNumber]) { // If confirmation number has not been signed yet.
