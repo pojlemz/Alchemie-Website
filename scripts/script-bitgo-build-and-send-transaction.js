@@ -90,7 +90,7 @@ From previous event:
     at Request.req.then (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/bitgo.js:389:40)
     at Request.superagent.Request.result (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/bitgo.js:70:15)
     at Wallet.submitTransaction (/Users/danielbruce/Documents/Programming/alchemy-website/node_modules/bitgo/src/v2/wallet.js:946:4)
-    at /Users/danielbruce/Documents/Programming/alchemy-website/test/smoke-test-bitgo-build-and-send-transaction.js:73:24
+    at /Users/danielbruce/Documents/Programming/alchemy-website/test/script-bitgo-build-and-send-transaction.js:73:24
     at runCallback (timers.js:785:20)
     at tryOnImmediate (timers.js:747:5)
     at processImmediate [as _immediateCallback] (timers.js:718:5)
