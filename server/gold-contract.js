@@ -1,9 +1,11 @@
+// var network = providers.networks.ropsten;
+// var provider = new providers.InfuraProvider(network, "KliH3fvXLthwPonWNfrh");
+
 var ethers = require('ethers');
 var providers = require('ethers').providers;
 
-// var network = providers.networks.ropsten;
-// var provider = new providers.InfuraProvider(network, "KliH3fvXLthwPonWNfrh");
 var network = providers.networks.testnet;
+// var provider = new providers.JsonRpcProvider('http://localhost:8545', network);
 var provider = new providers.JsonRpcProvider('http://localhost:8545', network);
 
 const metacoinArtifacts = require('../build/contracts/GoldToken.json');
