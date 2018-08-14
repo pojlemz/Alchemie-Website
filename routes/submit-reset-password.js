@@ -5,7 +5,7 @@ var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 var host = require('../server/host');
 var User = require('../models/user');
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 
 router.post('/submit-reset-password',parseForm, function(req, res) {
     // body parameters: key, password, code2fa

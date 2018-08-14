@@ -28,7 +28,7 @@ const uploadToS3 = require('../server/upload-to-s3');
 const util = require('util');
 var request = require('request');
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // const knox = require('knox');

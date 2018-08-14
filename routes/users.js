@@ -10,7 +10,7 @@ var request = require('request');
 
 var secretKey = process.env.GOOGLE_RECAPTCHA;
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 
 // Register User
 router.post('/register', parseForm, function(req, res){

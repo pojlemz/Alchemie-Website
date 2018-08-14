@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 // Accepts an incoming request and then acts as a bridge between client side code and 2fa server
 

@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 var router = express.Router();
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 
 // @NOTE: For encoding and decoding filenames we use
 // https://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html

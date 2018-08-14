@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../server/passport');
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 
 router.post('/login-shared-secret-removed',parseForm,
     passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login-shared-secret-removed',failureFlash: true}),

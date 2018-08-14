@@ -13,7 +13,7 @@ const HasBeenKyced = require("../models/has-been-kyced");
 // TODO: Ensure that the user has been kyced here.
 // TODO: Scan order to make sure that it only includes one item.
 
-const parseForm = require('../server/parse-form');
+const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
 // TODO: Handle all postgres sql error cases.
