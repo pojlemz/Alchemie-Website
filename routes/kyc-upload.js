@@ -15,9 +15,9 @@
 // module.exports = router;
 
 var fs = require('fs');
-const express = require('express');
+const express = require('express'); // Express app
 
-var router = express.Router();
+var router = express.Router(); // Express router
 var rimraf = require('rimraf'); // For removing files recursively
 var mkdirp = require('mkdirp'); // For making directories recursively
 

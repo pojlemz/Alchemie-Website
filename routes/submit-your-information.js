@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express'); // Express app
+const router = express.Router(); // Express router
 const requestIp = require('request-ip');
 const HasBeenKyced = require("../models/has-been-kyced");
 const DocumentInReview = require('../models/document-in-review');

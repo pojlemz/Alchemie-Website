@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'); // Express app
+var router = express.Router(); // Express router
 
 // Register
 router.get('/register', function(req, res){

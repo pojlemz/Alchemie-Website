@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'); // Express app
+var router = express.Router(); // Express router
 
 var User = require('../models/user');
 var PendingUser = require('../models/pending-user');

@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require('express'); // Express app
 const fileUpload = require('express-fileupload');
-var router = express.Router();
+var router = express.Router(); // Express router
 
 const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid
 

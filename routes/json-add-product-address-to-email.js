@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'); // Express app
+var router = express.Router(); // Express router
 
-var pgClient = require('../models/pg-client');
+var pgClient = require('../models/pg-client'); // client used for making calls to work directly with the Postgres database.
 const web3Utils = require('web3-utils');
 
 const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid

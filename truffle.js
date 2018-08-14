@@ -1,6 +1,6 @@
 var secrets = require("./secrets.json");
 var HDWalletProvider = require("truffle-hdwallet-provider");
-var Web3 = require('web3');
+var Web3 = require('web3'); // Set variable to the web3 module
 var web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 
 module.exports = {

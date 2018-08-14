@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'); // Express app
+var router = express.Router(); // Express router
 var random2faKeyGenerator = require('../server/random-2fa-key-generator');
 var TwoFactorAuthenticator = require('../server/two-factor-authenticator');
 var base32 = require('thirty-two');

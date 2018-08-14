@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'); // Express app
+var router = express.Router(); // Express router
 var passport = require('../server/passport');
 
 const parseForm = require('../server/parse-form'); // Function used for ensuring the CSRF token provided is valid

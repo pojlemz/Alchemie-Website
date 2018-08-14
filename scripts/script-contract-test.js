@@ -1,4 +1,4 @@
-const Web3 = require('web3');
+const Web3 = require('web3'); // Set variable to the web3 module
 const contract = require('truffle-contract');
 const fs = require('fs');
 
