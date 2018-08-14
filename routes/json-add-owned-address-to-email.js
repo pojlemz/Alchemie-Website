@@ -33,7 +33,7 @@ router.post('/add-owned-address-to-email',parseForm, ensureAuthenticated, functi
                             address: req.query.address // add the given bitcoin address to the response
                         }));
                     });
-                } else {
+                } else { // If there are too many owned addresses
                     response.setHeader('Content-Type', 'application/json'); // Set the header of the response object
                     response.send(JSON.stringify({ // Send stringified JSON back
                         response: "failure", // Report a failure in the stringified JSON
