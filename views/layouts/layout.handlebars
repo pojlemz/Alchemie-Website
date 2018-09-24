@@ -107,6 +107,37 @@
             </div>
         </div>
     </div>
+    <div class="modal fn-send-email-modal fn-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content css-modal-order-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Product Invoice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="css-modal-user-message-box fn-modal-user-message-box"></div>
+                <div class="modal-body">
+                    <!--<p>Review your order below and click 'Confirm' to complete your request.</p>-->
+                    <div class="container-fluid">
+                        <div class="row css-footer-dillon-gage-product-modal">
+                            <div class="css-dillon-gage-footer-label-modal">
+                                <h3>Total Due:</h3>
+                            </div>
+                            <div class="css-dillon-gage-footer-total-modal">
+                                <h3 class="fn-email-cost">0.00000008 BTC</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class=""> Send a payment to the QR code with your wallet and your order will be processed. </h6>
+                    <div id="SendEmailQRCode" class="css-center-qr-code-in-modal"><!--<img src="https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:2NCWko9dFrJt5JFwxHgMR4zQHHPoNHZ6tq2"></img>--></div>
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="css-float-left btn btn-success" clickcontroller="confirmProductOrder">Confirm</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
     <div class="modal fn-confirm-place-order fn-modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content css-modal-order-content">
@@ -273,6 +304,7 @@
     <script src="/js/view_product_address_add.js"></script>
     <script src="/js/view_product_prices.js"></script>
     <script src="/js/view_products.js"></script>
+    <script src="/js/websockets-frontend.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/thirdparty.js"></script>
     <script src="/js/initialize.js"></script> <!-- this script must be last -->

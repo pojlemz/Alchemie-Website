@@ -447,3 +447,22 @@ ControllerClick.prototype.buyOne = function(event){
         g_App.getViewUserMessages().showCustomErrorMessage("The address you entered is invalid.");
     }
 }
+
+ControllerClick.prototype.preparePaidEmail = function(event){
+    var csrfToken = $('#csrf').attr('associate');
+    $.post("/email-request", {content: "Strawbert", _csrf: csrfToken}, function( data ) {
+        // fn-send-email-modal
+        g_App.getViewModals().showModal("fn-send-email-modal");
+        var depositAddress = data.depositAddress;
+        var grandTotal = data.grandTotal;
+        $(".fn-email-cost").text(grandTotal.toFixed(8) + ' BTC');
+        var img = document.createElement("IMG");
+        // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
+        // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
+        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:" + depositAddress + "?amount=" + grandTotal.toFixed(8)
+        $('#SendEmailQRCode').children().remove();
+        $('#SendEmailQRCode').append(img);
+        console.log(data);
+        // Request a websocket connection and
+    }, "json");
+}

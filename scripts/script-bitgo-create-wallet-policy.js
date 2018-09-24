@@ -13,7 +13,6 @@ const Promise = require('bluebird');
 
 // TODO: put the new policy on the wallet with this id
 const id = process.env.WALLET_ID;
-
 const coin = process.env.BITCOIN_NETWORK;
 
 Promise.coroutine(function *() {

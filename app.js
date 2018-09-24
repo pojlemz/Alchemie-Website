@@ -16,6 +16,7 @@ const https = require('https');
 const fs = require('fs');
 const helmet = require('helmet');
 const csrfProtection = require('./server/csrf-protection');
+const webSocketServer = require('./server/web-socket-server');
 
 // Incoming web requests
 var routeIndex = require('./routes/index');
@@ -59,12 +60,16 @@ var routeJsonLockTradesAndGetResponse = require('./routes/json-lock-trades-and-g
 var routeJsonAddProductAddressToEmail = require('./routes/json-add-product-address-to-email')
 var routeJsonBeginOrderAndGetResponse = require('./routes/json-begin-order-and-get-response');
 var routeJsonGetProducts = require('./routes/json-get-products');
+// var routeWebsockets = require('./routes/websockets');
+var routePrunes = require('./routes/prunes');
+var routeJsonEmailRequest = require('./routes/json-email-request');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
 
 // Init App
 var app = express(); // I
+var expressWs = require('express-ws')(app);
 
 // View Engine
 app.set('views', path.join(__dirname, 'views')); // Set handlebars views to correspond to the views folder
@@ -191,19 +196,32 @@ app.use('/', routeGetPrices);
 app.use('/', routeJsonAddProductAddressToEmail);
 app.use('/', routeJsonBeginOrderAndGetResponse);
 app.use('/', routeJsonGetProducts);
+// app.use('/', routeWebsockets);
+app.use('/', routePrunes);
+app.use('/', routeJsonEmailRequest);
 
 // Runs server side code on various time intervals.
 require('./server/server-interval-5-seconds'); // This includes code that is triggered to run every 5 minutes.
 // require('./server/server-interval-30-seconds');
 // require('./server/server-interval-5-minutes');
 
+app.ws('/', function(ws, req) {
+    // This is called when we run the following line of code in the front end:
+    // var connection = new WebSocket('ws://127.0.0.1:3000');
+    ws.on('message', function(msg) {
+        console.log(msg);
+    });
+    console.log('socket', req.testing);
+});
+
 // This segment of code is concerned with setting up the actual server to serve the 'app'
 if (process.env.NODE_ENV !== 'production') { // If the node environment is 'production'
     app.set('port', (process.env.PORT || 3000)); // Set port environment variable to specific value
     app.listen(app.get('port'), function(){ // Allow app to listen on that port
-        console.log('Server started on port '+app.get('port')); // Message displayed when server begins listening
+        console.log('Server started on port ' + app.get('port')); // Message displayed when server begins listening
     });
 } else { // If node environment variable is development
+    // app.set('ws-port', (process.env.PORT || 1337)); // Set port environment variable to specific value
     app.set('port', (process.env.PORT || 3000)); // Set port environment variable to specific value
     var sslPath = process.env.SSL_PATH; // On your filesystem, this is where your security certificate is. ie. '/etc/letsencrypt/live/yourdomain.example.com/';
     var options = { // Set options for where SSL key and SSL certificate will be stored.

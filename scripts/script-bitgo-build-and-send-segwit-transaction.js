@@ -42,8 +42,8 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
                                 "chain": 11,
                                 "index": 43,
                                 "redeemScript": '0020e22cafde6f9dd68877e8a9afc7b931799c0c4d7e0f9f6ac9f560d51a932353f1',
-                                "id": '2f72e6722283cdc586b1ba00f9cab48412e3ccb179c654d67f70fce59306d6ef:1',
-                                "address": '2NAttnCeZFoRLhSkirg7NjuVJZ4hSE6m8YN',
+                                "id": 'cfed2842ae3038031773feee6f6d41598de5cc34c15335bd3daad422d3e49c82:1',
+                                "address": '2N3hqBWVNSFgS9uav2Qjh97eSWrUZJU7Z3h',
                                 "value": 1998878,
                                 "isSegwit": true,
                                 "witnessScript": '52210256a5575955c31917cf9271ce3d211d88150d046ededb2ff55ddf77e558a40fb02102dd12fb9f88602739fde59a6c212e98e860fbba1a0ef9a1929e39840a016e188121021befcce7626449a15cfd4ccd44b03cb8899c77eed1d3b31a43c04bc367c1bb0653ae'

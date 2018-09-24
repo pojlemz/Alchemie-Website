@@ -10,6 +10,7 @@ function App(){
     this._viewProductPrices = new ViewProductPrices();
     this._viewProductAddressAdd = new ViewProductAddressAdd();
     this._viewProducts = new ViewProducts();
+    this._webSockets = new WebSockets();
 };
 
 App.prototype.initialize = function(){
@@ -22,6 +23,7 @@ App.prototype.initialize = function(){
     this._viewProductPrices.initialize();
     this._viewProductAddressAdd.initialize();
     this._viewProducts.initialize();
+    this._webSockets.initialize();
 
     // g_App.getViewAddressAdd().showListOfOwnedAddresses();
     $(document).ready(function() { // This disables default action in the captcha form so that it can be handled in Javascript.

@@ -33,6 +33,7 @@
     "express-rate-limit": "^2.11.0",
     "express-session": "*",
     "express-validator": "*",
+    "express-ws": "^4.0.0",
     "google-auth-library": "^0.11.0",
     "googleapis": "^22.2.0",
     "helmet": "^3.12.0",
@@ -62,6 +63,7 @@
     "valid-filename": "^2.0.1",
     "wallet-address-validator": "^0.1.7",
     "web3": "^0.20.6",
-    "web3-utils": "^1.0.0-beta.34"
+    "web3-utils": "^1.0.0-beta.34",
+    "websocket": "^1.0.26"
   }
 }

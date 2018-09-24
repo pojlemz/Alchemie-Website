@@ -4,25 +4,12 @@ const request = require('request');
 const host = process.env.DILLON_GAGE_API_ENDPOINT;
 const privateToken = process.env.DILLON_GAGE_PRIVATE_TOKEN;
 
-var url2 = host + '/FizServices/UpdateShippingInfo/' + privateToken;
+var url2 = host + '/FizServices/ClearDropShipHold/' + privateToken;
 // https://stage-connect.fiztrade.com/FizServices/ExecuteTrade/token/1349-00bdbf2b582db69fb28b72a446cb6d18
 /* "inventoryLocation":"DGI", */
 request.post(url2,
-    {
-        json: {
-            "selection":"hold",
-            "dropShipInfo":
-                {
-                    "name":"John Smith",
-                    "address1": "1 Main St.",
-                    "address2": "",
-                    "address3": "",
-                    "address4": "",
-                    "city": "Dallas",
-                    "state": "TX",
-                    "postalCode": "75255",
-                    "country":"US"
-                },
+    { json:
+        {
             "confirmationNumber":'FIZ00064156',
             "traderId":"dan@blockunity.com"
         }

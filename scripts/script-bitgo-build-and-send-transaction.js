@@ -40,11 +40,11 @@ bitgo.coin('tbtc').wallets().get({ id: walletId }).then(function(wallet) {
                         "unspents": [
                             {
                                 "chain": 0,
-                                "index": 18,
-                                "redeemScript": '52210337c1c44429f5a57337cbab77ff5373932723943e6229b88cbb4d7167ece9e1aa2103ad8b01704e190052933c5dbec6a8f20f997ab4d64a1b797364987c883236656d21025b8d8d6c693d88ae419029f32741444812bde3b9cad3c36bbc4f5c53bad48a5753ae',
-                                "id": 'c174dcbf91cb7ea5566c1967d07daad1359640a26d230d5c065e05d152aaf3c2:0',
-                                "address": '2N1syCER4bdFs2cM8dZtQaHaD2FrE6NBTfE',
-                                "value": 10000000,
+                                "index": 63,
+                                "redeemScript": '5221024107ee4410dc2dd14b16550fb80a3697046531cb28f55bed740ccb99d6589a0321022e6c4bed41f03b9d4cbf616d4aaec1908d63e6e88676dbbed351718b5171252f21032ba1aeeef48dd4b50d86371321aa4deedc514ac50316c84c73da1a191713fb2b53ae',
+                                "id": 'cfed2842ae3038031773feee6f6d41598de5cc34c15335bd3daad422d3e49c82:1',
+                                "address": '2N3hqBWVNSFgS9uav2Qjh97eSWrUZJU7Z3h',
+                                "value": 45267200,
                                 "isSegwit": false
                             }
                         ],
