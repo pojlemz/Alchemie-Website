@@ -118,3 +118,7 @@ App.prototype.getViewProductAddressAdd = function(){
 App.prototype.getViewProducts = function(){
     return this._viewProducts;
 }
+
+App.prototype.getWebSockets = function() {
+    return this._webSockets;
+}

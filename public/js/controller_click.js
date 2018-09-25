@@ -298,7 +298,7 @@ ControllerClick.prototype.beginOrder = function(event){
         var img = document.createElement("IMG");
         // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
         // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
-        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress+"?amount="+grandTotal.toFixed(8)
+        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress+"?amount="+grandTotal.toFixed(8);
         $('#DillonGageQRCode').children().remove();
         $('#DillonGageQRCode').append(img);
     }, "json");
@@ -459,10 +459,11 @@ ControllerClick.prototype.preparePaidEmail = function(event){
         var img = document.createElement("IMG");
         // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
         // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
-        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:" + depositAddress + "?amount=" + grandTotal.toFixed(8)
+        img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:" + depositAddress + "?amount=" + grandTotal.toFixed(8);
         $('#SendEmailQRCode').children().remove();
         $('#SendEmailQRCode').append(img);
         console.log(data);
+        g_App.getWebSockets().startConnection(depositAddress);
         // Request a websocket connection and
     }, "json");
 }

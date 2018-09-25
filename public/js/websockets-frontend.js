@@ -16,6 +16,9 @@ WebSockets.prototype.startConnection = function(btcAddress){
     // $(".fn-modal-user-message-box").empty();
     // var modal = $("." + modalName);
     // modal.show();
+    // TODO: Consider storing the Bitcoin address in a local variable
+
+    var self = this;
     this._btcAddress = btcAddress;
 
     window.WebSocket = window.WebSocket || window.MozWebSocket;
@@ -30,6 +33,7 @@ WebSockets.prototype.startConnection = function(btcAddress){
     }
 
     var connection = new WebSocket("wss://bitgowebsockets.blockunity.com:443");
+    this._webSocket = connection;
     connection.onopen = function () {
         // first we want users to enter their names
         // input.removeAttr('disabled');
@@ -52,11 +56,16 @@ WebSockets.prototype.startConnection = function(btcAddress){
         }
 
         if (json.type === 'connect') {
-            connection.sendUTF(JSON.stringify({ type: 'connect', data: {address: btcAddress} }));
+            connection.send(JSON.stringify({ type: 'connect', data: {address: btcAddress} }));
         }
 
         if (json.type === 'rhubarb') {
             console.log("Catch the rabbit!");
         }
+
+        if (json.type === 'paid') {
+            console.log("Spirit Wolf");
+        }
     };
+
 }
