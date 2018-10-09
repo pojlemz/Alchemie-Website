@@ -27,12 +27,16 @@ const requestLoop = setInterval(function(){
                 console.error("Error when fetching prices.");
                 console.log(error);
             } else {
-                const customerPrice = markupPriceForCustomer(JSON.parse(body)['tiers'][1]['ask']);
-                Price.addPrice(instrument, customerPrice, function(err, res){
-                    if (err) {
-                        console.error("Error when storing prices.");
-                    }
-                });
+                if (body.substring(0, 1) === "<"){
+                    console.error("Error parsing body statement.");
+                } else {
+                    const customerPrice = markupPriceForCustomer(JSON.parse(body)['tiers'][1]['ask']);
+                    Price.addPrice(instrument, customerPrice, function(err, res){
+                        if (err) {
+                            console.error("Error when storing prices.");
+                        }
+                    });
+                }
             }
         });
     }

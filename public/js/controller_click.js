@@ -456,6 +456,7 @@ ControllerClick.prototype.preparePaidEmail = function(event){
         var depositAddress = data.depositAddress;
         var grandTotal = data.grandTotal;
         $(".fn-email-cost").text(grandTotal.toFixed(8) + ' BTC');
+        $('.fn-email-coin-address').text(depositAddress);
         var img = document.createElement("IMG");
         // https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1MoLoCh1srp6jjQgPmwSf5Be5PU98NJHgx?amount=.01%26label=Moloch.net%26message=Donation
         // img.src = "https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:"+depositAddress;
