@@ -18,7 +18,6 @@ const helmet = require('helmet');
 const csrfProtection = require('./server/csrf-protection');
 const webSocketServer = require('./server/web-socket-server');
 
-
 // Incoming web requests
 var routeIndex = require('./routes/index');
 var routeUsers = require('./routes/users');

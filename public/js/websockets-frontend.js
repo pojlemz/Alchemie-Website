@@ -60,11 +60,12 @@ WebSockets.prototype.startConnection = function(btcAddress){
         }
 
         if (json.type === 'rhubarb') {
-            console.log("Catch the rabbit!");
+
         }
 
         if (json.type === 'paid') {
-            console.log("Spirit Wolf");
+            g_App.getControllerClick().closeModals();
+            g_App.getViewModals().showModal("fn-payment-received-modal");
         }
     };
 

@@ -7,6 +7,7 @@ const Price = require('../models/price');
 const OrderPromise = require('../models/order-promise');
 const markupPriceForCustomer = require('../server/markup-price-for-customer');
 const handleOrderPromise = require('../server/handle-order-promise');
+var reportErrorOnlyOnce = false; // Create a variable that tells us if a particular warning has occurred
 
 var BitGoJS = require('bitgo');
 // const bitgo = new BitGoJS.BitGo({ env: process.env.BITGO_ENVIRONMENT, accessToken: process.env.ACCESS_TOKEN });
@@ -28,7 +29,10 @@ const requestLoop = setInterval(function(){
                 console.log(error);
             } else {
                 if (body.substring(0, 1) === "<"){
-                    console.error("Error parsing body statement.");
+                    if (!reportErrorOnlyOnce) { // If we haven't reported this warning yet
+                        console.error("Error parsing body statement.");
+                        reportErrorOnlyOnce = true;
+                    }
                 } else {
                     const customerPrice = markupPriceForCustomer(JSON.parse(body)['tiers'][1]['ask']);
                     Price.addPrice(instrument, customerPrice, function(err, res){
