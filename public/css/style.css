@@ -813,3 +813,7 @@ footer{
   background-color: red;
   color: white;
 }
+
+.css-email-coin-address {
+  text-align: center;
+}
