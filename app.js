@@ -63,7 +63,12 @@ var routeJsonGetProducts = require('./routes/json-get-products');
 // var routeWebsockets = require('./routes/websockets');
 var routePrunes = require('./routes/prunes');
 var routeJsonEmailRequest = require('./routes/json-email-request');
-
+var routeAboutUs = require('./routes/about-us');
+var routeProperties = require('./routes/properties');
+var routeToken = require('./routes/token');
+var routeContactUs = require('./routes/contact-us');
+var routeResources = require('./routes/resources');
+var routeInvestors = require('./routes/investors');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -185,6 +190,7 @@ app.use('/', routeBuyTokens);
 app.use('/', routeSubmitYourInformation);
 app.use('/', routeKycUpload);
 app.use('/', routeInformationIsInReview);
+// routeProperties
 // app.use('/', routeKycApprove);
 // app.use('/', routeKycDeny);
 // app.use('/', routeDeposit);
@@ -200,6 +206,15 @@ app.use('/', routeJsonGetProducts);
 // app.use('/', routeWebsockets);
 app.use('/', routePrunes);
 app.use('/', routeJsonEmailRequest);
+app.use('/', routeAboutUs);
+app.use('/', routeProperties);
+app.use('/', routeToken);
+app.use('/', routeContactUs);
+app.use('/', routeResources);
+app.use('/', routeInvestors);
+
+// routeResources
+// routeContactUs
 
 // Runs server side code on various time intervals.
 require('./server/server-interval-5-seconds'); // This includes code that is triggered to run every 5 minutes.

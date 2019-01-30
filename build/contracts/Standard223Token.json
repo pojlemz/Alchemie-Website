@@ -476,7 +476,7 @@
                           "name": "super",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2226,
+                          "referencedDeclaration": 2261,
                           "src": "523:5:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_super$_Standard223Token_$2167",
@@ -592,7 +592,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2182,
+                            "referencedDeclaration": 2217,
                             "src": "638:3:18",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -944,7 +944,7 @@
                           "name": "super",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2226,
+                          "referencedDeclaration": 2261,
                           "src": "805:5:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_super$_Standard223Token_$2167",
@@ -998,10 +998,10 @@
                         "name": "revert",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [
-                          2187,
-                          2188
+                          2222,
+                          2223
                         ],
-                        "referencedDeclaration": 2187,
+                        "referencedDeclaration": 2222,
                         "src": "845:6:18",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_revert_pure$__$returns$__$",
@@ -2039,7 +2039,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2182,
+                          "referencedDeclaration": 2217,
                           "src": "1530:3:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2730,7 +2730,7 @@
                           "name": "super",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2226,
+                          "referencedDeclaration": 2261,
                           "src": "523:5:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_super$_Standard223Token_$2167",
@@ -2846,7 +2846,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2182,
+                            "referencedDeclaration": 2217,
                             "src": "638:3:18",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -3198,7 +3198,7 @@
                           "name": "super",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2226,
+                          "referencedDeclaration": 2261,
                           "src": "805:5:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_super$_Standard223Token_$2167",
@@ -3252,10 +3252,10 @@
                         "name": "revert",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [
-                          2187,
-                          2188
+                          2222,
+                          2223
                         ],
-                        "referencedDeclaration": 2187,
+                        "referencedDeclaration": 2222,
                         "src": "845:6:18",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_revert_pure$__$returns$__$",
@@ -4293,7 +4293,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2182,
+                          "referencedDeclaration": 2217,
                           "src": "1530:3:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -4799,5 +4799,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-14T16:43:36.809Z"
+  "updatedAt": "2019-01-08T21:33:03.280Z"
 }

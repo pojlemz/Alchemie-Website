@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Alchemie</title>
+	<title>Alchemest</title>
 	<link rel="stylesheet" href="/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/jquery-ui.structure.min.css"/>
@@ -254,23 +254,29 @@
     </div>
     <!-- Main content -->
     <div class="css-main-page">
-        <div class="container css-main-container">
+        <div class="css-main-container">
           <div class="header clearfix">
             <div class="row">
                 <!--<div class="glyphicon glyphicon-glass col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>-->
-                <div class="css-image-bottles"></div>
-                <h3 class="text-muted col-lg-4 col-md-4 col-sm-4 col-xs-4">Alchemie</h3>
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        {{#if user}}
-                            <!-- <li role="presentation"><a href="/">Dashboard</a></li> -->
-                            <li role="presentation"><a href="/logout">Logout</a></li>
-                        {{else}}
-                            <li role="presentation"><a href="/login">Login</a></li>
-                            <li role="presentation"><a href="/register">Register</a></li>
-                        {{/if}}
-                    </ul>
-                </nav>
+                <a class="css-image-bottles" href="/"></a>
+                <!--<h3 class="text-muted col-lg-4 col-md-4 col-sm-4 col-xs-4">Alchemest</h3>-->
+                <ul class="pull-right css-navigation-options">
+                    <li role="presentation"><a href="/about-us">About Us</a></li>
+                    <!--<li role="presentation"><a href="/logout">Products And Solutions</a></li>-->
+                    <li role="presentation"><a href="/properties">Properties</a></li>
+                    <li role="presentation"><a href="/token">Token</a></li>
+                    <!--<li role="presentation"><a href="/logout">Token</a></li>-->
+                    <li role="presentation"><a href="/investors">Investors</a></li>
+                    <li role="presentation"><a href="/resources">Resources</a></li>
+                    <li role="presentation"><a href="/contact-us">Contact Us</a></li>
+                    {{#if user}}
+                        <!-- <li role="presentation"><a href="/">Dashboard</a></li> -->
+                        <!--<li role="presentation"><a href="/logout">Logout</a></li>-->
+                    {{else}}
+                        <!--<li role="presentation"><a href="/login">Login</a></li>-->
+                        <!--<li role="presentation"><a href="/register">Register</a></li>-->
+                    {{/if}}
+                </ul>
             </div>
 
           </div>
@@ -302,9 +308,9 @@
 
           </div>
           <br/>
-          <footer class="footer">
-            <p>Block Unity Inc.</p>
-          </footer>
+          <!--<footer class="footer">-->
+            <!--<p>Block Unity Inc.</p>-->
+          <!--</footer>-->
 
         </div> <!-- /container -->
     </div>

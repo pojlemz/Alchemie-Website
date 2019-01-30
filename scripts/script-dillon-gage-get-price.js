@@ -6,7 +6,8 @@ const publicToken = process.env.DILLON_GAGE_PRIVATE_TOKEN;
 
 // 100G
 // var url = host + '/FizServices/GetPrices/'+publicToken+'/1GP';
-var url = host + '/FizServices/GetPrices/'+publicToken+'/1KILOG';
+// var url = host + '/FizServices/GetPrices/'+publicToken+'/1KILOG';
+var url = host + '/FizServices/GetPrices/'+publicToken+'/.9999PURE';
 request({
     uri: url,
     method: ""

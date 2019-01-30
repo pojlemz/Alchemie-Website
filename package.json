@@ -25,7 +25,7 @@
     "csurf": "^1.9.0",
     "dotenv": "^4.0.0",
     "ethereumjs-wallet": "^0.6.2",
-    "ethers": "^3.0.25",
+    "ethers": "^4.0.20",
     "express": "*",
     "express-fileupload": "^0.3.0",
     "express-handlebars": "*",
