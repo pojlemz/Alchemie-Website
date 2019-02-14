@@ -66,6 +66,7 @@ var routeJsonEmailRequest = require('./routes/json-email-request');
 var routeTellUsWhoYouAre = require('./routes/tell-us-who-you-are');
 var routeBrowseOffers = require('./routes/browse-offers');
 var routeValidateUser = require('./routes/validate-user');
+var routeWebWallet = require('./routes/web-wallet');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -205,6 +206,9 @@ app.use('/', routeJsonEmailRequest);
 app.use('/', routeTellUsWhoYouAre);
 app.use('/', routeBrowseOffers); // routeBrowseOffers
 app.use('/', routeValidateUser); // routeValidateUser
+app.use('/', routeWebWallet); // routeValidateUser
+
+// routeWebWallet
 
 // Runs server side code on various time intervals.
 require('./server/server-interval-5-seconds'); // This includes code that is triggered to run every 5 minutes.

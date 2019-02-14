@@ -484,3 +484,7 @@ ControllerClick.prototype.preparePaidEmail = function(event){
 ControllerClick.prototype.investNowLicensingAgreement = function(event) { // This is called when we click the 'Invest Now' button
     g_App.getViewModals().showModal("fn-license-agreement-modal");
 }
+
+ControllerClick.prototype.agreeToTermsAndConditions = function(event) { // This is called when we click the 'Invest Now' button
+    g_App.sendPostRequest('/web-wallet', {}, 'get'); // We tell the user that the shared secret has been successfully set
+}

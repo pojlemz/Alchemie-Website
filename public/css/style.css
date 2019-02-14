@@ -1073,6 +1073,7 @@ div#wave .dot:nth-child(3) {
   padding-top: 5px;
   border-radius: 10px;
   cursor: pointer;
+  margin-top:20px;
 }
 
 .css-licensing-agreement-button:hover {
@@ -1081,4 +1082,9 @@ div#wave .dot:nth-child(3) {
 
 .css-licensing-agreement-footer {
   height: 50px;
+}
+
+.css-license-agreement-modal .modal-body {
+  height: calc(100% - 52px);
+  overflow-y: auto;
 }
