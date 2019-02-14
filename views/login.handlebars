@@ -1,14 +1,16 @@
-<h3 class="page-header">Account Login</h3>
-<form method="post" action="/login">
-    <input type="hidden" name="_csrf" value="{{csrfToken}}">
-    <div class="form-group">
-    <label>Username</label>
-    <input type="text" class="form-control" name="username" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off">
-  </div>
-  <button type="button" class="css-float-right btn btn-link" clickcontroller="forgotYourPassword">Trouble Signing In?</button>
-  <button type="submit" class="css-float-left btn btn-success">Submit</button>
-</form>
+<div class="css-login-window">
+    <h3 class="page-header">Account Login</h3>
+    <form method="post" action="/login">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off">
+      </div>
+      <button type="button" class="css-float-right btn btn-link" clickcontroller="forgotYourPassword">Trouble Signing In?</button>
+      <button type="submit" class="css-float-left btn btn-success">Submit</button>
+    </form>
+</div>

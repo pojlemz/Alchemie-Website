@@ -42,7 +42,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(email, cb) {
     var query = "SELECT email, password, name FROM users WHERE email = $1;";
     var params = [email];
-    pgClient.runQuery(query,params, function(err, results) {
+    pgClient.runQuery(query, params, function(err, results) {
         if (err) {
             console.error('Error when selecting user on session deserialize', err);
             return cb(err)

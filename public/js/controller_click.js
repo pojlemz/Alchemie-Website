@@ -130,7 +130,7 @@ ControllerClick.prototype.twoFactorNewPassword = function(event){ // This is cal
     var firstPassword = $("#change-password-new-password").val(); // A variable that stores the password entered by the user in the first box
     var secondPassword = $("#change-password-confirm-password").val(); // A variable that stores the password entered by the user in the second input box
     var csrfToken = $('#csrf').attr('associate'); // This variable stores the csrf token provided by the server.
-    if (firstPassword === secondPassword){ // If the first password equals the second password
+    if (firstPassword === secondPassword) { // If the first password equals the second password
         var email = $("#temporary-data-email").attr('associate'); // Set the email variable according to a value rendered in the UI from a previous request
         // // TODO: Check that password reset link is valid.
         // var urlHas2FA = g_App.getAjaxUrlPrefix() + "/two-factor-bridge-has-shared-secret-for-specific-email?email="+email;
@@ -163,7 +163,19 @@ ControllerClick.prototype.closeModals = function(event){ // This is called when 
 }
 
 ControllerClick.prototype.fileRealSubmitButton = function(event){ // This is called when we want to submit the file uploaded to the server
-    $('.fn-file-real-submit-button').click(); // Trigger click event on file real submit button
+    // $('.fn-file-real-submit-button').click(); // Trigger click event on file real submit button
+    g_App.getViewModals().showModal("fn-validating");
+    setTimeout(function() {
+        // fn-validation-complete
+        var urlValidate = g_App.getAjaxUrlPrefix() + "/validate-user";
+        $.ajax(urlValidate).done(function(msg) {
+            // $.post( "/two-factor-bridge-has-shared-secret", {_csrf: csrfToken}, function( msg ) { // This calls the backend ensuring that the user is permitted to enter the 2fa code.
+            g_App.getViewModals().showModal("fn-validation-complete");
+            setTimeout(function () {
+                g_App.sendPostRequest('/browse-offers', {}, 'get');
+            }, 2000);
+        });
+    }, 2000)
 }
 
 ControllerClick.prototype.fileRealUploadButton = function(event){ // This is called when we want to upload the file from the user's machine to the html form.

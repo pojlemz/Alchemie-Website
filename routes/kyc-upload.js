@@ -57,21 +57,21 @@ router.post('/kyc-upload',parseForm, ensureAuthenticated, function(req, res) {
 
                 // @TODO: Display a message if the user needs to be kyced
                 // @TODO: Add a branch if the file has been uploaded already
-                var b = new Buffer(req.user.email);
-                var randomlyGeneratedHash = generateRandomHash();
-                var folderName = b.toString('hex') + "/" + randomlyGeneratedHash;
+                // var b = new Buffer(req.user.email);
+                // var randomlyGeneratedHash = generateRandomHash();
+                // var folderName = b.toString('hex') + "/" + randomlyGeneratedHash;
 
-                var directoryFromRoot = 'uploads/' + folderName; // @NOTE: We have to create the directory from root
-                var targetFolderName = folderName;
+                // var directoryFromRoot = 'uploads/' + folderName; // @NOTE: We have to create the directory from root
+                // var targetFolderName = folderName;
                 // var directoryFromThisLocation = '/Users/danielbruce/Documents/Programming/alchemy-fund-manager';
 
-                if (fs.existsSync(directoryFromRoot)){
-                    rimraf(directoryFromRoot, function () {
-                        createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, randomlyGeneratedHash, file, req, response);
-                    });
-                } else {
-                    createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, randomlyGeneratedHash, file, req, response);
-                }
+                // if (fs.existsSync(directoryFromRoot)){
+                //     rimraf(directoryFromRoot, function () {
+                //         createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, randomlyGeneratedHash, file, req, response);
+                //     });
+                // } else {
+                //     createHashOfEmailFolderWithFile(directoryFromRoot, targetFolderName, randomlyGeneratedHash, file, req, response);
+                // }
             }
         })
     } else {

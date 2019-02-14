@@ -63,7 +63,9 @@ var routeJsonGetProducts = require('./routes/json-get-products');
 // var routeWebsockets = require('./routes/websockets');
 var routePrunes = require('./routes/prunes');
 var routeJsonEmailRequest = require('./routes/json-email-request');
-
+var routeTellUsWhoYouAre = require('./routes/tell-us-who-you-are');
+var routeBrowseOffers = require('./routes/browse-offers');
+var routeValidateUser = require('./routes/validate-user');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -200,6 +202,9 @@ app.use('/', routeJsonGetProducts);
 // app.use('/', routeWebsockets);
 app.use('/', routePrunes);
 app.use('/', routeJsonEmailRequest);
+app.use('/', routeTellUsWhoYouAre);
+app.use('/', routeBrowseOffers); // routeBrowseOffers
+app.use('/', routeValidateUser); // routeValidateUser
 
 // Runs server side code on various time intervals.
 require('./server/server-interval-5-seconds'); // This includes code that is triggered to run every 5 minutes.

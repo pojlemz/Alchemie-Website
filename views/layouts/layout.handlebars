@@ -12,6 +12,52 @@
     <!-- modals -->
     <div id="fn-modal-overlay" class="css-overlay" clickcontroller="closeModals"></div>
     <!--<div class="container modal css-password-change-2fa-modal fn-password-change-2fa-modal fn-modal" tabindex="-1" role="dialog">-->
+    <div class="modal fn-validating fn-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title css-float-center css-modal-title-center">Validating</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="css-modal-user-message-box fn-modal-user-message-box"></div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <div id="wave">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="css-center-button btn btn-danger" clickcontroller="closeModals">Ok</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <div class="modal fn-validation-complete-modal fn-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title css-float-center css-modal-title-center">Validation Complete </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="css-modal-user-message-box fn-modal-user-message-box"></div>
+                <div class="modal-body">
+                    <div class="css-validation-checkbox"></div>
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="css-center-button btn btn-danger" clickcontroller="closeModals">Ok</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
     <div class="modal fn-payment-received-modal fn-modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content css-modal-order-content">
@@ -254,12 +300,17 @@
     </div>
     <!-- Main content -->
     <div class="css-main-page">
-        <div class="container css-main-container">
+        <div class="css-main-container">
+          <div class="css-title-banner">
+
+          </div>
+
           <div class="header clearfix">
             <div class="row">
+                <div class="css-reit-wallet-title"> REIT Wallet</div>
                 <!--<div class="glyphicon glyphicon-glass col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>-->
-                <div class="css-image-bottles"></div>
-                <h3 class="text-muted col-lg-4 col-md-4 col-sm-4 col-xs-4">Alchemie</h3>
+                <!--<div class="css-image-wallet"></div>-->
+                <!--<h3 class="text-muted col-lg-4 col-md-4 col-sm-4 col-xs-4">Alchemie</h3>-->
                 <nav>
                     <ul class="nav nav-pills pull-right">
                         {{#if user}}
@@ -274,7 +325,6 @@
             </div>
 
           </div>
-
 
           <div class="row css-main-container-body-row">
             <div class="col-lg-12 fnAlertBox css-alert-box css-main-display">
@@ -302,9 +352,9 @@
 
           </div>
           <br/>
-          <footer class="footer">
-            <p>Block Unity Inc.</p>
-          </footer>
+          <!--<footer class="footer">-->
+            <!--<p>Block Unity Inc.</p>-->
+          <!--</footer>-->
 
         </div> <!-- /container -->
     </div>
