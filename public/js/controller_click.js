@@ -480,3 +480,7 @@ ControllerClick.prototype.preparePaidEmail = function(event){
         // Request a websocket connection and
     }, "json");
 }
+
+ControllerClick.prototype.investNowLicensingAgreement = function(event) { // This is called when we click the 'Invest Now' button
+    g_App.getViewModals().showModal("fn-license-agreement-modal");
+}

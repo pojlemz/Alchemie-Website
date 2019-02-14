@@ -1045,3 +1045,40 @@ div#wave .dot:nth-child(3) {
   color: darkblue;
   padding-left: 20px;
 }
+
+.css-license-agreement-body {
+  background-color: silver;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.css-license-agreement-modal .modal-content {
+  background-color: lightgray;
+  overflow-y: auto;
+  height: calc(100% - 40px);
+}
+
+.css-license-agreement-modal .modal-dialog {
+  height: 100%;
+}
+
+.css-licensing-agreement-button {
+  width: 120px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: oldlace;
+  height: 30px;
+  padding-top: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.css-licensing-agreement-button:hover {
+  background-color: silver;
+}
+
+.css-licensing-agreement-footer {
+  height: 50px;
+}
