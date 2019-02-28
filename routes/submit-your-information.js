@@ -9,6 +9,7 @@ const ensureAuthenticated = require('../server/ensure-authenticated'); // Route 
 // Get Homepage
 router.get('/submit-your-information', ensureAuthenticated, function(req, res){
     var response = res;
+
     HasBeenKyced.getHasBeenKycedByEmail( req.user.email, function(err, res) {
         if (res !== null && res.inreview) {
             response.redirect('/buy-tokens'); // in case where kyc is completed but user finds this link anyways

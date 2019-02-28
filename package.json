@@ -47,6 +47,7 @@
     "mongodb": "*",
     "mongoose": "^4.7.9",
     "nodemailer": "^4.3.1",
+    "npm": "^6.8.0",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",

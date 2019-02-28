@@ -1,3 +1,5 @@
+// What is the command line that gets executed here?
+
 var ethers = require('ethers'); // Require the ethers library
 var providers = require('ethers').providers; // Save a variable containing the ethers providers
 const privateKey = "0x6b2f76b4d63de3e216c7199da6a10efc077e61d4d44feca3432a7ce56e7d3b4e"; // Private key
@@ -9,7 +11,7 @@ const wallet = new ethers.Wallet(privateKey); // Create an ethers wallet from th
 wallet.provider = provider; // Set the provider for the wallet
 
 var transaction = { // Create the content of the transaction here
-    to: "0xF58E01Ac4134468F9Ad846034fb9247c6C131d8C", // destination address for the transaction
+    to: "0xa20a3ea17ed3e1a16a42e8dc1f4419c587f8c59d", // destination address for the transaction
     value: ethers.utils.parseEther("0.1") // Value to be sent
 };
 
@@ -18,7 +20,7 @@ var estimateGasPromise = wallet.estimateGas(transaction); // Promise that displa
 provider.listAccounts().then(function(accounts) { // List accounts
     var signer = provider.getSigner(accounts[0]); // Set a variable to match the signer of the transaction.
     console.log(signer);
-    provider.getBalance("0xF58E01Ac4134468F9Ad846034fb9247c6C131d8C").then(function(balance) { // gets the ether balance at this account
+    provider.getBalance("0xa20a3ea17ed3e1a16a42e8dc1f4419c587f8c59d").then(function(balance) { // gets the ether balance at this account
         // balance is a BigNumber (in wei); format is as a sting (in ether)
         var etherString = ethers.utils.formatEther(balance); // string storing ether balance
         console.log("Balance: " + etherString); // Print the ether balance

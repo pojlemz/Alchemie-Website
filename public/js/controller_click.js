@@ -488,3 +488,7 @@ ControllerClick.prototype.investNowLicensingAgreement = function(event) { // Thi
 ControllerClick.prototype.agreeToTermsAndConditions = function(event) { // This is called when we click the 'Invest Now' button
     g_App.sendPostRequest('/web-wallet', {}, 'get'); // We tell the user that the shared secret has been successfully set
 }
+
+ControllerClick.prototype.fundNowButton = function(event){
+    g_App.getViewModals().showModal("fn-deposit-modal");
+}

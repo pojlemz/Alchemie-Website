@@ -1088,3 +1088,100 @@ div#wave .dot:nth-child(3) {
   height: calc(100% - 52px);
   overflow-y: auto;
 }
+
+.css-btc-balance {
+  height: 40px;
+  background-color: blue;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: floralwhite;
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 10px;
+  overflow-x: hidden;
+  margin-top: 5px;
+}
+
+.css-btc-balance-label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.css-reco-balance-label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.css-balance-panel {
+  background-color: deepskyblue;
+  margin: 40px;
+  padding: 20px;
+  border-radius: 5px;
+  width: 240px;
+  float: left;
+}
+
+.css-reco-balance-subpanel {
+  height: 40px;
+  background-color: blue;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: floralwhite;
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 10px;
+  overflow-x: hidden;
+  margin-top: 5px;
+}
+
+.css-right-wallet-panel {
+  width: 200px;
+  float: right;
+  height: 200px;
+  margin: 40px;
+}
+
+.css-convert-btc-to-reco {
+  background-color: mediumblue;
+  height: 50px;
+  margin-top: 40px;
+  border-radius: 10px;
+  color: yellow;
+  text-align: center;
+  padding-top: 13px;
+  cursor: pointer;
+  font-weight: 100;
+}
+
+.css-convert-btc-to-reco:hover {
+  background-color: navy;
+}
+
+.css-fund-now-button {
+  background-color: red;
+  height: 80px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding-top: 25px;
+  box-shadow: 4px 4px lightblue;
+}
+
+.css-fund-now-button:hover {
+  background-color: firebrick;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.css-reco-balance-in-usd {
+  float: left;
+  font-size: 12px;
+  padding-top: 8px;
+  padding-left: 4px;
+}
+
+.css-reco-balance {
+  float: left;
+}

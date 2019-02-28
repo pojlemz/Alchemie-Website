@@ -15,17 +15,21 @@ module.exports = {
             gasLimit: 26000000000
         },
         ropsten: {
-            provider: new HDWalletProvider(secrets.mnemonic, "https://ropsten.infura.io/"),
-            network_id: "*",
-            gas: 1000000,
-            gasLimit: 67000000,
-            gasPrice: 20000000000 // web3.utils.toWei("20", "gwei")
+            network_id: 3,
+            host: "localhost",
+            port:  8545,
+            gas:   2900000
         },
         mainnet: {
             provider: new HDWalletProvider(secrets.mnemonic, "https://mainnet.infura.io/"),
             network_id: 1,
             gas: 1000000,
             gasLimit: 67000000
+        }
+    },
+    compilers: {
+        solc: {
+            version: "0.5.2"
         }
     }
 };
