@@ -69,6 +69,9 @@ var routeValidateUser = require('./routes/validate-user');
 var routeWebWallet = require('./routes/web-wallet');
 var routeJsonGetBalance = require('./routes/json-get-balance');
 var routeEstablishAddressAndGetRecoBalance = require('./routes/json-establish-address-and-get-reco-balance');
+var routeGetBTCToUSDConversionRate = require('./routes/json-get-btc-to-usd-conversion-rate');
+var routeOrderRecoTokens = require('./routes/json-order-reco-tokens');
+var routeGetRECOBalance = require('./routes/json-get-reco-balance');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -211,10 +214,11 @@ app.use('/', routeValidateUser); // routeValidateUser
 app.use('/', routeWebWallet);
 app.use('/', routeJsonGetBalance);
 app.use('/', routeEstablishAddressAndGetRecoBalance);
-
+app.use('/', routeGetBTCToUSDConversionRate);
+app.use('/', routeOrderRecoTokens);
+app.use('/', routeGetRECOBalance);
 
 // routeWebWallet
-
 // Runs server side code on various time intervals.
 // require('./server/server-interval-5-seconds'); // This includes code that is triggered to run every 5 minutes.
 // require('./server/server-interval-30-seconds');

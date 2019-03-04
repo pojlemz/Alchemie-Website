@@ -12,6 +12,39 @@
     <!-- modals -->
     <div id="fn-modal-overlay" class="css-overlay" clickcontroller="closeModals"></div>
     <!--<div class="container modal css-password-change-2fa-modal fn-password-change-2fa-modal fn-modal" tabindex="-1" role="dialog">-->
+    <div class="modal fn-purchase-reco-modal css-purchase-reco-modal fn-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title css-float-center css-modal-title-center">Purchase RECO Tokens</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" clickcontroller="closeModals">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="css-reco-purchase-description">
+                        You are about to place an order converting your entire Bitcoin balance to RECO tokens. The price at which this conversion will take place along with the total amount of tokens purchased will be shown below.
+                    </div>
+                    <div class="css-amounts-section">
+                        <div class="css-reco-price">
+                            <div class="css-reco-price-label">Price:</div>
+                            <div class="css-reco-price-value fn-reco-price-value"></div>
+                        </div>
+                        <div class="css-reco-amount-in-btc">
+                            <div class="css-reco-amount-total-purchase-label">Total (RECO): </div>
+                            <div class="css-reco-amount-total-purchase-value fn-total-reco-amount"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="css-reco-purchase-footer">
+                    <div class="css-reco-purchase-button" clickcontroller="buyRECOtokensnow">Buy Now</div>
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="css-center-button btn btn-danger" clickcontroller="closeModals">Ok</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
     <div class="modal fn-license-agreement-modal css-license-agreement-modal fn-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

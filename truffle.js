@@ -15,11 +15,16 @@ module.exports = {
             gasLimit: 26000000000
         },
         ropsten: {
-            network_id: 3,
-            host: "localhost",
-            port:  8545,
-            gas:   2900000
+            provider: new HDWalletProvider(secrets.mnemonic, "https://ropsten.infura.io/"),
+            network_id: "*",
+            gas: 1000000,
+            gasLimit: 67000000,
+            gasPrice: 20000000000
         },
+        // network_id: 3,
+        // host: "localhost",
+        // port:  8545,
+        // gas:   2900000
         mainnet: {
             provider: new HDWalletProvider(secrets.mnemonic, "https://mainnet.infura.io/"),
             network_id: 1,

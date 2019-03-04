@@ -1,5 +1,7 @@
 function ControllerClick(){
+    this._recoPrice = 0;
     this._addressToDelete = "";
+    this._tokensToBuy = 0;
 };
 
 ControllerClick.prototype.initialize = function(){
@@ -491,4 +493,40 @@ ControllerClick.prototype.agreeToTermsAndConditions = function(event) { // This 
 
 ControllerClick.prototype.fundNowButton = function(event){
     g_App.getViewModals().showModal("fn-deposit-modal");
+}
+
+ControllerClick.prototype.buyRECOWithBTCButton = function(event){
+    var self = this;
+    $.ajax('/get-btc-to-usd-conversion-rate').done(function(msg){
+        var usdToToken = 10;
+        var markup = 1.01;
+        var buyRate = parseFloat(parseFloat((1 / msg.rate) * markup * usdToToken).toFixed(8));
+        self._recoPrice = buyRate;
+        $(".fn-reco-price-value").text(buyRate + ' BTC per RECO');
+        var btcBalance = parseFloat($(".fn-display-btc-balance").text());
+        var tokensToBuy = parseInt(btcBalance / buyRate);
+        self._tokensToBuy = tokensToBuy;
+        $(".fn-total-reco-amount").text(tokensToBuy);
+        g_App.getViewModals().showModal("fn-purchase-reco-modal");
+    });
+}
+
+ControllerClick.prototype.buyRECOtokensnow = function(event){
+    var self = this;
+    var quantity = parseInt($(".fn-total-reco-amount").text());
+    var price = this._recoPrice;
+    var urlOrderTokens = "/order-reco-tokens?quantity="+quantity+"&price="+price; // Set variable to url used to withdraw funds
+    $.ajax(urlOrderTokens).done(function(msg) { // Make ajax call to add withdrawal address
+        self.closeModals();
+        var message = msg.msg;
+        if (message === "Transaction complete"){
+            console.log(message);
+        }
+        if (message === "The buying price requested is too low"){
+            console.log(message);
+        }
+        if (message === "There are not enough funds in the account to cover the requested purchase"){
+            console.log(message);
+        }
+    });
 }

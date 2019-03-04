@@ -1185,3 +1185,68 @@ div#wave .dot:nth-child(3) {
 .css-reco-balance {
   float: left;
 }
+
+.css-amounts-section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.css-reco-purchase-button {
+  width: 120px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: oldlace;
+  height: 30px;
+  padding-top: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  background-color: limegreen;
+}
+
+.css-reco-purchase-button:hover {
+  background-color: lawngreen;
+}
+
+.css-reco-purchase-footer {
+  height: 50px;
+  background-color: green;
+}
+
+.css-reco-price-label {
+  width: 180px;
+  color: darkgreen;
+  font-weight: 800;
+  float: left;
+}
+
+.css-reco-amount-total-purchase-label {
+  width: 180px;
+  color: darkgreen;
+  font-weight: 800;
+  float: left;
+}
+
+.css-reco-price {
+  padding-bottom: 5px;
+  height: 30px;
+}
+
+.css-reco-amount-in-btc {
+  padding-bottom: 5px;
+}
+
+.css-reco-price-value {
+  float: left;
+}
+
+.css-reco-amount-total-purchase-value {
+  float: left;
+}
+
+/*.css-purchase-reco-modal .modal-header {*/
+  /*background-color: forestgreen;*/
+/*}*/
