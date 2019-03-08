@@ -547,3 +547,11 @@ ControllerClick.prototype.selectVoteOption = function(event) { // This is called
     });
     // g_App.sendPostRequest('/dashboard', {}, 'get'); // We tell the user that the shared secret has been successfully set
 }
+
+ControllerClick.prototype.goToWebWallet = function(event) { // This is called when we click the 'Invest Now' button
+    g_App.sendPostRequest('/web-wallet', {}, 'get'); // We tell the user that the shared secret has been successfully set
+}
+
+ControllerClick.prototype.goToMessages = function(event) { // This is called when we click the 'Invest Now' button
+    g_App.sendPostRequest('/poll', {}, 'get'); // We tell the user that the shared secret has been successfully set
+}

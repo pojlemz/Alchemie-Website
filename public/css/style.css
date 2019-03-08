@@ -1372,3 +1372,42 @@ div#wave .dot:nth-child(3) {
   margin: 20px;
   padding: 10px;
 }
+
+.css-wallet-link {
+  background: url(../images/wallet.png) 0 0 no-repeat;
+  background-position: center center;
+  width: 70px;
+  height: 70px;
+  background-size: 80%;
+  float: left;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.css-messages-link {
+  background: url(../images/envelope.png) 0 0 no-repeat;
+  background-position: center center;
+  width: 70px;
+  height: 70px;
+  background-size: 80%;
+  float: left;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.css-wallet-link:hover {
+  background-color: lightblue;
+}
+
+.css-messages-link:hover {
+  background-color: lightblue;
+}
+
+.css-links-to-services {
+  width: 100%;
+  height: 120px;
+  padding-left: 30px;
+  background-color: lightsteelblue;
+}
