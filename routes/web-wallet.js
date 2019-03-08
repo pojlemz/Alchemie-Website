@@ -26,9 +26,12 @@ router.get('/web-wallet', ensureAuthenticated, function(req, res){
         HasBeenKyced.getHasBeenKycedByEmail(email, function (err, res) {
             if (res !== null && res.kyced) {
                 getBitgoBalanceByEmail(email, coinType, function(err,res) {
-                    var recoBalance = '340';
-                    var recoBalanceUSD = '(3400 USD)';
-                    var btcBalance = (res/100000000).toFixed(8);
+                    // var recoBalance = '340';
+                    var recoBalance = 'Loading...';
+                    var recoBalanceUSD = 'Loading...';
+                    // var recoBalanceUSD = '(3400 USD)';
+                    // var btcBalance = (res/100000000).toFixed(8);
+                    var btcBalance = 'Loading...';
                     var btcPrice = '3500.00';
                     response.render('web-wallet', {
                         "btc-api-prefix": btcApiPrefix,

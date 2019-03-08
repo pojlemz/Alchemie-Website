@@ -8,18 +8,19 @@ const request = require('request');
 const BitcoinSpent = require('../models/bitcoin-spent');
 const RecoBalance = require('../models/reco-balance');
 
+const PollVote = require('../models/poll-vote');
+
 // Try the following line in the browser to test retrieval of owned addresses
 // http://localhost:3000/get-owned-addresses-by-email
-router.get('/get-reco-balance', ensureAuthenticated, function(req, res) {
+router.get('/cast-vote', ensureAuthenticated, function(req, res) {
     // Ensure user is authenticated.
     var response = res;
-    RecoBalance.getRECOBalanceByEmail(req.user.email, function(err, res) {
-        var recoBalance = 0;
-        if (res !== null) { // If the table has an entry
-            recoBalance = res.amount;
-        }
-        response.send({balance: recoBalance});
-    });
+    var email = req.user.email;
+    var voteSelection = req.query.selection;
+    var pollid = req.query.pollid;
+    PollVote.updateVote(pollid, email, voteSelection, function(err, res) {
+        response.send({msg: "Vote updated"});
+    })
 });
 
 module.exports = router;

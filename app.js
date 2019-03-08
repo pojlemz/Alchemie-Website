@@ -72,6 +72,9 @@ var routeEstablishAddressAndGetRecoBalance = require('./routes/json-establish-ad
 var routeGetBTCToUSDConversionRate = require('./routes/json-get-btc-to-usd-conversion-rate');
 var routeOrderRecoTokens = require('./routes/json-order-reco-tokens');
 var routeGetRECOBalance = require('./routes/json-get-reco-balance');
+var routeDashboard = require('./routes/dashboard');
+var routePoll = require('./routes/poll');
+var routeJsonCastVote = require('./routes/json-cast-vote');
 
 var os = require("os");
 var RateLimit = require('express-rate-limit');
@@ -217,6 +220,9 @@ app.use('/', routeEstablishAddressAndGetRecoBalance);
 app.use('/', routeGetBTCToUSDConversionRate);
 app.use('/', routeOrderRecoTokens);
 app.use('/', routeGetRECOBalance);
+app.use('/', routeDashboard);
+app.use('/', routePoll);
+app.use('/', routeJsonCastVote);
 
 // routeWebWallet
 // Runs server side code on various time intervals.

@@ -530,3 +530,20 @@ ControllerClick.prototype.buyRECOtokensnow = function(event){
         }
     });
 }
+
+ControllerClick.prototype.goToDashboard = function(event) { // This is called when we click the 'Invest Now' button
+    g_App.sendPostRequest('/dashboard', {}, 'get'); // We tell the user that the shared secret has been successfully set
+}
+
+ControllerClick.prototype.selectVoteOption = function(event) { // This is called when we click the 'Invest Now' button
+    // Select appropriate items.
+    $(event.target).parent().children().removeClass("css-vote-selection");
+    $(event.target).addClass("css-vote-selection");
+    var selectedOption = $(event.target).attr("associate");
+    var pollid = $(event.target).parent().attr("associate");
+    var urlSelectedOption = "/cast-vote?selection="+selectedOption+"&pollid="+pollid;
+    $.ajax(urlSelectedOption).done(function(msg) {
+        console.log("Update completed");
+    });
+    // g_App.sendPostRequest('/dashboard', {}, 'get'); // We tell the user that the shared secret has been successfully set
+}

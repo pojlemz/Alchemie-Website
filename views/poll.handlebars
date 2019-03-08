@@ -1,0 +1,40 @@
+<div class="css-main-window">
+    {{#each votes}}
+        <div class="css-vote-box" associate="{{pollid}}">
+            <div class="css-vote-topic"> {{topic}}</div>
+            <div clickcontroller="selectVoteOption" class="css-vote-button-yes {{#if selectedYes}}css-vote-selection{{/if}}" associate="yes"></div>
+            <div clickcontroller="selectVoteOption" class="css-vote-button-no {{#if selectedNo}}css-vote-selection{{/if}}" associate="no"></div>
+            <div clickcontroller="selectVoteOption" class="css-vote-button-undecided {{#if selectedUndecided}}css-vote-selection{{/if}}" associate="undecided"></div>
+        </div>
+    {{/each}}
+    <!--<div class="css-left-wallet-panel">-->
+        <!--<div class="css-top-wallet-panel">-->
+            <!--<div class="css-balance-panel">-->
+                <!--<div class="css-btc-balance-label">BTC Balance:</div>-->
+                <!--<div class="css-btc-balance">-->
+                    <!--<div class="css-btc-balance-text fn-display-btc-balance">{{btc-balance}}</div>-->
+                    <!--<div class="css-btc-balance-withdraw-button"></div>-->
+                <!--</div>-->
+                <!--<div class="css-reco-balance-label">RECO Balance:</div>-->
+                <!--<div class="css-reco-balance-subpanel">-->
+                    <!--<div class="css-reco-balance fn-reco-balance">{{reco-balance-in-reco}}</div>-->
+                    <!--<div class="css-reco-balance-in-usd fn-reco-balance-in-usd">{{reco-balance-in-usd}}</div>-->
+                <!--</div>-->
+                <!--<div class="css-convert-btc-to-reco fn-convert-btc-to-reco" clickcontroller="buyRECOWithBTCButton">Buy RECO with BTC</div>-->
+            <!--</div>-->
+            <!--<div class="css-right-wallet-panel">-->
+                <!--<div class="css-fund-now-button" clickcontroller="fundNowButton">Fund Your Account</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="css-buy-reco-panel">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="text" class="form-control css-btc-purchase-amount fn-btc-purchase-amount" name="email" placeholder="0">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="">{{balance}}</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="css-send-button"></div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="css-send-panel">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="text" class="form-control" name="email" placeholder="Enter your email here">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="text" class="form-control" name="amount" placeholder="Enter your email here">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type='submit' class='fn-file-real-submit-button' value='Upload!'/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+</div>

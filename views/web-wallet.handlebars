@@ -1,9 +1,15 @@
+<div class="css-go-to-dashboard-banner" clickcontroller="goToDashboard">
+    <div class="css-go-to-dashboard-text"> Go To Dashboard </div>
+</div>
 <div class="css-main-window">
     <div class="css-left-wallet-panel">
         <div class="css-top-wallet-panel">
             <div class="css-balance-panel">
                 <div class="css-btc-balance-label">BTC Balance:</div>
-                <div class="css-btc-balance fn-display-btc-balance">{{btc-balance}}</div>
+                <div class="css-btc-balance">
+                    <div class="css-btc-balance-text fn-display-btc-balance">{{btc-balance}}</div>
+                    <div class="css-btc-balance-withdraw-button"></div>
+                </div>
                 <div class="css-reco-balance-label">RECO Balance:</div>
                 <div class="css-reco-balance-subpanel">
                     <div class="css-reco-balance fn-reco-balance">{{reco-balance-in-reco}}</div>

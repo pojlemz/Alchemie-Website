@@ -1250,3 +1250,125 @@ div#wave .dot:nth-child(3) {
 /*.css-purchase-reco-modal .modal-header {*/
   /*background-color: forestgreen;*/
 /*}*/
+
+.css-btc-balance-text {
+  float: left;
+}
+
+.css-btc-balance-withdraw-button {
+  background: url(../images/withdraw.png) 0 0 no-repeat;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  float: right;
+  background-size: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: lightcyan;
+}
+
+.css-go-to-dashboard-banner {
+  height: 60px;
+  background-color: limegreen;
+  color: white;
+  font-size: 28px;
+  padding-top: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align:center;
+}
+
+.css-go-to-dashboard-banner:hover {
+  background-color: lime;
+}
+
+.css-go-to-dashboard-text {
+
+}
+
+.css-dashboard-heading {
+  padding-left: 30px;
+  font-size: 18px;
+  height: 40px;
+  background-color: lightgray;
+  padding-top: 5px;
+}
+
+.css-dashboard-listings {
+  padding-bottom: 30px;
+}
+
+.css-dashboard-listing-label {
+  float: left;
+  padding-left: 30px;
+}
+
+.css-dashboard-listing-value {
+  float: right;
+  padding-right: 30px;
+}
+
+.css-dashboard-listing {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.css-financial-report-header-text {
+  padding: 30px;
+}
+
+.css-vote-button-yes {
+  background: url(../images/checkmark.png) 0 0 no-repeat;
+  background-size: 80%;
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin: 5px;
+  cursor: pointer;
+  background-position: center center;
+}
+
+.css-vote-button-no {
+  background: url(../images/xmark.jpeg) 0 0 no-repeat;
+  background-size: 80%;
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin: 5px;
+  cursor: pointer;
+  background-position: center center;
+}
+
+.css-vote-button-undecided {
+  background: url(../images/orangequestionmark.jpg) 0 0 no-repeat;
+  background-size: 80%;
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin: 5px;
+  cursor: pointer;
+  background-position: center center;
+}
+
+.css-vote-selection {
+  border-color: red;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.css-vote-topic {
+  width: calc(100% - 270px);
+  height: 100%;
+  float: left;
+  padding: 10px;
+  color: slategrey;
+}
+
+.css-vote-box {
+  height: 120px;
+  border-width: 10px;
+  border-style: solid;
+  margin: 20px;
+  padding: 10px;
+}
