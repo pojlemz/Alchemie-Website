@@ -13,7 +13,7 @@ const parseForm = require('../server/parse-form'); // Function used for ensuring
 router.post('/login',parseForm,
     passport.authenticate('local', {successRedirect:'/',failureRedirect:'/login', failureFlash: 'Incorrect Username And Password Combination'}),
     function(req, res) {
-        res.redirect('/');
+        res.redirect('/browse-offers');
     }
     //res.redirect('/');
 );
