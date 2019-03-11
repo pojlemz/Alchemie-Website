@@ -11,8 +11,9 @@ const coinType = process.env.BITCOIN_NETWORK; // Set variable to equal Bitcoin n
 
 const ensureAuthenticated = require('../server/ensure-authenticated'); // Route middleware to ensure that the user is authenticated
 
-router.get('/', ensureAuthenticated, function(req, res){ // The route corresponding to the front page of the web portal
-    res.redirect('/tell-us-who-you-are'); // Send user to a page where we tell them that their documents are being reviewed.
+router.get('/', function(req, res) { // The route corresponding to the front page of the web portal
+    // res.redirect('/tell-us-who-you-are'); // Send user to a page where we tell them that their documents are being reviewed.
+    res.render('index'); // in case where kyc is completed but user finds this link anyways
 });
 
 // Get Homepage
