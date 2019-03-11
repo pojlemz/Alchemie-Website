@@ -1411,3 +1411,226 @@ div#wave .dot:nth-child(3) {
   padding-left: 30px;
   background-color: lightsteelblue;
 }
+
+.css-email-banner {
+  height: 250px;
+  background-color: dodgerblue;
+  float: left;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.css-banner-for-header-about-us {
+  height: 250px;
+  background-image: linear-gradient(darkblue, lightblue);
+  width:100%;
+}
+
+.css-juan {
+  background: url(../images/juan.png) center center no-repeat;
+}
+
+.css-chris {
+  background: url(../images/chris.png) center center no-repeat;
+}
+
+.css-rico {
+  background: url(../images/rico.png) center center no-repeat;
+}
+
+.css-kris {
+  background: url(../images/kris.png) center center no-repeat;
+
+}
+
+.css-team-member {
+  float: left;
+  height: 400px;
+  width: 300px;
+  margin: 30px;
+}
+
+.css-team-member-picture {
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+}
+
+.css-team-member-text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.css-banner-for-header-properties {
+  height: 250px;
+  background-image: linear-gradient(darkblue, lightblue);
+  width:100%;
+}
+
+.css-property-banner {
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.css-property-text {
+  font-size: 16px;
+  color: #5e5e5e;
+  padding-top: 60px;
+  margin-left: 440px;
+  margin-right: 40px;
+}
+
+.css-cayman-islands {
+  background: url(../images/cayman-islands-property.png) center center no-repeat;
+  background-size: 100%;
+}
+
+.css-bali-property {
+  background: url(../images/bali-property.jpg) center center no-repeat;
+  background-size: 100%;
+}
+
+.css-footer {
+  padding-top: 80px;
+  line-height: 26px;
+  background-image: linear-gradient(blue, lightblue 100%);
+  padding-bottom: 100px;
+  padding-left: 60px;
+  margin-top: 60px;
+  float: left;
+  padding-right: 60px;
+}
+
+.css-footer p{
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.css-footer h3{
+  color: #ffffff;
+  font-size: 16px;
+  padding-top: 30px;
+}
+
+.css-footer li{
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.css-footer ul{
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 60px;
+}
+
+.css-footer a{
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.css-team-gallery {
+  float: left;
+}
+
+.css-banner-for-header-text {
+  height: 280px;
+  background-image: linear-gradient(darkblue, lightblue);
+  width:100%;
+}
+
+.css-banner-for-header-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.css-banner-for-header-description {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  padding-top: 60px;
+
+}
+
+.css-banner-for-header-advertisement {
+  padding-top:60px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.css-banner-for-header-icons {
+
+}
+
+.css-divider-image {
+  margin-top: 20px;
+  background-image: linear-gradient(90deg, #be0000 0%, #2eb0c9 100%);
+  margin-bottom: 20px;
+  height: 5px;
+  width: 100px;
+  margin-left: 40px;
+}
+
+.css-heading-for-descriptor {
+  padding-top: 60px;
+  text-transform: uppercase;
+  color: #3f3f3f;
+  font-size: 18px;
+  padding-left: 40px;
+}
+
+.css-description-for-heading {
+  padding-left: 40px;
+  font-family: 'Helvetica', sans-serif;
+  color: #5e5e5e;
+  font-size: 16px;
+  line-height: 1.7em;
+}
+
+.css-description-for-heading ul {
+
+}
+
+.css-building-image {
+  height: 350px;
+  background: url(../images/cartoon-building.jpeg) center center no-repeat;
+  width: 100%;
+  text-align:center;
+}
+
+.css-building-image img {
+
+}
+
+.css-navigation-options {
+  list-style-type: none;
+  padding-bottom: 20px;
+  position: absolute;
+  right: 0px;
+  padding-top: 10px;
+}
+
+.css-navigation-options li {
+  float: left;
+  padding-right: 30px;
+}
+
+.css-navigation-options li a {
+  color: rgba(0, 0, 0, .6);
+}
+
+.css-navigation-options li a:hover {
+  text-decoration: none;
+}
